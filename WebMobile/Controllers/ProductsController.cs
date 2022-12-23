@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebMobile.Models;
 
 namespace WebMobile.Controllers
 {
     public class ProductsController : Controller
     {
-
+        private WebmobileDB db = new WebmobileDB();
         // GET: Products
         public ActionResult Index()
         {
@@ -16,9 +17,10 @@ namespace WebMobile.Controllers
         }
 
         // GET: Products/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            var sp = db.SanPham.SingleOrDefault(x => x.MaSanPham == id);
+            return View(sp);
         }
 
         // GET: Products/Create

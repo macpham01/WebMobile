@@ -26,5 +26,11 @@ namespace WebMobile.Controllers
             var newProduct = db.SanPham.Where(x => x.GhiChu == "New").Take(4);
             return PartialView(newProduct.ToList());
         }
+
+        public ActionResult SpecialProduct()
+        {
+            var specialProduct = db.SanPham.OrderByDescending(x=>x.Gia).Take(4);
+            return PartialView(specialProduct.ToList());
+        }
     }
 }

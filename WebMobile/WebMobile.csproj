@@ -259,9 +259,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Partial\Sidebar.cshtml" />
     <Content Include="Views\Partial\NewProduct.cshtml" />
+    <Content Include="Views\Partial\SpecialProduct.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
