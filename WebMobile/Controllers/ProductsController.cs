@@ -4,23 +4,33 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebMobile.Models;
+using PagedList;
 
 namespace WebMobile.Controllers
 {
     public class ProductsController : Controller
     {
         private WebmobileDB db = new WebmobileDB();
+
+
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View();
+            var products = db.SanPham.OrderBy(x=>x.TenSanPham);
+            int pageSize = 9;
+            int pageNumber = (page ?? 1);
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Products/Details/5
-        public ActionResult Details(string id)
+        // GET: Products/Details?masp=5
+        public ActionResult Details(string masp)
         {
-            var sp = db.SanPham.SingleOrDefault(x => x.MaSanPham == id);
-            return View(sp);
+            var product = db.SanPham.SingleOrDefault(x => x.MaSanPham == masp);
+            if (product == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(product);
         }
 
         // GET: Products/Create
