@@ -1,0 +1,8 @@
+﻿@model IEnumerable<WebMobile.Models.NhaSanXuat>
+
+<ul class="list-unstyled">
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("Index", "Products", new {MaNSX=item.MaNhaSanXuat, title=item.TenNhaSanXuat})">@item.TenNhaSanXuat</a></li>
+    }
+</ul>

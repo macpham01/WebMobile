@@ -27,10 +27,23 @@ namespace WebMobile.Controllers
             return PartialView(newProduct.ToList());
         }
 
-        public ActionResult SpecialProduct()
+        public ActionResult SpecialProduct(int NumberOfProducts)
         {
-            var specialProduct = db.SanPham.OrderByDescending(x=>x.Gia).Take(4);
+            
+            var specialProduct = db.SanPham.OrderByDescending(x=>x.Gia).Take(NumberOfProducts);
             return PartialView(specialProduct.ToList());
+        }
+
+        public ActionResult MenuProducer()
+        {
+            var producer = db.NhaSanXuat;
+            return PartialView(producer.ToList());
+        }
+
+        public ActionResult MenuProductType()
+        {
+            var producer = db.LoaiSanPham;
+            return PartialView(producer.ToList());
         }
     }
 }

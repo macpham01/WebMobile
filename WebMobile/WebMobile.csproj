@@ -205,7 +205,6 @@
     <Content Include="Public\js\jquery-2.1.1.js" />
     <Content Include="Public\js\photo-gallery.js" />
     <Content Include="Public\js\respond.min.js" />
-    <Content Include="Public\product.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Public\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -271,6 +270,8 @@
     <Content Include="Views\Partial\NewProduct.cshtml" />
     <Content Include="Views\Partial\SpecialProduct.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Partial\MenuProducer.cshtml" />
+    <Content Include="Views\Partial\MenuProductType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

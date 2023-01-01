@@ -14,22 +14,44 @@ namespace WebMobile.Controllers
 
 
         // GET: Products
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string MaNSX, string title, string MaLoaiSP, string search)
         {
-            var products = db.SanPham.OrderBy(x=>x.TenSanPham);
+            var products = db.SanPham.Select(x=>x);
+            if (MaNSX != null)
+            {
+                ViewBag.nameNSX = title;
+               
+                products = products.Where(x => x.MaNhaSanXuat.Equals(MaNSX));
+            }
+
+            if (MaLoaiSP != null)
+            {
+                ViewBag.TenLoaiSP = title;
+
+                products = products.Where(x => x.MaLoaiSanPham.Equals(MaLoaiSP));
+            }
+
+            if (search != null)
+            {
+                ViewBag.Search = search;
+                products = products.Where(x => x.TenSanPham.Contains(search));
+            }
+            products = products.OrderBy(x=>x.TenSanPham);
             int pageSize = 9;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Products/Details?masp=5
-        public ActionResult Details(string masp)
+        public ActionResult Details(string masp, string title)
         {
             var product = db.SanPham.SingleOrDefault(x => x.MaSanPham == masp);
             if (product == null)
             {
                 return RedirectToAction("Index");
             }
+            ViewBag.nameProduct = title;
+            ViewBag.Masp = masp;
             return View(product);
         }
 

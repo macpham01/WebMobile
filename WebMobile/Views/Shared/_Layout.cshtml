@@ -8,7 +8,7 @@
     <meta name="description" content="Free Bootstrap Themes by Zerotheme dot com - Free Responsive Html5 Templates">
     <meta name="author" content="https://www.Zerotheme.com">
 
-    <title>Mobile Shop | Free Bootstrap Themes by Zerotheme.com</title>
+    <title>Mobile Shop</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="~/Public/css/bootstrap.min.css" type="text/css">
@@ -68,9 +68,9 @@
                 <div id="logo"><img src="~/Public/images/logo.png" /></div>
             </div>
             <div class="col-md-4">
-                <form class="form-search">
-                    <input type="text" class="input-medium search-query">
-                    <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+                <form class="form-search" action="/Products">
+                    <input type="text" name="search" class="input-medium search-query">
+                    <button style="vertical-align:top;" type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
                 </form>
             </div>
             <div class="col-md-4">
@@ -90,54 +90,23 @@
                     <li>@Html.ActionLink("home", "Index", "Home")</li>
                     <li class="dropdown">
                         @Html.ActionLink("products", "Index", "Products")
-                        <div class="dropdown-menu">
-                            <div class="dropdown-inner">
-                                <ul class="list-unstyled">
-                                    <li><a href="~/Public/category.html">Window</a></li>
-                                    <li><a href="~/Public/category.html">MacBook</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                     </li>
                     <li class="dropdown">
-                        <a href="~/Public/#" class="dropdown-toggle" data-toggle="dropdown">product company</a>
+                        <a href="~/Public/#" class="dropdown-toggle" data-toggle="dropdown">producer</a>
                         <div class="dropdown-menu">
                             <div class="dropdown-inner">
-                                <ul class="list-unstyled">
-                                    <li><a href="~/Public/category.html">Dell</a></li>
-                                    <li><a href="~/Public/category.html">Asus</a></li>
-                                    <li><a href="~/Public/category.html">Samsung</a></li>
-                                    <li><a href="~/Public/category.html">Lenovo</a></li>
-                                    <li><a href="~/Public/category.html">Acer</a></li>
-                                </ul>
+                                @*MenuProducer USE PARTIAL VIEW*@
+                                @{Html.RenderAction("MenuProducer", "Partial");}
                             </div>
                         </div>
                     </li>
                     <li class="dropdown">
                         <a href="~/Public/#" class="dropdown-toggle" data-toggle="dropdown">product type</a>
-                        <div class="dropdown-menu" style="margin-left: -203.625px;">
+                        <div class="dropdown-menu">
                             <div class="dropdown-inner">
-                                <ul class="list-unstyled">
-                                    <li><a href="~/Public/category.html">Iphone</a></li>
-                                    <li><a href="~/Public/category.html">Samsung</a></li>
-                                    <li><a href="~/Public/category.html">Nokia</a></li>
-                                    <li><a href="~/Public/category.html">Lenovo</a></li>
-                                    <li><a href="~/Public/category.html">Google</a></li>
-                                </ul>
-                                <ul class="list-unstyled">
-                                    <li><a href="~/Public/category.html">Nexus</a></li>
-                                    <li><a href="~/Public/category.html">Dell</a></li>
-                                    <li><a href="~/Public/category.html">Oppo</a></li>
-                                    <li><a href="~/Public/category.html">Blackberry</a></li>
-                                    <li><a href="~/Public/category.html">HTC</a></li>
-                                </ul>
-                                <ul class="list-unstyled">
-                                    <li><a href="~/Public/category.html">LG</a></li>
-                                    <li><a href="~/Public/category.html">Q-Mobiles</a></li>
-                                    <li><a href="~/Public/category.html">Sony</a></li>
-                                    <li><a href="~/Public/category.html">Wiko</a></li>
-                                    <li><a href="~/Public/category.html">T&T</a></li>
-                                </ul>
+                                @*MenuProductType USE PARTIAL VIEW*@
+                                @{Html.RenderAction("MenuProductType", "Partial");}
                             </div>
                         </div>
                     </li>

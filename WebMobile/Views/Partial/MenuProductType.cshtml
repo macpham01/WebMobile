@@ -1,0 +1,9 @@
+﻿@model IEnumerable<WebMobile.Models.LoaiSanPham>
+
+
+<ul class="list-unstyled">
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("Index", "Products", new {MaLoaiSP=item.MaLoaiSanPham, title=item.TenLoaiSanPham})">@item.TenLoaiSanPham</a></li>
+    }
+</ul>

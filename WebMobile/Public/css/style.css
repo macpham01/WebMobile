@@ -70,7 +70,9 @@ header #logo{margin: 5px 0 15px;}
 header #cart {float: right;}
 header .form-search input{width: 70%;height: 56px;}
 header .form-search button {background: #222; color: #fff;padding: 12px 20px;font-size: 20px;}
-header .form-search button:hover {color: #eee;}
+header .form-search button:hover {
+	color: #eee;
+}
 @media(max-width:968px) {
 	header #cart {margin-top: 20px;}
 	header #cart {float: none;}
