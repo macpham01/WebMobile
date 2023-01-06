@@ -134,6 +134,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoaiSanPhamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhaSanXuatsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -191,6 +195,7 @@
     <Content Include="Public\images\main-banner2-1903x600.jpg" />
     <Content Include="Public\images\main-banner3-1903x600.jpg" />
     <Content Include="Public\images\next.png" />
+    <Content Include="Public\images\no-image-news.png" />
     <Content Include="Public\images\paypal-curved-32px.png" />
     <Content Include="Public\images\prev.png" />
     <Content Include="Public\images\sub-banner1.png" />
@@ -240,6 +245,24 @@
     <Content Include="Public\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Public\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Public\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaSanXuats\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaSanXuats\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaSanXuats\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaSanXuats\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaSanXuats\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSanPhams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSanPhams\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSanPhams\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSanPhams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSanPhams\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -275,6 +298,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

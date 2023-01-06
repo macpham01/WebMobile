@@ -2,25 +2,16 @@
     <div class="widget wid-categories">
         <div class="heading"><h4>CATEGORIES</h4></div>
         <div class="content">
-            <ul>
-                <li><a href="~/Public/#">PC Computers</a></li>
-                <li><a href="~/Public/#">Laptops & Notebooks</a></li>
-                <li><a href="~/Public/#">Mobiles & Tablet</a></li>
-                <li><a href="~/Public/#">Software</a></li>
-            </ul>
+            @{Html.RenderAction("MenuProducer", "Partial");}
         </div>
     </div>
-    <div class="widget wid-type">
+    <div class="widget wid-categories">
         <div class="heading"><h4>TYPE</h4></div>
         <div class="content">
-            <select>
-                <option value="EL" selected>Electronics</option>
-                <option value="MT">Mice and Trackballs</option>
-                <option value="WC">Web Cameras</option>
-                <option value="TA">Tablates</option>
-                <option value="AP">Audio Parts</option>
-            </select>
+            @{Html.RenderAction("MenuProductType", "Partial");}
         </div>
+        
+
     </div>
     <div class="widget wid-discouts">
         <div class="heading"><h4>DISCOUNTS</h4></div>
@@ -44,7 +35,7 @@
             <label class="checkbox"><input type="checkbox" name="brand">Zumba</label>
         </div>
     </div>
-    <div class="widget wid-product">
+    @*<div class="widget wid-product">
         <div class="heading"><h4>LATEST</h4></div>
         <div class="content">
             <div class="product">
@@ -72,5 +63,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 </div>
