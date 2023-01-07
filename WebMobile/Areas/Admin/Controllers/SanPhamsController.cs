@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebMobile.Models;
+using PagedList;
 
 namespace WebMobile.Areas.Admin.Controllers
 {
@@ -15,10 +16,19 @@ namespace WebMobile.Areas.Admin.Controllers
         private WebmobileDB db = new WebmobileDB();
 
         // GET: Admin/SanPhams
-        public ActionResult Index()
+        public ActionResult Index(int? page, string search)
         {
-            var sanPham = db.SanPham.Include(s => s.LoaiSanPham).Include(s => s.NhaSanXuat);
-            return View(sanPham.ToList());
+            var products = db.SanPham.Select(x => x);
+
+            if (search != null)
+            {
+                ViewBag.Search = search;
+                products = products.Where(x => x.TenSanPham.Contains(search));
+            }
+            products = products.OrderBy(x => x.TenSanPham);
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/SanPhams/Details/5
@@ -49,10 +59,18 @@ namespace WebMobile.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaSanPham,MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,TinhTrang,GhiChu")] SanPham sanPham)
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "MaSanPham,MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase Image)
         {
             if (ModelState.IsValid)
             {
+                if (Image.FileName != null)
+                {
+                    string fileName = sanPham.MaSanPham.ToString();
+                    string fullPathWithFileName = "~/Public/images/" + fileName + ".png";
+                    Image.SaveAs(Server.MapPath(fullPathWithFileName));
+                    sanPham.Image = fileName + ".png";
+                }
                 db.SanPham.Add(sanPham);
                 db.SaveChanges();
                 return RedirectToAction("Index");

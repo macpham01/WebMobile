@@ -1,87 +1,99 @@
-﻿@model IEnumerable<WebMobile.Models.SanPham>
-
+﻿@model PagedList.IPagedList<WebMobile.Models.SanPham>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Danh sách sản phẩm</h2>
-
+<br />
+@using (Html.BeginForm())
+{
+    <p>
+        Tìm kiếm: @Html.TextBox("search", ViewBag.Search as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<br />
 <p>
     @Html.ActionLink("Thêm mới", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LoaiSanPham.TenLoaiSanPham)
+            Loại sản phẩm
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NhaSanXuat.TenNhaSanXuat)
+            Nhà sản xuất
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TenSanPham)
+            Tên sản phẩm
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CauHinh)
+            Cấu hình
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image)
+            Hình ảnh
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gia)
+            Giá
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SoLuongDaBan)
+            Số lượng đã bán
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LuotView)
+            Lượt xem
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TinhTrang)
+            Tình trạng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GhiChu)
+            Ghi chú
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NhaSanXuat.TenNhaSanXuat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CauHinh)
-        </td>
-        <td>
-            <img src="~/Public/images/@item.Image" alt="@item.Image" width="100"/>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuongDaBan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LuotView)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TinhTrang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GhiChu)
-        </td>
-        <td>
-            @Html.ActionLink("Sửa", "Edit", new { id=item.MaSanPham }) |
-            @Html.ActionLink("Chi tiết", "Details", new { id=item.MaSanPham }) |
-            @Html.ActionLink("Xoá", "Delete", new { id=item.MaSanPham })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhaSanXuat.TenNhaSanXuat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CauHinh)
+            </td>
+            <td>
+                <img src="~/Public/images/@item.Image" alt="@item.Image" width="100" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongDaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotView)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.MaSanPham }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSanPham }) |
+                @Html.ActionLink("Xoá", "Delete", new { id = item.MaSanPham })
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+Trang @Model.PageNumber / @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = @ViewBag.Search }))
