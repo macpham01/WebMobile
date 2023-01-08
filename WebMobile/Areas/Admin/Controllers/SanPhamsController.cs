@@ -103,10 +103,21 @@ namespace WebMobile.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaSanPham,MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,TinhTrang,GhiChu")] SanPham sanPham)
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "MaSanPham,MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image == null)
+                {                 
+                    db.Entry(sanPham).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                string fileName = sanPham.MaSanPham.ToString();
+                string fullPathWithFileName = "~/Public/images/" + fileName + ".png";
+                image.SaveAs(Server.MapPath(fullPathWithFileName));
+                sanPham.Image = fileName + ".png";
                 db.Entry(sanPham).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

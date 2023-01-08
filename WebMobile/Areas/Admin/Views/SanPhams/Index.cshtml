@@ -65,7 +65,7 @@
                 @Html.DisplayFor(modelItem => item.TenSanPham)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CauHinh)
+                <textarea class="ckeditor" name="CauHinh">@item.CauHinh</textarea>
             </td>
             <td>
                 <img src="~/Public/images/@item.Image" alt="@item.Image" width="100" />

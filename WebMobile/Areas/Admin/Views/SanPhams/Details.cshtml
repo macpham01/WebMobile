@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết sản phẩm</h2>
 
 <div>
-    <h4>SanPham</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -39,7 +38,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CauHinh)
+            <textarea class="ckeditor" name="CauHinh">@Model.CauHinh</textarea>
         </dd>
 
         <dt>
@@ -93,6 +92,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaSanPham }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaSanPham }) |
+    @Html.ActionLink("Danh sách", "Index")
 </p>
