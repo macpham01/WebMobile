@@ -8,17 +8,6 @@ namespace WebMobile.Models
 
     public partial class AspNetUsers
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetUsers()
-        {
-            AspNetUserClaims = new HashSet<AspNetUserClaims>();
-            AspNetUserLogins = new HashSet<AspNetUserLogins>();
-            BinhLuan = new HashSet<BinhLuan>();
-            HoaDon = new HashSet<HoaDon>();
-            ThongTinCaNhan = new HashSet<ThongTinCaNhan>();
-            AspNetRoles = new HashSet<AspNetRoles>();
-        }
-
         public string Id { get; set; }
 
         [StringLength(256)]

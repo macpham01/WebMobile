@@ -53,16 +53,27 @@
                     </select>
                 </div>
                 <div class="col-xs-6">
-                    <ul class="top-link">
-                        <li><a href="~/Public/account.html">Log in</a></li>
-                        <li><a href="~/Public/contact.html">Sign up</a></li>
-                    </ul>
+                    @if (Session["username"] == null)
+                    {
+                        <ul class="top-link">
+                            <li><a href="/Accout/Login">Log in</a></li>
+                            <li><a href="/Accout/Signup">Sign up</a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="top-link">
+                            <li>Xin chào @Session["username"]</li>
+                            <li><a href="/Accout/Logout">Log out</a></li>
+                        </ul>
+                    }
+
                 </div>
             </div>
         </div>
     </nav>
     <!--Header-->
-    <header class="container">
+    <header style="padding:25px 0;" class="container">
         <div class="row">
             <div class="col-md-4">
                 <div id="logo"><img src="~/Public/images/logo.png" /></div>
