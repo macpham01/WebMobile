@@ -17,28 +17,35 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/NhaSanXuats
         public ActionResult Index()
         {
-            return View(db.NhaSanXuat.ToList());
+            if (Session["admin"] != null) return View(db.NhaSanXuat.ToList());
+            return Redirect("/Accout/Login");
         }
 
         // GET: Admin/NhaSanXuats/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                NhaSanXuat nhaSanXuat = db.NhaSanXuat.Find(id);
+                if (nhaSanXuat == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(nhaSanXuat);
             }
-            NhaSanXuat nhaSanXuat = db.NhaSanXuat.Find(id);
-            if (nhaSanXuat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhaSanXuat);
+            return Redirect("/Accout/Login");
         }
 
         // GET: Admin/NhaSanXuats/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["admin"] != null) return View();
+            return Redirect("/Accout/Login");
+
         }
 
         // POST: Admin/NhaSanXuats/Create
@@ -61,16 +68,20 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/NhaSanXuats/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                NhaSanXuat nhaSanXuat = db.NhaSanXuat.Find(id);
+                if (nhaSanXuat == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(nhaSanXuat);
             }
-            NhaSanXuat nhaSanXuat = db.NhaSanXuat.Find(id);
-            if (nhaSanXuat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhaSanXuat);
+            return Redirect("/Accout/Login");
         }
 
         // POST: Admin/NhaSanXuats/Edit/5
@@ -92,16 +103,20 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/NhaSanXuats/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                NhaSanXuat nhaSanXuat = db.NhaSanXuat.Find(id);
+                if (nhaSanXuat == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(nhaSanXuat);
             }
-            NhaSanXuat nhaSanXuat = db.NhaSanXuat.Find(id);
-            if (nhaSanXuat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhaSanXuat);
+            return Redirect("/Accout/Login");
         }
 
         // POST: Admin/NhaSanXuats/Delete/5

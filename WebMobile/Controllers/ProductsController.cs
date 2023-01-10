@@ -50,6 +50,8 @@ namespace WebMobile.Controllers
             {
                 return RedirectToAction("Index");
             }
+            product.LuotView += 1;
+            db.SaveChanges();
             ViewBag.nameProduct = title;
             ViewBag.Masp = masp;
             return View(product);

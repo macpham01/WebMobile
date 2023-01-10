@@ -18,40 +18,55 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/SanPhams
         public ActionResult Index(int? page, string search)
         {
-            var products = db.SanPham.Select(x => x);
-
-            if (search != null)
+            if (Session["admin"] != null)
             {
-                ViewBag.Search = search;
-                products = products.Where(x => x.TenSanPham.Contains(search));
+                var products = db.SanPham.Select(x => x);
+
+                if (search != null)
+                {
+                    ViewBag.Search = search;
+                    products = products.Where(x => x.TenSanPham.Contains(search));
+                }
+                products = products.OrderBy(x => x.TenSanPham);
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(products.ToPagedList(pageNumber, pageSize));
             }
-            products = products.OrderBy(x => x.TenSanPham);
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(products.ToPagedList(pageNumber, pageSize));
+            return Redirect("/Accout/Login");
+
         }
 
         // GET: Admin/SanPhams/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SanPham sanPham = db.SanPham.Find(id);
+                if (sanPham == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(sanPham);
             }
-            SanPham sanPham = db.SanPham.Find(id);
-            if (sanPham == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sanPham);
+            return Redirect("/Accout/Login");
+
         }
 
         // GET: Admin/SanPhams/Create
         public ActionResult Create()
         {
-            ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPham, "MaLoaiSanPham", "TenLoaiSanPham");
-            ViewBag.MaNhaSanXuat = new SelectList(db.NhaSanXuat, "MaNhaSanXuat", "TenNhaSanXuat");
-            return View();
+            if (Session["admin"] != null)
+            {
+                ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPham, "MaLoaiSanPham", "TenLoaiSanPham");
+                ViewBag.MaNhaSanXuat = new SelectList(db.NhaSanXuat, "MaNhaSanXuat", "TenNhaSanXuat");
+                return View();
+            }
+
+            return Redirect("/Accout/Login");
         }
 
         // POST: Admin/SanPhams/Create
@@ -84,18 +99,23 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/SanPhams/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SanPham sanPham = db.SanPham.Find(id);
+                if (sanPham == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPham, "MaLoaiSanPham", "TenLoaiSanPham", sanPham.MaLoaiSanPham);
+                ViewBag.MaNhaSanXuat = new SelectList(db.NhaSanXuat, "MaNhaSanXuat", "TenNhaSanXuat", sanPham.MaNhaSanXuat);
+                return View(sanPham);
             }
-            SanPham sanPham = db.SanPham.Find(id);
-            if (sanPham == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPham, "MaLoaiSanPham", "TenLoaiSanPham", sanPham.MaLoaiSanPham);
-            ViewBag.MaNhaSanXuat = new SelectList(db.NhaSanXuat, "MaNhaSanXuat", "TenNhaSanXuat", sanPham.MaNhaSanXuat);
-            return View(sanPham);
+            return Redirect("/Accout/Login");
+
         }
 
         // POST: Admin/SanPhams/Edit/5
@@ -130,16 +150,21 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/SanPhams/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SanPham sanPham = db.SanPham.Find(id);
+                if (sanPham == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(sanPham);
             }
-            SanPham sanPham = db.SanPham.Find(id);
-            if (sanPham == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sanPham);
+
+            return Redirect("/Accout/Login");
         }
 
         // POST: Admin/SanPhams/Delete/5
