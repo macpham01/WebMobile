@@ -38,6 +38,8 @@ namespace WebMobile.Controllers
                 return Redirect("/Admin");
             }
             Session["username"] = acc.UserName;
+            var gh = db.GioHang.Where(x => x.MaTaiKhoan == acc.Email).ToList();
+            Session["countItem"] = gh.Count();
             return RedirectToAction("Index", "Home");
         }
 
@@ -65,7 +67,7 @@ namespace WebMobile.Controllers
                 }
                 catch
                 {
-                    ViewBag.error = "Mời bạn nhập lại thông tin";
+                    ViewBag.error = "Mời bạn nhập một email khác ";
                     return View();
                 }
                 
@@ -77,6 +79,7 @@ namespace WebMobile.Controllers
         {
             Session["username"] = null;
             Session["admin"] = null;
+            Session["countItem"] = null;
             return RedirectToAction("Login");
         }
 

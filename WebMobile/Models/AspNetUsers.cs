@@ -9,8 +9,9 @@ namespace WebMobile.Models
     public partial class AspNetUsers
     {
         public string Id { get; set; }
-
+        [Key]
         [StringLength(256)]
+        
         public string Email { get; set; }
 
         public bool EmailConfirmed { get; set; }

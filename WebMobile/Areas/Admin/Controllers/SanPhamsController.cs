@@ -18,6 +18,7 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/SanPhams
         public ActionResult Index(int? page, string search)
         {
+            Session["username"] = null;
             if (Session["admin"] != null)
             {
                 var products = db.SanPham.Select(x => x);

@@ -45,5 +45,11 @@ namespace WebMobile.Controllers
             var producer = db.LoaiSanPham;
             return PartialView(producer.ToList());
         }
+
+        public ActionResult getImage(string masp)
+        {
+            var product = db.SanPham.FirstOrDefault(x => x.MaSanPham == masp);
+            return PartialView(product);
+        }
     }
 }

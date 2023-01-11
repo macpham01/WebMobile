@@ -85,7 +85,19 @@
                 </form>
             </div>
             <div class="col-md-4">
-                <div id="cart"><a class="btn btn-1" href="~/Public/cart.html"><span class="glyphicon glyphicon-shopping-cart"></span>CART : 0 ITEM</a></div>
+                <div id="cart">
+                    <a class="btn btn-1" href="/Cart/Index">
+                        <span class="glyphicon glyphicon-shopping-cart">
+                        </span>
+                        CART :
+                        @if (@Session["countItem"] != null)
+                        {
+                            <span>@Session["countItem"]</span> 
+                        }
+                        else
+                        {<span>0</span>}
+                    </a>
+                </div>
             </div>
         </div>
     </header>

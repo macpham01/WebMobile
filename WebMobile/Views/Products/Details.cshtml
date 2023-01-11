@@ -57,7 +57,17 @@
                     </div>
 
 
-                    <div class="well"><label>Qty: </label> <input class="form-inline quantity" type="text" value="1"><a href="~/Public/#" class="btn btn-2 ">ADD</a></div>
+                    <div class="well">
+                        @using (Html.BeginForm("Add", "Cart"))
+                        {
+                            <input type="hidden" name="MaSanPham" value="@Model.MaSanPham" />
+                            <input type="hidden" name="TenSanPham" value="@Model.TenSanPham" />
+                            <input type="hidden" name="Gia" value=@Model.Gia />
+                            <label>Số lượng: </label> <input name="SoLuong" class="form-inline quantity" style="width:80px;" type="number" min="1" max="1000" value="1">
+                            <input type="hidden" name="image" value="@Model.Image" />
+                            <input type="submit" name="submit" value="ADD" />
+                        }
+                    </div>
                     <div class="share well">
                         <strong style="margin-right: 13px;">Share :</strong>
                         <a href="~/Public/#" class="share-btn" target="_blank">
