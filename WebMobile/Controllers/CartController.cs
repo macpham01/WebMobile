@@ -66,5 +66,22 @@ namespace WebMobile.Controllers
             }
             return Redirect("/Accout/Login");
         }
+
+        [HttpPost]
+        public ActionResult Remove(string masp)
+        {
+            if (Session["username"] != null)
+            {
+                string mataikhoan = (string)Session["username"];
+                var gh = db.GioHang.FirstOrDefault(x => x.MaSanPham == masp && x.MaTaiKhoan == mataikhoan);
+                if (gh != null)
+                {
+                    db.GioHang.Remove(gh);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            return Redirect("/Accout/Login");
+        }
     }
 }

@@ -1,17 +1,43 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div id="page-content" class="single-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb" style="padding-left: 0;">
+                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading"><h1>CONTACT US</h1></div>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 30px;">
+                <form name="form1" id="ff" method="post" action="contact.php">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name *" name="name" id="name" required data-validation-required-message="Please enter your name.">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Your Email *" name="email" id="email" required data-validation-required-message="Please enter your email address.">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="Your Phone *" name="phone" id="phone" required data-validation-required-message="Please enter your phone number.">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Your Message *" name="message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-1">Send Message</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <p><span class="glyphicon glyphicon-home"></span> VietNam, Hanoi University of Industry</p>
+                <p><span class="glyphicon glyphicon-earphone"></span> +6221 888 888 90 , +6221 888 88891</p>
+                <p><span class="glyphicon glyphicon-envelope"></span> info@yourdomain.com</p>
+                <iframe src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Trường đại học công nghiệp hà nội&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"" width="95%" height="240" frameborder="0" style="border:0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
