@@ -31,17 +31,18 @@
 
                                 <input type="hidden" name="masp" value="@item.MaSanPham" />
                                 <label>Số lượng: </label><input name="soluong" class="form-inline quantity" style="width:80px;" type="number" min="1" max="1000" value="@item.SoLuong">
-                                <input type="submit" name="update" value="UPDATE" />
-                            
+                                @*<input type="submit" name="update" value="UPDATE" />*@
+                                <button type="submit" class="btn btn-primary" style=" position: relative; bottom: 1px;">UPDATE</button>
                              }
                             <div class="price">Thành tiền: $@item.TongTien</div>
                             <hr>
                              @using (Html.BeginForm("Remove", "Cart", FormMethod.Post))
                              {
-                                <div style="display: flex; justify-content: right;">
-                                    <input type="hidden" name="masp" value="@item.MaSanPham" />
-                                    <input type="submit" name="delete" value="REMOVE" />
-                                </div>
+                        <div style="display: flex; justify-content: right;">
+                            <input type="hidden" name="masp" value="@item.MaSanPham" />
+                            @*<input type="submit" name="delete" value="REMOVE" />*@
+                            <button type="submit" class="btn btn-danger" style=" position: relative; bottom: 1px;">REMOVE</button>
+                        </div>
                              }
 
                         </div>

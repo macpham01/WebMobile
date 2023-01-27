@@ -19,22 +19,7 @@
             <div class="col-md-6">
                 <div class="image">
                     <img src="~/Public/images/@Model.Image" />
-                    <div class="image-more">
-                        <ul class="row">
-                            <li class="col-lg-3 col-sm-3 col-xs-4">
-                                <a href="#"><img class="img-responsive" src="~/Public/images/galaxy-note.jpg"></a>
-                            </li>
-                            <li class="col-lg-3 col-sm-3 col-xs-4">
-                                <a href="#"><img class="img-responsive" src="~/Public/images/galaxy-note-2.jpg"></a>
-                            </li>
-                            <li class="col-lg-3 col-sm-3 col-xs-4">
-                                <a href="#"><img class="img-responsive" src="~/Public/images/galaxy-note-3.jpg"></a>
-                            </li>
-                            <li class="col-lg-3 col-sm-3 col-xs-4">
-                                <a href="#"><img class="img-responsive" src="~/Public/images/galaxy-note-4.jpg"></a>
-                            </li>
-                        </ul>
-                    </div>
+                   
                 </div>
             </div>
             <div class="col-md-6">
@@ -65,7 +50,8 @@
                             <input type="hidden" name="Gia" value=@Model.Gia />
                             <label>Số lượng: </label> <input name="SoLuong" class="form-inline quantity" style="width:80px;" type="number" min="1" max="1000" value="1">
                             <input type="hidden" name="image" value="@Model.Image" />
-                            <input type="submit" name="submit" value="ADD" />
+                            @*<input type="submit" name="submit" value="ADD" />*@
+                            <button type="submit" class="btn btn-primary" style=" position: relative; bottom: 1px;">ADD</button>
                         }
                     </div>
                     <div class="share well">
