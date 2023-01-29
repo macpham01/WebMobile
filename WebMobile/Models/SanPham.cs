@@ -43,7 +43,7 @@
         [DisplayName("Giá")]
 
         public int? Gia { get; set; }
-        [DisplayName("Số lượng đã bán")]
+        [DisplayName("Số lượng")] //Số lượng đã bán trong DB
 
         public int? SoLuongDaBan { get; set; }
         [DisplayName("Lượt xem")]

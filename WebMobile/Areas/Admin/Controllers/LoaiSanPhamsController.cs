@@ -46,10 +46,14 @@ namespace WebMobile.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaLoaiSanPham,TenLoaiSanPham,TinhTrang")] LoaiSanPham loaiSanPham)
+        public ActionResult Create([Bind(Include = "TenLoaiSanPham,TinhTrang")] LoaiSanPham loaiSanPham)
         {
             if (ModelState.IsValid)
             {
+                string Numrd_str;
+                Random rd = new Random();
+                Numrd_str = rd.Next(1, 100000000).ToString();
+                loaiSanPham.MaLoaiSanPham = Numrd_str;
                 db.LoaiSanPham.Add(loaiSanPham);
                 db.SaveChanges();
                 return RedirectToAction("Index");

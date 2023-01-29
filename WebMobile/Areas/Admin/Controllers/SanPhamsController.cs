@@ -76,13 +76,17 @@ namespace WebMobile.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "MaSanPham,MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase Image)
+        public ActionResult Create([Bind(Include = "MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase Image)
         {
             if (ModelState.IsValid)
             {
+                string Numrd_str;
+                Random rd = new Random();
+                Numrd_str = rd.Next(1, 100000000).ToString();
+                sanPham.MaSanPham = Numrd_str;
                 if (Image.FileName != null)
                 {
-                    string fileName = sanPham.MaSanPham.ToString();
+                    string fileName = sanPham.MaSanPham;
                     string fullPathWithFileName = "~/Public/images/" + fileName + ".png";
                     Image.SaveAs(Server.MapPath(fullPathWithFileName));
                     sanPham.Image = fileName + ".png";

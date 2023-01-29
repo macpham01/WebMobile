@@ -53,10 +53,14 @@ namespace WebMobile.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaNhaSanXuat,TenNhaSanXuat,TinhTrang")] NhaSanXuat nhaSanXuat)
+        public ActionResult Create([Bind(Include = "TenNhaSanXuat,TinhTrang")] NhaSanXuat nhaSanXuat)
         {
             if (ModelState.IsValid)
             {
+                string Numrd_str;
+                Random rd = new Random();
+                Numrd_str = rd.Next(1, 100000000).ToString();
+                nhaSanXuat.MaNhaSanXuat = Numrd_str;
                 db.NhaSanXuat.Add(nhaSanXuat);
                 db.SaveChanges();
                 return RedirectToAction("Index");
