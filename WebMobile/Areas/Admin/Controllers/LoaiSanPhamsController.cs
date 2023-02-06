@@ -17,28 +17,34 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/LoaiSanPhams
         public ActionResult Index()
         {
-            return View(db.LoaiSanPham.ToList());
+            if (Session["admin"] != null) return View(db.LoaiSanPham.ToList());
+            return Redirect("/Accout/Login");
         }
 
         // GET: Admin/LoaiSanPhams/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                LoaiSanPham loaiSanPham = db.LoaiSanPham.Find(id);
+                if (loaiSanPham == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(loaiSanPham);
             }
-            LoaiSanPham loaiSanPham = db.LoaiSanPham.Find(id);
-            if (loaiSanPham == null)
-            {
-                return HttpNotFound();
-            }
-            return View(loaiSanPham);
+            return Redirect("/Accout/Login");
         }
 
         // GET: Admin/LoaiSanPhams/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["admin"] != null) return View();
+            return Redirect("/Accout/Login");
         }
 
         // POST: Admin/LoaiSanPhams/Create
@@ -65,16 +71,20 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/LoaiSanPhams/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                LoaiSanPham loaiSanPham = db.LoaiSanPham.Find(id);
+                if (loaiSanPham == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(loaiSanPham);
             }
-            LoaiSanPham loaiSanPham = db.LoaiSanPham.Find(id);
-            if (loaiSanPham == null)
-            {
-                return HttpNotFound();
-            }
-            return View(loaiSanPham);
+            return Redirect("/Accout/Login");
         }
 
         // POST: Admin/LoaiSanPhams/Edit/5
@@ -96,16 +106,20 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/LoaiSanPhams/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                LoaiSanPham loaiSanPham = db.LoaiSanPham.Find(id);
+                if (loaiSanPham == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(loaiSanPham);
             }
-            LoaiSanPham loaiSanPham = db.LoaiSanPham.Find(id);
-            if (loaiSanPham == null)
-            {
-                return HttpNotFound();
-            }
-            return View(loaiSanPham);
+            return Redirect("/Accout/Login");
         }
 
         // POST: Admin/LoaiSanPhams/Delete/5
