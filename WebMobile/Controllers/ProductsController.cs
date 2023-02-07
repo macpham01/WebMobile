@@ -36,6 +36,7 @@ namespace WebMobile.Controllers
                 ViewBag.Search = search;
                 products = products.Where(x => x.TenSanPham.Contains(search));
             }
+            ViewBag.soluong = 1; //mac dinh so luong san pham khi them vao gio hang la 1
             products = products.OrderBy(x=>x.TenSanPham);
             int pageSize = 9;
             int pageNumber = (page ?? 1);

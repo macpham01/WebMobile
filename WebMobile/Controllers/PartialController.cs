@@ -24,13 +24,14 @@ namespace WebMobile.Controllers
         public ActionResult NewProduct()
         {
             var newProduct = db.SanPham.Where(x => x.GhiChu == "New").Take(4);
+            ViewBag.soluong = 1; //mac dinh so luong san pham khi them vao gio hang la 1
             return PartialView(newProduct.ToList());
         }
 
         public ActionResult SpecialProduct(int NumberOfProducts)
         {
-            
             var specialProduct = db.SanPham.OrderByDescending(x=>x.Gia).Take(NumberOfProducts);
+            ViewBag.soluong = 1; //mac dinh so luong san pham khi them vao gio hang la 1
             return PartialView(specialProduct.ToList());
         }
 

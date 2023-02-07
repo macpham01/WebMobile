@@ -24,22 +24,54 @@ namespace WebMobile.Controllers
             return Redirect("/Accout/Login");
 
         }
-        [HttpPost]
-        public ActionResult Add(GioHang ghnew)
+        [HttpGet]
+        public ActionResult Add(string MaSanPham, string TenSanPham, int SoLuong, int Gia)
         {
             if (Session["username"] != null)
             {
-                var gh = db.GioHang.FirstOrDefault(x => x.MaSanPham == ghnew.MaSanPham && x.MaTaiKhoan == ghnew.MaTaiKhoan);
+                string mataikhoan = (string)Session["username"];
+                var gh = db.GioHang.FirstOrDefault(x => x.MaSanPham == MaSanPham && x.MaTaiKhoan == mataikhoan);
                 if (gh != null)
                 {
-                    gh.SoLuong = ghnew.SoLuong;
+                    gh.SoLuong += SoLuong;
                     gh.TongTien = gh.Gia * gh.SoLuong;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    ghnew.MaTaiKhoan = (string)Session["username"];
+                    GioHang ghnew = new GioHang();
+                    ghnew.MaTaiKhoan = mataikhoan;
+                    ghnew.MaSanPham = MaSanPham;
+                    ghnew.TenSanPham = TenSanPham;
+                    ghnew.SoLuong = SoLuong;
+                    ghnew.Gia = Gia;
+                    ghnew.TongTien = Gia*SoLuong;
+                    db.GioHang.Add(ghnew);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            return Redirect("/Accout/Login");
+        }
+
+        [HttpPost]
+        public ActionResult Add(GioHang ghnew)
+        {
+            if (Session["username"] != null)
+            {
+                string mataikhoan = (string)Session["username"];
+                var gh = db.GioHang.FirstOrDefault(x => x.MaSanPham == ghnew.MaSanPham && x.MaTaiKhoan == mataikhoan);
+                if (gh != null)
+                {
+                    gh.SoLuong += ghnew.SoLuong;
+                    gh.TongTien = gh.Gia * gh.SoLuong;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ghnew.MaTaiKhoan = mataikhoan;
                     ghnew.TongTien = ghnew.Gia * ghnew.SoLuong;
                     db.GioHang.Add(ghnew);
                     db.SaveChanges();
