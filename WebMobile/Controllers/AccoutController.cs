@@ -38,6 +38,7 @@ namespace WebMobile.Controllers
                 return Redirect("/Admin");
             }
             Session["username"] = acc.UserName;
+            Session["Id"] = acc.Id;
             var gh = db.GioHang.Where(x => x.MaTaiKhoan == acc.Email).ToList();
             Session["countItem"] = gh.Count();
             return RedirectToAction("Index", "Home");

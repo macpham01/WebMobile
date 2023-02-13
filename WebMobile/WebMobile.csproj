@@ -141,6 +141,7 @@
     <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\AccoutController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -596,6 +597,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Public\css\bootstrap.min.css" />
     <Content Include="Public\css\style.css" />
+    <Content Include="Public\css\style2.css" />
     <Content Include="Public\font-awesome\css\font-awesome.css" />
     <Content Include="Public\font-awesome\css\font-awesome.min.css" />
     <Content Include="Public\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -768,10 +770,12 @@
     <Content Include="Views\Accout\Signup.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Partial\getImage.cshtml" />
+    <Content Include="Views\Partial\AllCommentByMasp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -55,6 +55,7 @@ namespace WebMobile.Controllers
             db.SaveChanges();
             ViewBag.nameProduct = title;
             ViewBag.Masp = masp;
+            Session["masp"] = product.MaSanPham;
             return View(product);
         }
 

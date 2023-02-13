@@ -1,0 +1,18 @@
+﻿@media(max-width:991px) {
+    #main-content .products .product .image img {
+        width: 250px;
+    }
+
+    .container .setWidthImage img {
+        width: 250px;
+        margin-left: -30px;
+    }
+}
+
+
+@media(max-width:767px) {
+    .setHeightImage img {
+        width: 100% !important;
+        height: 220px !important;
+    }
+}

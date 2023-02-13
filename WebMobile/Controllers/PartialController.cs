@@ -52,5 +52,12 @@ namespace WebMobile.Controllers
             var product = db.SanPham.FirstOrDefault(x => x.MaSanPham == masp);
             return PartialView(product);
         }
+
+        public ActionResult AllCommentByMasp()
+        {
+            string masp = (string)Session["masp"];
+            var commentByMasp = db.BinhLuan.Where(x => x.MaSanPham.Equals(masp));
+            return PartialView(commentByMasp);
+        }
     }
 }

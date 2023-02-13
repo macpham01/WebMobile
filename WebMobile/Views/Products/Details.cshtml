@@ -16,13 +16,12 @@
 <div class="row">
     <div id="main-content" class="col-md-8">
         <div class="product">
-            <div class="col-md-6">
-                <div class="image">
+            <div class="col-md-6 col-sm-12">
+                <div class="image setWidthImage">
                     <img src="~/Public/images/@Model.Image" />
-                   
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
                 <div class="caption">
                     <div class="name"><h3 style="font-size:28px;">@Model.TenSanPham</h3></div>
                     <div class="price">$@Model.Gia</div>
@@ -74,33 +73,64 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#description">Description</a></li>
                 <li><a href="#review">Review</a></li>
+                <li><a href="#evaluate">Evaluate</a></li>
             </ul>
-            <div class="tab-content">
+            <div class="tab-content" style="height: 430px; overflow-y:auto;">
                 <div id="description" class="tab-pane fade in active">
                     @Html.Raw(@Model.CauHinh)
                 </div>
                 <div id="review" class="tab-pane fade">
                     <div class="review-text">
-                        <p>Please write your review about this product</p>
+                        @if (Session["username"] == null)
+                        {
+                            <p>Please login to review about this product</p>
+                        }
+                        else
+                        {
+                            <p>Please write your review about this product</p>
+                        }
                     </div>
                     <div class="review-form">
                         <h4>Write a review</h4>
-                        <form name="form1" id="ff" method="post" action="review.php">
+                        <form name="comment"  method="post" action="/Comment/Create">
                             <label>
+                                <input type="text" hidden name="MaSanPham" value=@Model.MaSanPham />
+                                <input type="text" hidden name="MaTaiKhoan" value=@Session["Id"] />
+                                <input type="text" hidden name="tensanpham" value=@ViewBag.nameProduct />
                                 <span>Enter your name:</span>
-                                <input type="text" name="name" id="name" required>
+                                @if (Session["username"] != null)
+                                {
+                                    <input type="text" name="TenTaiKhoan" value=@Session["username"] readonly>
+                                }
+                                else
+                                {
+                                    <input type="text" name="name" id="name" required>
+                                }
+
+
                             </label>
                             <label>
                                 <span>Your message here:</span>
-                                <textarea name="message" id="message"></textarea>
+                               
+                                <textarea name="NoiDung" id="NoiDung"></textarea>
                             </label>
                             <div class="text-right">
-                                <input class="btn btn-default" type="reset" name="reset" value="Reset">
-                                <input class="btn btn-default" type="submit" name="Submit" value="Submit">
+                                @if (Session["username"] != null)
+                                {
+                                    <input class="btn btn-default" type="reset" name="reset" value="Reset">
+                                    <input class="btn btn-default" type="submit" name="Submit" value="Submit">
+                                }
+            
+
                             </div>
                         </form>
                     </div>
                 </div>
+                <div id="evaluate" class="tab-pane fade">
+                    @*COMMENTS USE PARTIAL CONTROLLER*@
+                    @{Html.RenderAction("AllCommentByMasp", "Partial");}
+                </div>
+
             </div>
         </div>
         
