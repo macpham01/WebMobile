@@ -106,13 +106,13 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
                     <li class="dropdown">
-                        @Html.ActionLink("products", "Index", "Products")
+                        @Html.ActionLink("Sản phẩm", "Index", "Products")
                         
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">producer</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hãng sản xuất</a>
                         <div class="dropdown-menu">
                             <div class="dropdown-inner">
                                 @*MenuProducer USE PARTIAL VIEW*@
@@ -121,7 +121,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">product type</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Loại sản phẩm</a>
                         <div class="dropdown-menu">
                             <div class="dropdown-inner">
                                 @*MenuProductType USE PARTIAL VIEW*@
@@ -129,7 +129,7 @@
                             </div>
                         </div>
                     </li>
-                    <li><a href=@Url.Action("Contact", "Home")>contact</a></li>
+                    <li><a href=@Url.Action("Contact", "Home")>Liên hệ</a></li>
                 </ul>
             </div>
         </div>
@@ -148,30 +148,31 @@
                 <div class="row">
                     <div class="col-md-3 col-footer footer-1">
                         <img src="~/Public/images/logofooter.png" />
-                        <p>This is a website specializing in providing cheap, reputable and high quality phones.</p>
+                        
+                        <p>
+                            Đây là trang web chuyên cung cấp điện thoại giá rẻ, uy tín, chất lượng cao.
+                        </p>
                     </div>
                     <div class="col-md-3 col-footer footer-2">
-                        <div class="heading"><h4>Customer Service</h4></div>
+                        <div class="heading"><h4>Dịch vụ khách hàng</h4></div>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                            <li><a href="#">Điều khoản và điều kiện</a></li>
+                            
                         </ul>
                     </div>
                     <div class="col-md-3 col-footer footer-3">
-                        <div class="heading"><h4>My Account</h4></div>
+                        <div class="heading"><h4>Tài khoản của tôi</h4></div>
                         <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Brands</a></li>
-                            <li><a href="#">Gift Vouchers</a></li>
-                            <li><a href="#">Specials</a></li>
-                            <li><a href="#">Site Map</a></li>
+                            <li><a href="#">Tài khoản của tôi</a></li>
+                            <li><a href="#">Nhãn hiệu</a></li>
+                            <li><a href="#">Đặc biệt</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-md-3 col-footer footer-4">
-                        <div class="heading"><h4>Contact Us</h4></div>
+                        <div class="heading"><h4>Liên hệ chúng tôi</h4></div>
                         <ul>
                             <li><span class="glyphicon glyphicon-home"></span>VietNam, Hanoi University of Industry</li>
                             <li><span class="glyphicon glyphicon-earphone"></span>+91 8866888111</li>

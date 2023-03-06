@@ -7,8 +7,8 @@
 <div class="row">
     <div class="col-lg-12">
         <ul class="breadcrumb">
-            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-            <li><a href="@Url.Action("Index")">Products</a></li>
+            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index")">Sản phẩm</a></li>
             <li>@ViewBag.nameProduct</li>
         </ul>
     </div>
@@ -26,6 +26,7 @@
                     <div class="name"><h3 style="font-size:28px;">@Model.TenSanPham</h3></div>
                     <div class="price">$@Model.Gia</div>
                     <div class="name">Lượt xem: @Model.LuotView</div>
+                    <div class="name">Số lượng: @Model.SoLuongDaBan</div>
                     <div class="rating" style="color: #fec93f;">
                         @for (int i = 0; i < 4; i++)
                         {
@@ -50,9 +51,12 @@
                             <label>Số lượng: </label> <input name="SoLuong" class="form-inline quantity" style="width:80px;" type="number" min="1" max="1000" value="1">
                             <input type="hidden" name="image" value="@Model.Image" />
                             @*<input type="submit" name="submit" value="ADD" />*@
-                            <button type="submit" class="btn btn-primary" style=" position: relative; bottom: 1px;">ADD</button>
+                            <button type="submit" class="btn btn-primary" style=" position: relative; bottom: 1px;">Thêm vào giỏ</button>
                         }
+
                     </div>
+                    @if (ViewBag.ErrorQuantity != null)
+                    {<p style="color:red">@ViewBag.ErrorQuantity</p>}
                     <div class="share well">
                         <strong style="margin-right: 13px;">Share :</strong>
                         <a href="#" class="share-btn" target="_blank">
@@ -69,70 +73,6 @@
             </div>
             <div class="clear"></div>
         </div>
-        <div class="product-desc">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#description">Description</a></li>
-                <li><a href="#review">Review</a></li>
-                <li><a href="#evaluate">Evaluate</a></li>
-            </ul>
-            <div class="tab-content" style="height: 430px; overflow-y:auto;">
-                <div id="description" class="tab-pane fade in active">
-                    @Html.Raw(@Model.CauHinh)
-                </div>
-                <div id="review" class="tab-pane fade">
-                    <div class="review-text">
-                        @if (Session["username"] == null)
-                        {
-                            <p>Please login to review about this product</p>
-                        }
-                        else
-                        {
-                            <p>Please write your review about this product</p>
-                        }
-                    </div>
-                    <div class="review-form">
-                        <h4>Write a review</h4>
-                        <form name="comment"  method="post" action="/Comment/Create">
-                            <label>
-                                <input type="text" hidden name="MaSanPham" value=@Model.MaSanPham />
-                                <input type="text" hidden name="MaTaiKhoan" value=@Session["Id"] />
-                                <input type="text" hidden name="tensanpham" value=@ViewBag.nameProduct />
-                                <span>Enter your name:</span>
-                                @if (Session["username"] != null)
-                                {
-                                    <input type="text" name="TenTaiKhoan" value=@Session["username"] readonly>
-                                }
-                                else
-                                {
-                                    <input type="text" name="name" id="name" required>
-                                }
-
-
-                            </label>
-                            <label>
-                                <span>Your message here:</span>
-                               
-                                <textarea name="NoiDung" id="NoiDung"></textarea>
-                            </label>
-                            <div class="text-right">
-                                @if (Session["username"] != null)
-                                {
-                                    <input class="btn btn-default" type="reset" name="reset" value="Reset">
-                                    <input class="btn btn-default" type="submit" name="Submit" value="Submit">
-                                }
-            
-
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div id="evaluate" class="tab-pane fade">
-                    @*COMMENTS USE PARTIAL CONTROLLER*@
-                    @{Html.RenderAction("AllCommentByMasp", "Partial");}
-                </div>
-
-            </div>
-        </div>
         
     </div>
 
@@ -140,8 +80,73 @@
     @{Html.RenderAction("Sidebar", "Partial");}
     <div class="row">
         <div class="col-lg-12">
+            <div class="product-desc" style="margin-top:0">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#description">Mô tả sản phẩm</a></li>
+                    <li><a href="#review">Bình luận</a></li>
+                    <li><a href="#evaluate">Nhận xét</a></li>
+                </ul>
+                <div class="tab-content" style="height: 700px; overflow-y:auto;">
+                    <div id="description" class="tab-pane fade in active">
+                        @Html.Raw(@Model.MoTa)
+                    </div>
+                    <div id="review" class="tab-pane fade">
+                        <div class="review-text">
+                            @if (Session["username"] == null)
+                            {
+                                <p>Please login to review about this product</p>
+                            }
+                            else
+                            {
+                                <p>Please write your review about this product</p>
+                            }
+                        </div>
+                        <div class="review-form">
+                            <h4>Write a review</h4>
+                            <form name="comment" method="post" action="/Comment/Create">
+                                <label>
+                                    <input type="text" hidden name="MaSanPham" value=@Model.MaSanPham />
+                                    <input type="text" hidden name="MaTaiKhoan" value=@Session["Id"] />
+                                    <input type="text" hidden name="tensanpham" value=@ViewBag.nameProduct />
+                                    <span>Enter your name:</span>
+                                    @if (Session["username"] != null)
+                                    {
+                                        <input type="text" name="TenTaiKhoan" value=@Session["username"] readonly>
+                                    }
+                                    else
+                                    {
+                                        <input type="text" name="name" id="name" required>
+                                    }
+
+
+                                </label>
+                                <label>
+                                    <span>Your message here:</span>
+
+                                    <textarea name="NoiDung" id="NoiDung"></textarea>
+                                </label>
+                                <div class="text-right">
+                                    @if (Session["username"] != null)
+                                    {
+                                        <input class="btn btn-default" type="reset" name="reset" value="Reset">
+                                        <input class="btn btn-default" type="submit" name="Submit" value="Submit">
+                                    }
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="evaluate" class="tab-pane fade">
+                        @*COMMENTS USE PARTIAL CONTROLLER*@
+                        @{Html.RenderAction("AllCommentByMasp", "Partial");}
+                    </div>
+
+                </div>
+            </div>
+
             <div class="product-related">
-                <div class="heading"><h2  style="margin: 0px 10px;">RELATED PRODUCTS</h2></div>
+                <div class="heading"><h2 style="margin: 0px 10px;">SẢN PHẨM KHÁC</h2></div>
                 <div class="products">
                     @*SPECIAL PRODUCT PARTIAL VIEW*@
                     @{Html.RenderAction("SpecialProduct", "Partial", new { NumberOfProducts = 4 });}

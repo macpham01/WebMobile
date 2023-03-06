@@ -14,7 +14,7 @@ namespace WebMobile.Controllers
 
 
         // GET: Products
-        public ActionResult Index(int? page, string MaNSX, string title, string MaLoaiSP, string search)
+        public ActionResult Index(int? page, string MaNSX, string title, string MaLoaiSP, string search, string sorted)
         {
             var products = db.SanPham.Select(x=>x);
             if (MaNSX != null)
@@ -37,14 +37,30 @@ namespace WebMobile.Controllers
                 products = products.Where(x => x.TenSanPham.Contains(search));
             }
             ViewBag.soluong = 1; //mac dinh so luong san pham khi them vao gio hang la 1
-            products = products.OrderBy(x=>x.TenSanPham);
+            
             int pageSize = 9;
+            switch (sorted)
+            {
+                case "desName":
+                    products = products.OrderByDescending(x => x.TenSanPham);
+                    break;
+                case "desPrice":
+                    products = products.OrderByDescending(x => x.Gia);
+                    break;
+                case "price":
+                    products = products.OrderBy(x => x.Gia);
+                    break;
+                default:
+                    products = products.OrderBy(x => x.TenSanPham); 
+                    break;
+            }
+            ViewBag.Sorted = sorted;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Products/Details?masp=5
-        public ActionResult Details(string masp, string title)
+        public ActionResult Details(string masp, string title, string errorQuantity)
         {
             var product = db.SanPham.SingleOrDefault(x => x.MaSanPham == masp);
             if (product == null)
@@ -55,6 +71,7 @@ namespace WebMobile.Controllers
             db.SaveChanges();
             ViewBag.nameProduct = title;
             ViewBag.Masp = masp;
+            ViewBag.ErrorQuantity = errorQuantity;
             Session["masp"] = product.MaSanPham;
             return View(product);
         }

@@ -40,20 +40,28 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/SanPhams/Details/5
         public ActionResult Details(string id)
         {
-            if (Session["admin"] != null)
+            try
             {
-                if (id == null)
+                if (Session["admin"] != null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    SanPham sanPham = db.SanPham.Find(id);
+                    if (sanPham == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(sanPham);
                 }
-                SanPham sanPham = db.SanPham.Find(id);
-                if (sanPham == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(sanPham);
+                return Redirect("/Accout/Login");
             }
-            return Redirect("/Accout/Login");
+           catch(Exception error)
+            {
+                Console.WriteLine("{0}", error);
+                return RedirectToAction("Index");
+            }
 
         }
 
@@ -76,7 +84,7 @@ namespace WebMobile.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase Image)
+        public ActionResult Create([Bind(Include = "MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,MoTa,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase Image)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +137,7 @@ namespace WebMobile.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "MaSanPham,MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase image)
+        public ActionResult Edit([Bind(Include = "MaSanPham,MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,MoTa,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {

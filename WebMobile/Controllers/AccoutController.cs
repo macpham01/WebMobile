@@ -33,8 +33,9 @@ namespace WebMobile.Controllers
                 ViewBag.error = "Email hoặc mật khẩu không chính xác";
                 return View();
             }
-            if (acc.isAdmin) { 
-                Session["admin"] = "admin";
+            if (acc.isAdmin) {
+                //Session["admin"] = "admin";
+                Session["admin"] = acc.UserName;
                 return Redirect("/Admin");
             }
             Session["username"] = acc.UserName;
@@ -68,7 +69,7 @@ namespace WebMobile.Controllers
                 }
                 catch
                 {
-                    ViewBag.error = "Mời bạn nhập một email khác ";
+                    ViewBag.error = "Mời bạn nhập một email khác";
                     return View();
                 }
                 

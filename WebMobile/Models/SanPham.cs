@@ -54,6 +54,9 @@
         [DisplayName("Tình trạng")]
 
         public string TinhTrang { get; set; }
+        [DisplayName("Mô tả")]
+
+        public string MoTa { get; set; }
 
         [StringLength(50)]
         [DisplayName("Ghi chú")]

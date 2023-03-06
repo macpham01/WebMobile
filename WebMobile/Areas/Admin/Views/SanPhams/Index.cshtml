@@ -17,7 +17,7 @@
 <p>
     @Html.ActionLink("Thêm mới", "Create")
 </p>
-<table class="table">
+<table border="1" class="table" style="width: 1500px; max-width:unset; border-collapse:collapse; border-color:gray">
     <tr>
         <th>
             Loại sản phẩm
@@ -54,43 +54,43 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NhaSanXuat.TenNhaSanXuat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenSanPham)
-            </td>
-            <td>
-                @Html.Raw(@item.CauHinh)
-            </td>
-            <td>
-                <img src="~/Public/images/@item.Image" alt="@item.Image" width="130" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoLuongDaBan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LuotView)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TinhTrang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GhiChu)
-            </td>
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.MaSanPham }) |
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSanPham }) |
-                @Html.ActionLink("Xoá", "Delete", new { id = item.MaSanPham })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NhaSanXuat.TenNhaSanXuat)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TenSanPham)
+    </td>
+    <td>
+        @Html.Raw(@item.CauHinh)
+    </td>
+    <td>
+        <img src="~/Public/images/@item.Image" alt="@item.Image" width="130" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SoLuongDaBan)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LuotView)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TinhTrang)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GhiChu)
+    </td>
+    <td>
+        @Html.ActionLink("Sửa", "Edit", new { id = item.MaSanPham }) |
+        @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSanPham }) |
+        @Html.ActionLink("Xoá", "Delete", new { id = item.MaSanPham })
+    </td>
+</tr>
     }
 
 </table>
