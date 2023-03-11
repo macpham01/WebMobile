@@ -156,5 +156,10 @@ namespace WebMobile.Controllers
                 return Redirect("/Accout/Login");
             }
         }
+
+        public ActionResult CheckOut()
+        {
+            return View();
+        }
     }
 }

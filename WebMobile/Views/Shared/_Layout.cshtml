@@ -30,6 +30,19 @@
 </head>
 
 <body>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/640c67354247f20fefe54602/1gr876b3c';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
     <!--Top-->
     <nav id="top">
         <div class="container">
@@ -38,12 +51,12 @@
                     <select class="language">
                         <option value="English" selected>English</option>
                         <option value="VietNam">VietNam</option>
-                        
+
                     </select>
                     <select class="currency">
                         <option value="USD" selected>USD</option>
                         <option value="VND">VND</option>
-                       
+
                     </select>
                 </div>
                 <div class="col-xs-6">
@@ -88,7 +101,7 @@
                         CART :
                         @if (@Session["countItem"] != null)
                         {
-                            <span>@Session["countItem"] ITEM</span> 
+                            <span>@Session["countItem"] ITEM</span>
                         }
                         else
                         {<span>0 ITEM</span>}
@@ -98,18 +111,18 @@
         </div>
     </header>
     <!--Navigation-->
-    <nav id="menu" class="navbar">
+    <nav id="menu" class="navbar container">
         <div class="container">
             <div class="navbar-header">
                 <span id="heading" class="visible-xs">Categories</span>
                 <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
             </div>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <div class="collapse navbar-collapse navbar-ex1-collapse" style="padding:0">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
                     <li class="dropdown">
                         @Html.ActionLink("Sản phẩm", "Index", "Products")
-                        
+
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hãng sản xuất</a>
@@ -148,7 +161,7 @@
                 <div class="row">
                     <div class="col-md-3 col-footer footer-1">
                         <img src="~/Public/images/logofooter.png" />
-                        
+
                         <p>
                             Đây là trang web chuyên cung cấp điện thoại giá rẻ, uy tín, chất lượng cao.
                         </p>
@@ -159,7 +172,7 @@
                             <li><a href="#">Về chúng tôi</a></li>
                             <li><a href="#">Chính sách bảo mật</a></li>
                             <li><a href="#">Điều khoản và điều kiện</a></li>
-                            
+
                         </ul>
                     </div>
                     <div class="col-md-3 col-footer footer-3">
@@ -168,7 +181,7 @@
                             <li><a href="#">Tài khoản của tôi</a></li>
                             <li><a href="#">Nhãn hiệu</a></li>
                             <li><a href="#">Đặc biệt</a></li>
-                           
+
                         </ul>
                     </div>
                     <div class="col-md-3 col-footer footer-4">
@@ -186,7 +199,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        
+
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
