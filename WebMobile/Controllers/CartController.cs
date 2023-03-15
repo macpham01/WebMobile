@@ -41,6 +41,10 @@ namespace WebMobile.Controllers
                     {
                         gh.SoLuong += SoLuong;
                         gh.TongTien = gh.Gia * gh.SoLuong;
+
+                        //Trừ đi số lượng sản phẩm có mã sản phẩm khi được thêm vào giỏ hàng
+                        var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == MaSanPham);
+                        sp.SoLuongDaBan -= SoLuong;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -54,6 +58,10 @@ namespace WebMobile.Controllers
                         ghnew.Gia = Gia;
                         ghnew.TongTien = Gia * SoLuong;
                         db.GioHang.Add(ghnew);
+
+                        //Trừ đi số lượng sản phẩm có mã sản phẩm khi được thêm vào giỏ hàng
+                        var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == MaSanPham);
+                        sp.SoLuongDaBan -= SoLuong;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -81,20 +89,38 @@ namespace WebMobile.Controllers
                     {
                         gh.SoLuong += ghnew.SoLuong;
                         gh.TongTien = gh.Gia * gh.SoLuong;
+
+                        //Kiểm tra xem số lượng sau khi update có đủ để bán không
+                        var productSelected = db.SanPham.Where(x => x.MaSanPham == ghnew.MaSanPham).Select(x => x.SoLuongDaBan).FirstOrDefault();
+                        int productSelectedInt = Convert.ToInt32(productSelected);
+                        if (gh.SoLuong > productSelectedInt)
+                        {
+                            return RedirectToAction("Details", "Products", new { masp = ghnew.MaSanPham, errorQuantity = "Số lượng bán không đủ" });
+                        }
+
+                        //Trừ đi số lượng sản phẩm có mã sản phẩm khi được thêm vào giỏ hàng
+                        var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == ghnew.MaSanPham);
+                        sp.SoLuongDaBan -= ghnew.SoLuong;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
                     else
                     {
+                        //kiểm tra xem số lượng có đủ để bán không
                         var productSelected =db.SanPham.Where(x => x.MaSanPham == ghnew.MaSanPham).Select(x => x.SoLuongDaBan).FirstOrDefault();
                         int productSelectedInt = Convert.ToInt32(productSelected);
                         if (ghnew.SoLuong> productSelectedInt)
                         {
                             return RedirectToAction("Details", "Products", new { masp = ghnew.MaSanPham, errorQuantity= "Số lượng bán không đủ" });
                         }
+
                         ghnew.MaTaiKhoan = mataikhoan;
                         ghnew.TongTien = ghnew.Gia * ghnew.SoLuong;
                         db.GioHang.Add(ghnew);
+
+                        //Trừ đi số lượng sản phẩm có mã sản phẩm khi được thêm vào giỏ hàng
+                        var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == ghnew.MaSanPham);
+                        sp.SoLuongDaBan -= ghnew.SoLuong;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -122,6 +148,14 @@ namespace WebMobile.Controllers
                     {
                         gh.SoLuong = soluong;
                         gh.TongTien = gh.Gia * soluong;
+
+                        //kiểm tra xem số lượng có đủ để bán không
+                        var productSelected = db.SanPham.Where(x => x.MaSanPham == masp).Select(x => x.SoLuongDaBan).FirstOrDefault();
+                        int productSelectedInt = Convert.ToInt32(productSelected);
+                        if (soluong > productSelectedInt)
+                        {
+                            return RedirectToAction("Details", "Products", new { masp = masp, errorQuantity = "Số lượng bán không đủ" });
+                        }
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }

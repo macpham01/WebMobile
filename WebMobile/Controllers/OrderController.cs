@@ -35,7 +35,7 @@ namespace WebMobile.Controllers
                 orderNew.ID = rd.Next(1, 10000);
                 orderNew.NguoiDat = nguoidat.Id; //Lấy id thay cho Email (vì trong CSDL đang bị ràng buộc khoá)
                 orderNew.TongTien = gh.Sum(x => x.TongTien);
-                orderNew.TrangThai = "Đang giao hàng";
+                orderNew.TrangThai = "Chưa giao hàng";
                 
                 orderNew.NgayTao = DateTime.Now;
 
@@ -48,15 +48,20 @@ namespace WebMobile.Controllers
                     db.SaveChanges();
                 }
                 Session["countItem"] = 0;
-                return Redirect("/Home");
+                return RedirectToAction("ThankYou");
             }
             catch (Exception ex)
             {
-                //Console.WriteLine(ex.Message);
-                //return Redirect("/Home");
-                throw;
+                Console.WriteLine(ex.Message);
+                return Redirect("/Home");
+
             }
             
+        }
+
+        public ActionResult ThankYou()
+        {
+            return View();
         }
     }
 }

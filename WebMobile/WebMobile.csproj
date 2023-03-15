@@ -749,9 +749,7 @@
     <Content Include="Areas\Admin\Views\AspNetUsers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\HoaDons\Create.cshtml" />
     <Content Include="Areas\Admin\Views\HoaDons\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\HoaDons\Details.cshtml" />
     <Content Include="Areas\Admin\Views\HoaDons\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\HoaDons\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -793,6 +791,7 @@
     <Content Include="Views\Partial\AllCommentByMasp.cshtml" />
     <Content Include="Views\Cart\CheckOut.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\ThankYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

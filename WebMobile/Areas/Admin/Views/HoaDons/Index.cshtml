@@ -4,12 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Danh sách đơn hàng</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table" border="1" style="border-collapse:collapse">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.NgayTao)
@@ -24,52 +21,59 @@
             @Html.DisplayNameFor(model => model.DiaChi)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.CCCD)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.TongTien)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.HinhThucThanhToan)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TrangThai)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CCCD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HinhThucThanhToan)
-        </th>
-        <th></th>
+        <th style=" width: 108px;"></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayTao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NguoiNhan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SDT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiaChi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TongTien)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrangThai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CCCD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HinhThucThanhToan)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NguoiNhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CCCD)
+            </td>
+            <td>
+                @String.Format("{0:#,0đ}", item.TongTien)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.HinhThucThanhToan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrangThai)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa đơn hàng", "Edit", new { id = item.ID })
+
+                @Html.ActionLink("Xoá đơn hàng", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+<div>@Html.ActionLink("Xuất danh sách đơn hàng", "ExportToExcel")</div>
+
