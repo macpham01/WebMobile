@@ -25,7 +25,7 @@
                     <div class="col-md-9">
                         <div class="caption">
                             <div class="name"><h3><a href="/Products/Details?masp=@item.MaSanPham">@item.TenSanPham</a></h3></div>
-                            <div class="price">$@item.Gia</div>
+                            <div class="price">@String.Format("{0:#,0đ}", item.Gia)</div>
                             @using (Html.BeginForm("Update", "Cart", FormMethod.Post))
                              {
 
@@ -34,7 +34,7 @@
                                 @*<input type="submit" name="update" value="UPDATE" />*@
                                 <button type="submit" class="btn btn-primary" style=" position: relative; bottom: 1px;">Cập nhật</button>
                              }
-                            <div class="price">Thành tiền: $@item.TongTien</div>
+                        <div class="price">Thành tiền: @String.Format("{0:#,0đ}", item.TongTien)</div>
                             <hr>
                              @using (Html.BeginForm("Remove", "Cart", FormMethod.Post))
                              {
@@ -66,7 +66,8 @@
                         </tr>
                         <tr>
                             <td>Tổng cộng</td>
-                            <td>$@ViewBag.sum</td>
+                           
+                            <td>@String.Format("{0:#,0đ}", ViewBag.sum)</td>
                         </tr>
                         <tr>
                             <td>Giảm giá</td>
@@ -74,10 +75,10 @@
                         </tr>
                         <tr style="border-top: 1px solid #333">
                             <td><h5>TỔNG CỘNG</h5></td>
-                            <td>$@ViewBag.sum</td>
+                            <td>@String.Format("{0:#,0đ}", ViewBag.sum)</td>
                         </tr>
                     </table>
-                    <center><a href="@Url.Action("Index", "Home")" class="btn btn-1">ĐẶT HÀNG</a></center>
+                    <center><a href="@Url.Action("Index", "Order")" class="btn btn-1">ĐẶT HÀNG</a></center>
                 </div>
             </div>
         </div>

@@ -38,7 +38,8 @@ namespace WebMobile.Controllers
                 Session["admin"] = acc.UserName;
                 return Redirect("/Admin");
             }
-            Session["username"] = acc.UserName;
+            Session["username"] = acc.UserName;  //ở đây UserName và Email cùng một tên
+            //thật ra mình muốn đặt email làm khoá chính thì Session["username"] = acc.Email
             Session["Id"] = acc.Id;
             var gh = db.GioHang.Where(x => x.MaTaiKhoan == acc.Email).ToList();
             Session["countItem"] = gh.Count();

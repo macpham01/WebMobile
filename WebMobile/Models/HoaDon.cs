@@ -33,7 +33,9 @@ namespace WebMobile.Models
 
         public long? TongTien { get; set; }
 
-        public int? TrangThai { get; set; }
+        public string TrangThai { get; set; }
+        public string CCCD { get; set; }
+        public string HinhThucThanhToan { get; set; }
 
         public virtual AspNetUsers AspNetUsers { get; set; }
 

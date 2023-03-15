@@ -10,6 +10,7 @@ namespace WebMobile.Controllers
     public class CartController : Controller
     {
         private WebmobileDB db = new WebmobileDB();
+
         // GET: Cart
         public ActionResult Index()
         {
@@ -17,6 +18,10 @@ namespace WebMobile.Controllers
             {
                 string mataikhoan = (string)Session["username"];
                 var gh = db.GioHang.Where(x => x.MaTaiKhoan == mataikhoan).ToList();
+                if (gh.Count == 0)
+                {
+                    return Redirect("/Home");
+                }
                 ViewBag.sum = gh.Sum(x => x.TongTien);
                 Session["countItem"] = gh.Count();
                 return View(gh);
@@ -144,6 +149,8 @@ namespace WebMobile.Controllers
                     {
                         db.GioHang.Remove(gh);
                         db.SaveChanges();
+                        var ghnew = db.GioHang.Where(x => x.MaTaiKhoan == mataikhoan).ToList();
+                        Session["countItem"] = ghnew.Count();
                         return RedirectToAction("Index");
                     }
                 }
