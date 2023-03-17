@@ -43,8 +43,8 @@ namespace WebMobile.Controllers
                         gh.TongTien = gh.Gia * gh.SoLuong;
 
                         //Trừ đi số lượng sản phẩm có mã sản phẩm khi được thêm vào giỏ hàng
-                        var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == MaSanPham);
-                        sp.SoLuongDaBan -= SoLuong;
+                        //var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == MaSanPham);
+                        //sp.SoLuongDaBan -= SoLuong;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -60,8 +60,8 @@ namespace WebMobile.Controllers
                         db.GioHang.Add(ghnew);
 
                         //Trừ đi số lượng sản phẩm có mã sản phẩm khi được thêm vào giỏ hàng
-                        var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == MaSanPham);
-                        sp.SoLuongDaBan -= SoLuong;
+                        //var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == MaSanPham);
+                        //sp.SoLuongDaBan -= SoLuong;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -99,8 +99,8 @@ namespace WebMobile.Controllers
                         }
 
                         //Trừ đi số lượng sản phẩm có mã sản phẩm khi được thêm vào giỏ hàng
-                        var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == ghnew.MaSanPham);
-                        sp.SoLuongDaBan -= ghnew.SoLuong;
+                        //var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == ghnew.MaSanPham);
+                        //sp.SoLuongDaBan -= ghnew.SoLuong;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -119,8 +119,8 @@ namespace WebMobile.Controllers
                         db.GioHang.Add(ghnew);
 
                         //Trừ đi số lượng sản phẩm có mã sản phẩm khi được thêm vào giỏ hàng
-                        var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == ghnew.MaSanPham);
-                        sp.SoLuongDaBan -= ghnew.SoLuong;
+                        //var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == ghnew.MaSanPham);
+                        //sp.SoLuongDaBan -= ghnew.SoLuong;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }

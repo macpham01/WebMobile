@@ -143,6 +143,10 @@
                         </div>
                     </li>
                     <li><a href=@Url.Action("Contact", "Home")>Liên hệ</a></li>
+                    @if (Session["buyProduct"] != null)
+                    {
+                        <li><a href=@Url.Action("ThankYou", "Order", new {orderID = Session["buyProduct"]})>Đơn hàng</a></li>
+                    }
                 </ul>
             </div>
         </div>

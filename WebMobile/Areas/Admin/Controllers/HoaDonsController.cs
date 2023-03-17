@@ -24,6 +24,33 @@ namespace WebMobile.Areas.Admin.Controllers
             return View(hoaDon.ToList());
         }
 
+        public ActionResult Details(long? id)
+        {
+            try
+            {
+                if (Session["admin"] != null)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    var orderDetails = db.ChiTietHoaDon.Where(x=>x.OrderID==id);
+                    if (orderDetails == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(orderDetails);
+                }
+                return Redirect("/Accout/Login");
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("{0}", error);
+                return RedirectToAction("Index");
+            }
+
+        }
+
         // GET: Admin/HoaDons/Edit/5
         public ActionResult Edit(long? id)
         {

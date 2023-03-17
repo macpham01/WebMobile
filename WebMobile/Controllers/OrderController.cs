@@ -30,6 +30,7 @@ namespace WebMobile.Controllers
                 string mataikhoan = (string)Session["username"];
                 var gh = db.GioHang.Where(x => x.MaTaiKhoan == mataikhoan).ToList();
                 var nguoidat = db.AspNetUsers.FirstOrDefault(x=>x.UserName == mataikhoan);
+                var product = db.SanPham.ToList();
 
                 Random rd = new Random();
                 orderNew.ID = rd.Next(1, 10000);
@@ -42,13 +43,38 @@ namespace WebMobile.Controllers
                 db.HoaDon.Add(orderNew);
                 db.SaveChanges();
 
+               
+
                 foreach (var item in gh)
                 {
+                    //Trừ đi số lượng tương ứng của sản phẩm khi thanh toán
+                    var productSelect = product.FirstOrDefault(x => x.MaSanPham == item.MaSanPham);
+                    productSelect.SoLuongDaBan -= item.SoLuong;
+
+                    //Khai báo thông tin của một đối tượng thuộc bảng chi tiết hoá đơn 
+                    var orderDetail = new ChiTietHoaDon();
+                    orderDetail.MaSanPham = item.MaSanPham;
+                    orderDetail.OrderID = orderNew.ID;
+                    orderDetail.TenSanPham = item.TenSanPham;
+                    orderDetail.SoLuong = item.SoLuong;
+                    orderDetail.Gia = item.Gia;
+                    orderDetail.TongTien = item.TongTien;
+
+                    //Thêm dữ liệu vào bảng chi tiết hoá đơn 
+                    db.ChiTietHoaDon.Add(orderDetail);
+                    
+
+                    //Xoá từng bản ghi trong bảng giỏ hàng (dữ liệu đã được copy sang bảng chi tiết hoá đơn)
                     db.GioHang.Remove(item);
                     db.SaveChanges();
                 }
+
+                //Hiện thị số lượng item trong giỏ hàng
                 Session["countItem"] = 0;
-                return RedirectToAction("ThankYou");
+
+                //Hiện thanh nav Chi tiết đơn hàng
+                Session["buyProduct"] = orderNew.ID;
+                return RedirectToAction("ThankYou", new {orderID = orderNew.ID});
             }
             catch (Exception ex)
             {
@@ -59,9 +85,18 @@ namespace WebMobile.Controllers
             
         }
 
-        public ActionResult ThankYou()
+        public ActionResult ThankYou(int orderID)
         {
-            return View();
+            if (Session["username"] != null)
+            {
+                
+                var orderDetails = db.ChiTietHoaDon.Where(x => x.OrderID == orderID);
+
+                ViewBag.sum = orderDetails.Sum(x => x.TongTien);
+               
+                return View(orderDetails);
+            }
+            return Redirect("/Accout/Login");
         }
     }
 }

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WebMobile.Models.ChiTietHoaDon>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết hoá đơn</h2>
+
+
+<table class="table" border="1" style="border-collapse:collapse">
+    <tr>
+
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+            Thành tiền
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+
+                @String.Format("{0:#,0đ}", item.Gia)
+            </td>
+            <td>
+
+                @String.Format("{0:#,0đ}", item.TongTien)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</div>
