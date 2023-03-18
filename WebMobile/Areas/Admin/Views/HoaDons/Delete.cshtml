@@ -54,7 +54,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TongTien)
+            
+            @String.Format("{0:#,0đ}", Model.TongTien)
+
         </dd>
 
         <dt>
@@ -87,7 +89,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Xoá" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Quay lại danh sách", "Index")
         </div>
     }

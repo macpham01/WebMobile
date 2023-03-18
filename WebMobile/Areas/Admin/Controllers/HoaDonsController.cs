@@ -104,6 +104,15 @@ namespace WebMobile.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
+            //Xoá các sản phẩm có trong hoá đơn này (ở trong bảng chi tiết hoá đơn)
+            var orderDetails = db.ChiTietHoaDon.Where(x=>x.OrderID == id).ToList();
+            foreach (var item in orderDetails)
+            {
+                db.ChiTietHoaDon.Remove(item);
+                db.SaveChanges();
+            }
+
+            //Xoá hoá đơn
             HoaDon hoaDon = db.HoaDon.Find(id);
             db.HoaDon.Remove(hoaDon);
             db.SaveChanges();
