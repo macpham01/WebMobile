@@ -13,9 +13,12 @@
             </div>
             <div class="caption">
                 <div class="name"><h3><a href="@Url.Action("Details", "Products", new {masp=item.MaSanPham, title=item.TenSanPham })">@item.TenSanPham</a></h3></div>
-                <div class="price">@String.Format("{0:#,0đ}", item.Gia)</div>
+                <div class="price">@String.Format("{0:#,0đ}", item.GiaBan)</div>
+                <div class="price"><span style="margin: 0; font-size: 20px;">@String.Format("{0:#,0đ}", item.Gia)</span></div>
                 <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
             </div>
+            <span class="percent-deal" style="line-height: normal; display: flex; align-items: center; justify-content: center; position: absolute; top: 0; right: 0; width: 50px; height: 50px; color: white; background-color: red; border-radius: 50%">Giảm @item.GiamGia%</span>
+
         </div>
     </div>
 }

@@ -54,7 +54,24 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Gia)
+            @String.Format("{0:#,0đ}", Model.Gia)
+            
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiamGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiamGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </dt>
+
+        <dd>
+            @String.Format("{0:#,0đ}", Model.GiaBan)
         </dd>
 
         <dt>

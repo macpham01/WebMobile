@@ -43,6 +43,18 @@
         [DisplayName("Giá")]
 
         public int? Gia { get; set; }
+
+        [DisplayName("Giảm giá")]
+
+        public int? GiamGia { get; set; }
+
+        [DisplayName("Giá bán")]
+
+        public int? GiaBan { get {
+                return (Gia * (100 - GiamGia)) / 100;
+            
+        } }
+
         [DisplayName("Số lượng")] //Số lượng đã bán trong DB
 
         public int? SoLuongDaBan { get; set; }

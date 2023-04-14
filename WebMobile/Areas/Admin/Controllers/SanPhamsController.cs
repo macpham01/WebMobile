@@ -238,7 +238,8 @@ namespace WebMobile.Areas.Admin.Controllers
                             var ghiChu = worksheet.Cells[i, 9].Value?.ToString();
                             var image = worksheet.Cells[i, 10].Value?.ToString();
                             var moTa = worksheet.Cells[i, 11].Value?.ToString();
-                       
+                            var giamGia = Convert.ToInt32(worksheet.Cells[i, 12].Value);
+
                             var product = new SanPham
                             {
                                 MaSanPham=masanpham,
@@ -253,6 +254,7 @@ namespace WebMobile.Areas.Admin.Controllers
                                 GhiChu=ghiChu,
                                 Image=image,
                                 MoTa=moTa,
+                                GiamGia=giamGia,
                             };
 
                             db.SanPham.Add(product);
@@ -292,7 +294,7 @@ namespace WebMobile.Areas.Admin.Controllers
             worksheet.Cells[1, 1].Value = "Mã loại sản phẩm";
             worksheet.Cells[1, 2].Value = "Mã nhà sản xuất";
             worksheet.Cells[1, 3].Value = "Tên sản phẩm";
-            worksheet.Cells[1, 4].Value = "Giá";
+            worksheet.Cells[1, 4].Value = "Giá bán";
             worksheet.Cells[1, 5].Value = "Số lượng";
             worksheet.Cells[1, 6].Value = "Lượt view";
 
@@ -303,7 +305,7 @@ namespace WebMobile.Areas.Admin.Controllers
                 worksheet.Cells[row, 1].Value = product.MaLoaiSanPham;
                 worksheet.Cells[row, 2].Value = product.MaNhaSanXuat;
                 worksheet.Cells[row, 3].Value = product.TenSanPham;
-                worksheet.Cells[row, 4].Value = String.Format("{0:#,0đ}",product.Gia) ;
+                worksheet.Cells[row, 4].Value = String.Format("{0:#,0đ}",product.GiaBan);
                 worksheet.Cells[row, 5].Value = product.SoLuongDaBan;
                 worksheet.Cells[row, 6].Value = product.LuotView;
                 row++;
@@ -314,6 +316,16 @@ namespace WebMobile.Areas.Admin.Controllers
             worksheet.Cells.Style.Font.Name = "Times New Roman";
             worksheet.Cells.Style.Font.Size = 11;
 
+            // Thiết lập độ rộng cho các ô trong excel
+            worksheet.Column(1).Width = 18;
+            worksheet.Column(2).Width = 18;
+            worksheet.Column(3).Width = 28;
+            worksheet.Column(4).Width = 18;
+            worksheet.Column(5).Width = 12;
+            worksheet.Column(6).Width = 12;
+
+            worksheet.Column(5).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+            worksheet.Column(6).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
             // Tạo ra file Excel từ bảng tính
             byte[] excelData = package.GetAsByteArray();
 
