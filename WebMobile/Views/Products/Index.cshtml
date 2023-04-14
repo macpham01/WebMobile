@@ -10,13 +10,9 @@
         <ul class="breadcrumb">
             <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
             <li><a href="@Url.Action("Index")">Sản phẩm</a></li>
-            @if (@ViewBag.nameNSX != null)
+            @if (@ViewBag.name != null)
             {
-                <li>@ViewBag.nameNSX</li>
-            }
-            @if (@ViewBag.TenLoaiSP != null)
-            {
-                <li>@ViewBag.TenLoaiSP</li>
+                <li>@ViewBag.name</li>
             }
         </ul>
     </div>
@@ -27,23 +23,31 @@
             <div class="col-md-12">
                 <div class="products">
                     <div class="row">
-                        @foreach (var item in Model)
+                        @if (Model.Count() > 0)
                         {
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                <div class="product">
-                                    <div class="image"><a href="@Url.Action("Details", "Products", new {masp=item.MaSanPham, title=item.TenSanPham })"><img src="~/Public/images/@item.Image" /></a></div>
-                                    <div class="buttons">
-                                        <a class="btn cart" href="/Cart/Add?MaSanPham=@item.MaSanPham&TenSanPham=@item.TenSanPham&SoLuong=@ViewBag.soluong&Gia=@item.Gia"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-                                        <a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-                                        <a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-                                    </div>
-                                    <div class="caption">
-                                        <div class="name"><h3><a href="@Url.Action("Details", "Products", new {masp=item.MaSanPham, title=item.TenSanPham })">@item.TenSanPham</a></h3></div>
-                                        <div class="price">@String.Format("{0:#,0đ}", item.Gia)</div>
-                                        <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+                            foreach (var item in Model)
+                            {
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="product" style="position:relative">
+                                        <div class="image"><a href="@Url.Action("Details", "Products", new {masp=item.MaSanPham, title=item.TenSanPham })"><img src="~/Public/images/@item.Image" /></a></div>
+                                        <div class="buttons">
+                                            <a class="btn cart" href="/Cart/Add?MaSanPham=@item.MaSanPham&TenSanPham=@item.TenSanPham&SoLuong=@ViewBag.soluong&Gia=@item.Gia"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                                            <a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
+                                            <a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
+                                        </div>
+                                        <div class="caption">
+                                            <div class="name"><h3><a href="@Url.Action("Details", "Products", new {masp=item.MaSanPham, title=item.TenSanPham })">@item.TenSanPham</a></h3></div>
+                                            <div class="price">@String.Format("{0:#,0đ}", item.Gia)</div>
+                                            <div class="price"><span style="margin: 0; font-size: 20px;">@String.Format("{0:#,0đ}", item.Gia)</span></div>
+                                            <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+                                        </div>
+                                        <span class="percent-deal" style="line-height: normal; display: flex; align-items: center; justify-content: center; position: absolute; top: 0; right: 0; width: 50px; height: 50px; color: white; background-color: red; border-radius: 50%">Giảm 21%</span>
                                     </div>
                                 </div>
-                            </div>
+                            }
+                        }
+                        else {
+                            <h4>Không tìm thấy sản phẩm</h4>
                         }
                     </div>
                 </div>
@@ -51,7 +55,7 @@
         </div>
         <div class="row text-center">
             Trang @Model.PageNumber / @Model.PageCount
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search=@ViewBag.Search, sorted= @ViewBag.Sorted }))
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = @ViewBag.Search, sorted = @ViewBag.Sorted, title = @ViewBag.name, MaNSX = @ViewBag.MaNSX, MaLoaiSP = @ViewBag.MaLoaiSP}))
         </div>
     </div>
 

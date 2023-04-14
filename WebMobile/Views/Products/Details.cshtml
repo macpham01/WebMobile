@@ -94,21 +94,21 @@
                         <div class="review-text">
                             @if (Session["username"] == null)
                             {
-                                <p>Please login to review about this product</p>
+                                <p>Đăng nhập để viết đánh giá về sản phẩm này</p>
                             }
                             else
                             {
-                                <p>Please write your review about this product</p>
+                                <p>Hãy viết nhận xét của bạn về sản phẩm này</p>
                             }
                         </div>
                         <div class="review-form">
-                            <h4>Write a review</h4>
+                            <h4>Viết đánh giá</h4>
                             <form name="comment" method="post" action="/Comment/Create">
                                 <label>
                                     <input type="text" hidden name="MaSanPham" value=@Model.MaSanPham />
                                     <input type="text" hidden name="MaTaiKhoan" value=@Session["Id"] />
                                     <input type="text" hidden name="tensanpham" value=@ViewBag.nameProduct />
-                                    <span>Enter your name:</span>
+                                    <span>Email của bạn:</span>
                                     @if (Session["username"] != null)
                                     {
                                         <input type="text" name="TenTaiKhoan" value=@Session["username"] readonly>
@@ -121,7 +121,7 @@
 
                                 </label>
                                 <label>
-                                    <span>Your message here:</span>
+                                    <span>Bình luận của bạn:</span>
 
                                     <textarea name="NoiDung" id="NoiDung"></textarea>
                                 </label>

@@ -17,18 +17,23 @@ namespace WebMobile.Controllers
         public ActionResult Index(int? page, string MaNSX, string title, string MaLoaiSP, string search, string sorted)
         {
             var products = db.SanPham.Select(x=>x);
+
             if (MaNSX != null)
             {
-                ViewBag.nameNSX = title;
-               
+                ViewBag.MaNSX = MaNSX;
                 products = products.Where(x => x.MaNhaSanXuat.Equals(MaNSX));
             }
 
             if (MaLoaiSP != null)
             {
-                ViewBag.TenLoaiSP = title;
-
+               
+                ViewBag.MaLoaiSP = MaLoaiSP;
                 products = products.Where(x => x.MaLoaiSanPham.Equals(MaLoaiSP));
+            }
+
+            if (title != null)
+            {
+                ViewBag.name = title;
             }
 
             if (search != null)

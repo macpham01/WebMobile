@@ -1,35 +1,41 @@
 ﻿@model IEnumerable<WebMobile.Models.BinhLuan>
 
-<table class="table" border="1" width="100%" style="border-collapse:collapse">
-    <tr>
-        <th>
-            Tên tài khoản
-        </th>
-        <th>
-           Nội dung
-        </th>
-       
-        <th>
-           Ngày
-        </th>
-        
-    </tr>
+@if (@Model.Count()>0){
 
-@foreach (var item in Model) {
-    <tr>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.TenTaiKhoan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoiDung)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Ngay)
-        </td>
+    <table class="table" border="1" width="100%" style="border-collapse:collapse">
+        <tr>
+            <th>
+                Tên tài khoản
+            </th>
+            <th>
+               Nội dung
+            </th>
        
-    </tr>
+            <th>
+               Ngày
+            </th>
+        
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TenTaiKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+        
+            <td>
+                @Html.DisplayFor(modelItem => item.Ngay)
+            </td>
+       
+        </tr>
+    }
+
+    </table>
 }
-
-</table>
+else { 
+    <h4>Hiện chưa có bình luận nào ở đây</h4>
+}

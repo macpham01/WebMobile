@@ -42,6 +42,13 @@ namespace WebMobile.Controllers
                         gh.SoLuong += SoLuong;
                         gh.TongTien = gh.Gia * gh.SoLuong;
 
+                        //Kiểm tra xem số lượng sau khi update có đủ để bán không
+                        var productSelected = db.SanPham.Where(x => x.MaSanPham == MaSanPham).Select(x => x.SoLuongDaBan).FirstOrDefault();
+                        int productSelectedInt = Convert.ToInt32(productSelected);
+                        if (gh.SoLuong > productSelectedInt)
+                        {
+                            return RedirectToAction("Details", "Products", new { masp = MaSanPham, errorQuantity = "Số lượng bán không đủ" });
+                        }
                         //Trừ đi số lượng sản phẩm có mã sản phẩm khi được thêm vào giỏ hàng
                         //var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == MaSanPham);
                         //sp.SoLuongDaBan -= SoLuong;
@@ -50,6 +57,14 @@ namespace WebMobile.Controllers
                     }
                     else
                     {
+                        //kiểm tra xem số lượng có đủ để bán không
+                        var productSelected = db.SanPham.Where(x => x.MaSanPham == MaSanPham).Select(x => x.SoLuongDaBan).FirstOrDefault();
+                        int productSelectedInt = Convert.ToInt32(productSelected);
+                        if (SoLuong > productSelectedInt)
+                        {
+                            return RedirectToAction("Details", "Products", new { masp = MaSanPham, errorQuantity = "Số lượng bán không đủ" });
+                        }
+
                         GioHang ghnew = new GioHang();
                         ghnew.MaTaiKhoan = mataikhoan;
                         ghnew.MaSanPham = MaSanPham;
