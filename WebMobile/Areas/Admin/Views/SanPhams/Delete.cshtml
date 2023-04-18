@@ -51,11 +51,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Gia)
+            @Html.DisplayNameFor(model => model.GiaBan)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Gia)
+            @String.Format("{0:#,0đ}", Model.GiaBan)
         </dd>
 
         <dt>
@@ -72,6 +72,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.LuotView)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            <textarea class="ckeditor" name="MoTa">@Model.MoTa</textarea>
         </dd>
 
         <dt>
@@ -95,9 +103,9 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Trở lại danh sách", "Index")
-        </div>
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-danger" /> 
+    @Html.ActionLink("Trở lại danh sách", "Index", null, new { @class = "btn btn-primary" })
+</div>
     }
 </div>

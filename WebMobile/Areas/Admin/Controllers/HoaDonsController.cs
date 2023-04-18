@@ -20,8 +20,13 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/HoaDons
         public ActionResult Index()
         {
-            var hoaDon = db.HoaDon.Include(h => h.AspNetUsers);
-            return View(hoaDon.ToList());
+            Session["username"] = null;
+            if (Session["admin"] != null)
+            {
+                var hoaDon = db.HoaDon.Include(h => h.AspNetUsers);
+                return View(hoaDon.ToList());
+            }
+            return Redirect("/Accout/Login");
         }
 
         public ActionResult Details(long? id)

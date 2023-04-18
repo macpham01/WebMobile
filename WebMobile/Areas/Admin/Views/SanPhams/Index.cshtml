@@ -8,14 +8,14 @@
 <br />
 @using (Html.BeginForm())
 {
-    <p>
-        Tìm kiếm: @Html.TextBox("search", ViewBag.Search as string)
-        <input type="submit" value="Search" />
-    </p>
+    <div style="display: flex; column-gap: 3px;">
+         @Html.TextBox("search", ViewBag.Search as string, new { @class = "form-control", placeholder = "Tìm kiếm sản phẩm theo tên", style = "display: inline;" })
+        <input class="btn btn-dark"  type="submit" value="Tìm kiếm" style="background: black; color: white;" />
+    </div>
 }
 <br />
 <p>
-    @Html.ActionLink("Thêm mới", "Create")
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table border="1" class="table" style="border-collapse:collapse; border-color:gray">
     <tr>
@@ -85,11 +85,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.GhiChu)
             </td>
-            <td>
-                <div>@Html.ActionLink("Sửa", "Edit", new { id = item.MaSanPham })</div>
-                <div>@Html.ActionLink("Chi tiết", "Details", new { id = item.MaSanPham })</div>
+            <td align="center">
+                <div>@Html.ActionLink("Sửa", "Edit", new { id = item.MaSanPham }, new { @class = "btn btn-success" })</div>
+                <div>@Html.ActionLink("Chi tiết", "Details", new { id = item.MaSanPham }, new { @class = "btn btn-warning", style="margin: 10px 0;" })</div>
                 <div>
-                    @Html.ActionLink("Xoá", "Delete", new { id = item.MaSanPham })
+                    @Html.ActionLink("Xoá", "Delete", new { id = item.MaSanPham }, new { @class = "btn btn-danger" })
                 </div>
 
             </td>
