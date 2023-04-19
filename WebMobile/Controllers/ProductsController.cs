@@ -17,7 +17,7 @@ namespace WebMobile.Controllers
         public ActionResult Index(int? page, string MaNSX, string title, string MaLoaiSP, string search, string sorted)
         {
             var products = db.SanPham.Select(x=>x);
-
+            Session["ReturnUrl"] = Request.Url.AbsoluteUri;
             if (MaNSX != null)
             {
                 ViewBag.MaNSX = MaNSX;
@@ -78,6 +78,7 @@ namespace WebMobile.Controllers
             ViewBag.Masp = masp;
             ViewBag.ErrorQuantity = errorQuantity;
             Session["masp"] = product.MaSanPham;
+            Session["ReturnUrl"] = Request.Url.AbsoluteUri;
             return View(product);
         }
 

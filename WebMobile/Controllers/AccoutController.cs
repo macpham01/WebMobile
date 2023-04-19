@@ -43,6 +43,15 @@ namespace WebMobile.Controllers
             Session["Id"] = acc.Id;
             var gh = db.GioHang.Where(x => x.MaTaiKhoan == acc.Email).ToList();
             Session["countItem"] = gh.Count();
+
+            // Khi khách hàng chưa đăng nhập mà thêm sản phẩm vào giỏ hàng
+            if (Session["ReturnUrl"] != null)
+            {
+                return Redirect(Session["ReturnUrl"].ToString());
+
+            }
+
+            // Các trường hợp còn lại thì return về trang home
             return RedirectToAction("Index", "Home");
         }
 
@@ -83,6 +92,7 @@ namespace WebMobile.Controllers
             Session["username"] = null;
             Session["admin"] = null;
             Session["countItem"] = null;
+            Session["ReturnUrl"] = null;
             return RedirectToAction("Login");
         }
 
