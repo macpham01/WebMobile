@@ -171,9 +171,19 @@ namespace WebMobile.Areas.Admin.Controllers
             
 
             // Thiết lập định dạng cho các ô trong trang tính
-            worksheet.Cells["A1:F1"].Style.Font.Bold = true;
+            worksheet.Cells["A1:H1"].Style.Font.Bold = true;
             worksheet.Cells.Style.Font.Name = "Times New Roman";
             worksheet.Cells.Style.Font.Size = 11;
+
+            // Thiết lập độ rộng cho các ô trong excel
+            worksheet.Column(1).Width = 12;
+            worksheet.Column(2).Width = 20;
+            worksheet.Column(3).Width = 18;
+            worksheet.Column(4).Width = 25;
+            worksheet.Column(5).Width = 18;
+            worksheet.Column(6).Width = 15;
+            worksheet.Column(7).Width = 20;
+            worksheet.Column(8).Width = 20;
 
             // Tạo ra file Excel từ bảng tính
             byte[] excelData = package.GetAsByteArray();

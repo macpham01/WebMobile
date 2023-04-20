@@ -22,29 +22,31 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand"})
-            <div class="navbar-brand">
-                @Html.ActionLink("Sản phẩm", "Index", "SanPhams")
-                @Html.ActionLink("Nhà sản xuất", "Index", "NhaSanXuats")
-                @Html.ActionLink("Loại sản phẩm", "Index", "LoaiSanPhams")
-                @Html.ActionLink("Hoá đơn", "Index", "HoaDons")
-                <a href="/Accout/Logout">Đăng xuất</a>
-                <a style="margin-left: 238px; color: #e0dddd " href="/Accout/Logout">Xin chào @Session["admin"]!</a>
-
+            <div style="display: flex; align-items:center; justify-content: space-between;">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand">
+                        <div>
+                            @*@Html.ActionLink("Trang chủ", "Index", "Home", new { style = "padding-left: 0;" })*@
+                            <a style="color: #9d9d9d; font-size: 18px; text-decoration: none; padding-left: 0;" href="/Home">Trang chủ</a>
+                            @Html.ActionLink("Sản phẩm", "Index", "SanPhams")
+                            @Html.ActionLink("Nhà sản xuất", "Index", "NhaSanXuats")
+                            @Html.ActionLink("Loại sản phẩm", "Index", "LoaiSanPhams")
+                            @Html.ActionLink("Hoá đơn", "Index", "HoaDons")
+                            @Html.ActionLink("Thống kê", "Index", "ThongKe")
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a style="color: #e0dddd; font-size: 18px; text-decoration: none;" href="/Accout/Logout">Xin chào @Session["admin"]!</a>
+                    <a style="color: #9d9d9d; font-size: 18px; text-decoration: none; padding-left: 10px"  href="/Accout/Logout">Đăng xuất</a>
+                </div>
             </div>
-
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                   
-                </ul>
-            </div>
+            
         </div>
     </div>
 

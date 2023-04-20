@@ -154,6 +154,7 @@
     <Compile Include="Areas\Admin\Controllers\LoaiSanPhamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaSanXuatsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
     <Compile Include="Controllers\AccoutController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Models\BinhLuan.cs" />
     <Compile Include="Models\ChiTietHoaDon.cs" />
     <Compile Include="Models\C__MigrationHistory.cs" />
+    <Compile Include="Models\DTO\ThongKe.cs" />
     <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\HoaDon.cs" />
     <Compile Include="Models\LoaiSanPham.cs" />
@@ -996,6 +998,7 @@
     <Content Include="Areas\Admin\Public\bootstrap-4.0.0-dist\js\bootstrap.bundle.min.js.map" />
     <Content Include="Areas\Admin\Public\bootstrap-4.0.0-dist\js\bootstrap.js.map" />
     <Content Include="Areas\Admin\Public\bootstrap-4.0.0-dist\js\bootstrap.min.js.map" />
+    <Content Include="Areas\Admin\Views\ThongKe\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -65,10 +65,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TrangThai)
             </td>
-            <td>
-                @Html.ActionLink("Sửa đơn hàng", "Edit", new { id = item.ID }, new { @class = "btn btn-success" })
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-warning" })
-                <div>@Html.ActionLink("Xoá đơn hàng", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })</div>
+            <td align="center">
+                @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-warning", style = "margin: 10px 0;" })
+                <div>@Html.ActionLink("Xoá", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })</div>
                 
             </td>
         </tr>

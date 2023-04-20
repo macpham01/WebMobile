@@ -10,7 +10,7 @@ namespace WebMobile.Controllers
     {
         public ActionResult Index()
         {
-            Session["admin"] = null;
+            //Session["admin"] = null;
             return View();
         }
 

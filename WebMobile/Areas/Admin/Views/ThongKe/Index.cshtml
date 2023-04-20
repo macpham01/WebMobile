@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <div class="alert alert-warning alert-dismissible fade show">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+        <strong>Vui lòng chọn thời gian thống kê</strong>
+    </div>
+    <form method="post" class="border rounded" action="/Admin/ThongKe">
+        <div class="row pt-2" style="margin: 0">
+            <div class="col-12">
+                <div style="display: flex; align-items: end; column-gap: 30px">
+                    <div style="width: 200px">
+                        <div>
+                            <label class="form-text pr-1">Thời gian từ</label>
+                        </div>
+                        <input class="form-control text-box single-line" id="batDau" name="batDau" type="date" value="">
+                    </div>
+
+                    <div style="width: 200px">
+                        <div>
+                            <label class="form-text pr-2 pl-2">đến</label>
+                        </div>
+                        <input class="form-control text-box single-line" id="ketThuc" name="ketThuc" type="date" value="">
+                    </div>
+
+
+                    <button class="btn btn-primary" type="submit" formaction="/Admin/ThongKe">
+                        Thống Kê
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br />
+    @if (ViewBag.error != null)
+    {
+        <div class="alert-danger">@ViewBag.error</div>
+    }
+    <br />
+    @if (ViewBag.thongke != null)
+    {
+
+       <h3>Thống kê từ ngày @ViewBag.batDau đến ngày @ViewBag.ketThuc</h3>
+
+        <table border="1" class="table" style="border-collapse:collapse; border-color:gray">
+            <tr>
+                <th>
+                    Tên sản phẩm
+                </th>
+                <th>
+                    Số lượng đã bán
+                </th>
+                <th>
+                    Tổng tiền đã bán
+                </th>
+                <th>
+                    Lợi nhuận
+                </th>
+            </tr>
+            @foreach (var item in ViewBag.thongke)
+            {
+                <tr>
+                    <td>@item.tensp</td>
+                    <td>@item.soluong </td>
+                    <td>@String.Format("{0:#,0đ}", @item.tongtien)</td>
+                    <td>@String.Format("{0:#,0đ}", (item.sanpham.Gia * item.soluong - @item.tongtien))</td>
+                </tr>
+            }
+
+        </table>
+
+    }
+</div>
+
