@@ -6,9 +6,8 @@
 
 <div>
 
-    <div class="alert alert-warning alert-dismissible fade show">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-        <strong>Vui lòng chọn thời gian thống kê</strong>
+    <div class="alert alert-success" role="alert" style="margin-top: 50px">
+        Vui lòng chọn thời gian thống kê
     </div>
     <form method="post" class="border rounded" action="/Admin/ThongKe">
         <div class="row pt-2" style="margin: 0">
@@ -39,13 +38,15 @@
     <br />
     @if (ViewBag.error != null)
     {
-        <div class="alert-danger">@ViewBag.error</div>
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.error
+        </div>
     }
     <br />
     @if (ViewBag.thongke != null)
     {
 
-       <h3>Thống kê từ ngày @ViewBag.batDau đến ngày @ViewBag.ketThuc</h3>
+        <h3>Thống kê từ ngày @ViewBag.batDau đến ngày @ViewBag.ketThuc</h3>
 
         <table border="1" class="table" style="border-collapse:collapse; border-color:gray">
             <tr>
@@ -68,7 +69,7 @@
                     <td>@item.tensp</td>
                     <td>@item.soluong </td>
                     <td>@String.Format("{0:#,0đ}", @item.tongtien)</td>
-                    <td>@String.Format("{0:#,0đ}", (item.soluong - @item.soluong))</td>
+                    <td>@(item.sanpham.SoLuongDaBan)</td>
                 </tr>
             }
 

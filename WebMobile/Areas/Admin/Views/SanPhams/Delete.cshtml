@@ -2,110 +2,119 @@
 
 @{
     ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+
 }
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Xoá sản phẩm</h2>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
 
-<h2>Xoá sản phẩm</h2>
+    <h3>Bạn có chắc muốn xoá sản phẩm @Model.TenSanPham không?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.LoaiSanPham.TenLoaiSanPham)
+            </dt>
 
-<h3>Bạn có chắc muốn xoá sản phẩm @Model.TenSanPham không?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LoaiSanPham.TenLoaiSanPham)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LoaiSanPham.TenLoaiSanPham)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LoaiSanPham.TenLoaiSanPham)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NhaSanXuat.TenNhaSanXuat)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NhaSanXuat.TenNhaSanXuat)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NhaSanXuat.TenNhaSanXuat)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NhaSanXuat.TenNhaSanXuat)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TenSanPham)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TenSanPham)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TenSanPham)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenSanPham)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CauHinh)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CauHinh)
-        </dt>
+            <dd>
+                <textarea class="ckeditor" name="CauHinh">@Model.CauHinh</textarea>
+            </dd>
 
-        <dd>
-            <textarea class="ckeditor" name="CauHinh">@Model.CauHinh</textarea>
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Image)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.GiaBan)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GiaBan)
-        </dt>
+            <dd>
+                @String.Format("{0:#,0đ}", Model.GiaBan)
+            </dd>
 
-        <dd>
-            @String.Format("{0:#,0đ}", Model.GiaBan)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SoLuongDaBan)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SoLuongDaBan)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SoLuongDaBan)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SoLuongDaBan)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LuotView)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LuotView)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LuotView)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LuotView)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MoTa)
-        </dt>
+            <dd>
+                <textarea class="ckeditor" name="MoTa">@Model.MoTa</textarea>
+            </dd>
 
-        <dd>
-            <textarea class="ckeditor" name="MoTa">@Model.MoTa</textarea>
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TinhTrang)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TinhTrang)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TinhTrang)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.GhiChu)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GhiChu)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.GhiChu)
-        </dd>
+        </dl>
 
-    </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-<div class="form-actions no-color">
-    <input type="submit" value="Delete" class="btn btn-danger" /> 
-    @Html.ActionLink("Trở lại danh sách", "Index", null, new { @class = "btn btn-primary" })
-</div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                @Html.ActionLink("Trở lại danh sách", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>
 </div>

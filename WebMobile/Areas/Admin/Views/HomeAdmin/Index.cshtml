@@ -4,370 +4,650 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
 }
 
-<div class="main-content container-fluid">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-lg-6 col-xl-3">
-            <div class="widget widget-tile">
-                <div class="chart sparkline" id="spark1"></div>
-                <div class="data-info">
-                    <div class="desc">New Users</div>
-                    <div class="value">
-                        <span class="indicator indicator-equal mdi mdi-chevron-right"></span><span class="number" data-toggle="counter" data-end="113">0</span>
+        <div class="col-lg-12">
+            <h2 class="page-header">Tổng quan</h2>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-mobile-phone fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@ViewBag.qualityProduct</div>
+                            <div>Sản phẩm</div>
+                        </div>
                     </div>
                 </div>
+                <a href="@Url.Action("Index", "SanPhams")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Xem chi tiết</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
         </div>
-        <div class="col-12 col-lg-6 col-xl-3">
-            <div class="widget widget-tile">
-                <div class="chart sparkline" id="spark2"></div>
-                <div class="data-info">
-                    <div class="desc">Monthly Sales</div>
-                    <div class="value">
-                        <span class="indicator indicator-positive mdi mdi-chevron-up"></span><span class="number" data-toggle="counter" data-end="80" data-suffix="%">0</span>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@ViewBag.qualityProducer</div>
+                            <div>Hãng sản xuất</div>
+                        </div>
                     </div>
                 </div>
+                <a href="@Url.Action("Index", "NhaSanXuats")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Xem chi tiết</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
         </div>
-        <div class="col-12 col-lg-6 col-xl-3">
-            <div class="widget widget-tile">
-                <div class="chart sparkline" id="spark3"></div>
-                <div class="data-info">
-                    <div class="desc">Impressions</div>
-                    <div class="value">
-                        <span class="indicator indicator-positive mdi mdi-chevron-up"></span><span class="number" data-toggle="counter" data-end="532">0</span>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@ViewBag.qualityOrder</div>
+                            <div>Đơn hàng</div>
+                        </div>
                     </div>
                 </div>
+                <a href="@Url.Action("Index", "HoaDons")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Xem chi tiết</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
         </div>
-        <div class="col-12 col-lg-6 col-xl-3">
-            <div class="widget widget-tile">
-                <div class="chart sparkline" id="spark4"></div>
-                <div class="data-info">
-                    <div class="desc">Downloads</div>
-                    <div class="value">
-                        <span class="indicator indicator-negative mdi mdi-chevron-down"></span><span class="number" data-toggle="counter" data-end="113">0</span>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-support fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@ViewBag.qualityType </div>
+                            <div>Loại sản phẩm</div>
+                        </div>
                     </div>
                 </div>
+                <a href="@Url.Action("Index", "LoaiSanPhams")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Xem chi tiết</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
+    <!-- /.row -->
     <div class="row">
-        <div class="col-md-12">
-            <div class="widget widget-fullwidth be-loading">
-                <div class="widget-head">
-                    <div class="tools">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown"><span class="icon mdi mdi-more-vert d-inline-block d-md-none"></span></a>
-                            <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="#">Week</a><a class="dropdown-item" href="#">Month</a><a class="dropdown-item" href="#">Year</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Today</a>
-                            </div>
-                        </div><span class="icon mdi mdi-chevron-down"></span><span class="icon toggle-loading mdi mdi-refresh-sync"></span><span class="icon mdi mdi-close"></span>
-                    </div>
-                    <div class="button-toolbar d-none d-md-block">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
+                    <div class="pull-right">
                         <div class="btn-group">
-                            <button class="btn btn-secondary" type="button">Week</button>
-                            <button class="btn btn-secondary active" type="button">Month</button>
-                            <button class="btn btn-secondary" type="button">Year</button>
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                    data-toggle="dropdown">
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                            </ul>
                         </div>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div id="morris-area-chart"></div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart Example
+                    <div class="pull-right">
                         <div class="btn-group">
-                            <button class="btn btn-secondary" type="button">Today</button>
-                        </div>
-                    </div><span class="title">Recent Movement</span>
-                </div>
-                <div class="widget-chart-container">
-                    <div class="widget-chart-info">
-                        <ul class="chart-legend-horizontal">
-                            <li><span data-color="main-chart-color1"></span> Purchases</li>
-                            <li><span data-color="main-chart-color2"></span> Plans</li>
-                            <li><span data-color="main-chart-color3"></span> Services</li>
-                        </ul>
-                    </div>
-                    <div class="widget-counter-group widget-counter-group-right">
-                        <div class="counter counter-big">
-                            <div class="value">25%</div>
-                            <div class="desc">Purchase</div>
-                        </div>
-                        <div class="counter counter-big">
-                            <div class="value">5%</div>
-                            <div class="desc">Plans</div>
-                        </div>
-                        <div class="counter counter-big">
-                            <div class="value">5%</div>
-                            <div class="desc">Services</div>
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                    data-toggle="dropdown">
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div id="main-chart" style="height: 260px;"></div>
                 </div>
-                <div class="be-spinner">
-                    <svg width="40px" height="40px" viewbox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                        <circle class="circle" fill="none" stroke-width="4" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-lg-6">
-            <div class="card card-table">
-                <div class="card-header">
-                    <div class="tools dropdown">
-                        <span class="icon mdi mdi-download"></span><a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"><span class="icon mdi mdi-more-vert"></span></a>
-                        <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </div>
-                    <div class="title">Purchases</div>
-                </div>
-                <div class="card-body table-responsive">
-                    <table class="table table-striped table-borderless">
-                        <thead>
-                            <tr>
-                                <th style="width:40%;">Product</th>
-                                <th class="number">Price</th>
-                                <th style="width:20%;">Date</th>
-                                <th style="width:20%;">State</th>
-                                <th class="actions" style="width:5%;"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="no-border-x">
-                            <tr>
-                                <td>Sony Xperia M4</td>
-                                <td class="number">$149</td>
-                                <td>Aug 23, 2018</td>
-                                <td class="text-success">Completed</td>
-                                <td class="actions"><a class="icon" href="#"><i class="mdi mdi-plus-circle-o"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>Apple iPhone 6</td>
-                                <td class="number">$535</td>
-                                <td>Aug 20, 2018</td>
-                                <td class="text-success">Completed</td>
-                                <td class="actions"><a class="icon" href="#"><i class="mdi mdi-plus-circle-o"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy S7</td>
-                                <td class="number">$583</td>
-                                <td>Aug 18, 2018</td>
-                                <td class="text-warning">Pending</td>
-                                <td class="actions"><a class="icon" href="#"><i class="mdi mdi-plus-circle-o"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>HTC One M9</td>
-                                <td class="number">$350</td>
-                                <td>Aug 15, 2018</td>
-                                <td class="text-warning">Pending</td>
-                                <td class="actions"><a class="icon" href="#"><i class="mdi mdi-plus-circle-o"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>Sony Xperia Z5</td>
-                                <td class="number">$495</td>
-                                <td>Aug 13, 2018</td>
-                                <td class="text-danger">Cancelled</td>
-                                <td class="actions"><a class="icon" href="#"><i class="mdi mdi-plus-circle-o"></i></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-6">
-            <div class="card card-table">
-                <div class="card-header">
-                    <div class="tools dropdown">
-                        <span class="icon mdi mdi-download"></span><a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"><span class="icon mdi mdi-more-vert"></span></a>
-                        <div class="dropdown-menu dropdown-menu-right" role="menu">
-                            <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </div>
-                    <div class="title">Latest Commits</div>
-                </div>
-                <div class="card-body table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th style="width:37%;">User</th>
-                                <th style="width:36%;">Commit</th>
-                                <th>Date</th>
-                                <th class="actions"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="user-avatar"> <img src="assets\img\avatar6.png" alt="Avatar">Penelope Thornton</td>
-                                <td>Topbar dropdown style</td>
-                                <td>Aug 16, 2018</td>
-                                <td class="actions"><a class="icon" href="#"><i class="mdi mdi-github-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td class="user-avatar"> <img src="assets\img\avatar4.png" alt="Avatar">Benji Harper</td>
-                                <td>Left sidebar adjusments</td>
-                                <td>Jul 15, 2018</td>
-                                <td class="actions"><a class="icon" href="#"><i class="mdi mdi-github-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td class="user-avatar"> <img src="assets\img\avatar5.png" alt="Avatar">Justine Myranda</td>
-                                <td>Main structure markup</td>
-                                <td>Jul 28, 2018</td>
-                                <td class="actions"><a class="icon" href="#"><i class="mdi mdi-github-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td class="user-avatar"> <img src="assets\img\avatar3.png" alt="Avatar">Sherwood Clifford</td>
-                                <td>Initial commit</td>
-                                <td>Jun 30, 2018</td>
-                                <td class="actions"><a class="icon" href="#"><i class="mdi mdi-github-alt"></i></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-lg-4">
-            <div class="card">
-                <div class="card-header card-header-divider pb-3">Current Progress</div>
-                <div class="card-body pt-5">
-                    <div class="row user-progress user-progress-small">
-                        <div class="col-lg-5"><span class="title">Bootstrap Admin</span></div>
-                        <div class="col-lg-7">
-                            <div class="progress">
-                                <div class="progress-bar bg-success" style="width: 40%;"></div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>3326</td>
+                                            <td>10/21/2013</td>
+                                            <td>3:29 PM</td>
+                                            <td>$321.33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3325</td>
+                                            <td>10/21/2013</td>
+                                            <td>3:20 PM</td>
+                                            <td>$234.34</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3324</td>
+                                            <td>10/21/2013</td>
+                                            <td>3:03 PM</td>
+                                            <td>$724.17</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3323</td>
+                                            <td>10/21/2013</td>
+                                            <td>3:00 PM</td>
+                                            <td>$23.71</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3322</td>
+                                            <td>10/21/2013</td>
+                                            <td>2:49 PM</td>
+                                            <td>$8345.23</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3321</td>
+                                            <td>10/21/2013</td>
+                                            <td>2:23 PM</td>
+                                            <td>$245.12</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3320</td>
+                                            <td>10/21/2013</td>
+                                            <td>2:15 PM</td>
+                                            <td>$5663.54</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3319</td>
+                                            <td>10/21/2013</td>
+                                            <td>2:13 PM</td>
+                                            <td>$943.45</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                            <!-- /.table-responsive -->
                         </div>
-                    </div>
-                    <div class="row user-progress user-progress-small">
-                        <div class="col-lg-5"><span class="title">Custom Work</span></div>
-                        <div class="col-lg-7">
-                            <div class="progress">
-                                <div class="progress-bar bg-success" style="width: 65%;"></div>
-                            </div>
+                        <!-- /.col-lg-4 (nested) -->
+                        <div class="col-lg-8">
+                            <div id="morris-bar-chart"></div>
                         </div>
+                        <!-- /.col-lg-8 (nested) -->
                     </div>
-                    <div class="row user-progress user-progress-small">
-                        <div class="col-lg-5"><span class="title">Clients Module</span></div>
-                        <div class="col-lg-7">
-                            <div class="progress">
-                                <div class="progress-bar bg-success" style="width: 30%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row user-progress user-progress-small">
-                        <div class="col-lg-5"><span class="title">Email Templates</span></div>
-                        <div class="col-lg-7">
-                            <div class="progress">
-                                <div class="progress-bar bg-success" style="width: 80%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row user-progress user-progress-small">
-                        <div class="col-lg-5"><span class="title">Plans Module</span></div>
-                        <div class="col-lg-7">
-                            <div class="progress">
-                                <div class="progress-bar bg-success" style="width: 45%;"></div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- /.row -->
                 </div>
+                <!-- /.panel-body -->
             </div>
-        </div>
-        <div class="col-12 col-lg-4">
-            <div class="widget be-loading">
-                <div class="widget-head">
-                    <div class="tools"><span class="icon mdi mdi-chevron-down"></span><span class="icon mdi mdi-refresh-sync toggle-loading"></span><span class="icon mdi mdi-close"></span></div>
-                    <div class="title">Top Sales</div>
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
                 </div>
-                <div class="widget-chart-container">
-                    <div id="top-sales" style="height: 178px;"></div>
-                    <div class="chart-pie-counter">36</div>
-                </div>
-                <div class="chart-legend">
-                    <table>
-                        <tr>
-                            <td class="chart-legend-color"><span data-color="top-sales-color1"></span></td>
-                            <td>Premium Purchases</td>
-                            <td class="chart-legend-value">125</td>
-                        </tr>
-                        <tr>
-                            <td class="chart-legend-color"><span data-color="top-sales-color2"></span></td>
-                            <td>Standard Plans</td>
-                            <td class="chart-legend-value">1569</td>
-                        </tr>
-                        <tr>
-                            <td class="chart-legend-color"><span data-color="top-sales-color3"></span></td>
-                            <td>Services</td>
-                            <td class="chart-legend-value">824</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="be-spinner">
-                    <svg width="40px" height="40px" viewbox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                        <circle class="circle" fill="none" stroke-width="4" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4">
-            <div class="widget widget-calendar">
-                <div id="calendar-widget"></div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-lg-6">
-            <div class="card">
-                <div class="card-header">Latest Activity</div>
-                <div class="card-body">
-                    <ul class="user-timeline user-timeline-compact">
-                        <li class="latest">
-                            <div class="user-timeline-date">Just Now</div>
-                            <div class="user-timeline-title">Create New Page</div>
-                            <div class="user-timeline-description">Vestibulum lectus nulla, maximus in eros non, tristique.</div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-badge">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+
+                                    <p>
+                                        <small class="text-muted">
+                                            <i class="fa fa-clock-o"></i> 11 hours ago via
+                                            Twitter
+                                        </small>
+                                    </p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero
+                                        laboriosam
+                                        dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est
+                                        cum
+                                        veniam excepturi. Maiores praesentium, porro voluptas suscipit facere
+                                        rem
+                                        dicta, debitis.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-badge warning">
+                                <i class="fa fa-credit-card"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem
+                                        quibusdam, tenetur commodi provident cumque magni voluptatem libero,
+                                        quis
+                                        rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia
+                                        repellendus.
+                                    </p>
+
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium
+                                        maiores
+                                        odit qui est tempora eos, nostrum provident explicabo dignissimos
+                                        debitis
+                                        vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.
+                                    </p>
+                                </div>
+                            </div>
                         </li>
                         <li>
-                            <div class="user-timeline-date">Today - 15:35</div>
-                            <div class="user-timeline-title">Back Up Theme</div>
-                            <div class="user-timeline-description">Vestibulum lectus nulla, maximus in eros non, tristique.</div>
+                            <div class="timeline-badge danger">
+                                <i class="fa fa-bomb"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus
+                                        numquam
+                                        facilis enim eaque, tenetur nam id qui vel velit similique nihil iure
+                                        molestias aliquam, voluptatem totam quaerat, magni commodi quisquam.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates est
+                                        quaerat asperiores sapiente, eligendi, nihil. Itaque quos, alias
+                                        sapiente
+                                        rerum quas odit! Aperiam officiis quidem delectus libero, omnis ut
+                                        debitis!
+                                    </p>
+                                </div>
+                            </div>
                         </li>
                         <li>
-                            <div class="user-timeline-date">Yesterday - 10:41</div>
-                            <div class="user-timeline-title">Changes In The Structure</div>
-                            <div class="user-timeline-description">Vestibulum lectus nulla, maximus in eros non, tristique.      </div>
+                            <div class="timeline-badge info">
+                                <i class="fa fa-save"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis minus
+                                        modi
+                                        quam ipsum alias at est molestiae excepturi delectus nesciunt, quibusdam
+                                        debitis amet, beatae consequuntur impedit nulla qui! Laborum, atque.
+                                    </p>
+                                    <hr>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <i class="fa fa-gear"></i> <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="#">Action</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Another action</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Something else here</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="#">Separated link</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                         <li>
-                            <div class="user-timeline-date">Yesterday - 3:02</div>
-                            <div class="user-timeline-title">Fix the Sidebar</div>
-                            <div class="user-timeline-description">Vestibulum lectus nulla, maximus in eros non, tristique.</div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi fuga odio
+                                        quibusdam. Iure expedita, incidunt unde quis nam! Quod, quisquam.
+                                        Officia
+                                        quam qui adipisci quas consequuntur nostrum sequi. Consequuntur,
+                                        commodi.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-badge success">
+                                <i class="fa fa-graduation-cap"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt
+                                        obcaecati,
+                                        quaerat tempore officia voluptas debitis consectetur culpa amet,
+                                        accusamus
+                                        dolorum fugiat, animi dicta aperiam, enim incidunt quisquam maxime neque
+                                        eaque.
+                                    </p>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
+                <!-- /.panel-body -->
             </div>
+            <!-- /.panel -->
         </div>
-        <div class="col-12 col-lg-6">
-            <div class="widget be-loading">
-                <div class="widget-head">
-                    <div class="tools"><span class="icon mdi mdi-chevron-down"></span><span class="icon mdi mdi-refresh-sync toggle-loading"></span><span class="icon mdi mdi-close"></span></div>
-                    <div class="title">Conversions</div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i> Notifications Panel
                 </div>
-                <div class="widget-chart-container">
-                    <div class="widget-chart-info mb-4">
-                        <div class="indicator indicator-positive float-right"><span class="icon mdi mdi-chevron-up"></span><span class="number">15%</span></div>
-                        <div class="counter counter-inline">
-                            <div class="value">156k</div>
-                            <div class="desc">Impressions</div>
-                        </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-comment fa-fw"></i> New Comment
+                            <span class="pull-right text-muted small">
+                                <em>4 minutes ago</em>
+                            </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                            <span class="pull-right text-muted small">
+                                <em>12 minutes ago</em>
+                            </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-envelope fa-fw"></i> Message Sent
+                            <span class="pull-right text-muted small">
+                                <em>27 minutes ago</em>
+                            </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-tasks fa-fw"></i> New Task
+                            <span class="pull-right text-muted small">
+                                <em>43 minutes ago</em>
+                            </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                            <span class="pull-right text-muted small">
+                                <em>11:32 AM</em>
+                            </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-bolt fa-fw"></i> Server Crashed!
+                            <span class="pull-right text-muted small">
+                                <em>11:13 AM</em>
+                            </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-warning fa-fw"></i> Server Not Responding
+                            <span class="pull-right text-muted small">
+                                <em>10:57 AM</em>
+                            </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
+                            <span class="pull-right text-muted small">
+                                <em>9:49 AM</em>
+                            </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-money fa-fw"></i> Payment Received
+                            <span class="pull-right text-muted small">
+                                <em>Yesterday</em>
+                            </span>
+                        </a>
                     </div>
-                    <div id="map-widget" style="height: 265px;"></div>
+                    <!-- /.list-group -->
+                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                 </div>
-                <div class="be-spinner">
-                    <svg width="40px" height="40px" viewbox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                        <circle class="circle" fill="none" stroke-width="4" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-                    </svg>
-                </div>
+                <!-- /.panel-body -->
             </div>
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
+                </div>
+                <div class="panel-body">
+                    <div id="morris-donut-chart"></div>
+                    <a href="#" class="btn btn-default btn-block">View Details</a>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+            <div class="chat-panel panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-comments fa-fw"></i>
+                    Chat
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                data-toggle="dropdown">
+                            <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <ul class="dropdown-menu slidedown">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-refresh fa-fw"></i> Refresh
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-check-circle fa-fw"></i> Available
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-times fa-fw"></i> Busy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-clock-o fa-fw"></i> Away
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-sign-out fa-fw"></i> Sign Out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <ul class="chat">
+                        <li class="left clearfix">
+                            <span class="chat-img pull-left">
+                                <img src="http://via.placeholder.com/50/55C1E7/fff" alt="User Avatar"
+                                     class="img-circle" />
+                            </span>
+
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Jack Sparrow</strong>
+                                    <small class="pull-right text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                                    </small>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                    ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix">
+                            <span class="chat-img pull-right">
+                                <img src="http://via.placeholder.com/50/FA6F57/fff" alt="User Avatar"
+                                     class="img-circle" />
+                            </span>
+
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 13 mins ago
+                                    </small>
+                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                    ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="left clearfix">
+                            <span class="chat-img pull-left">
+                                <img src="http://via.placeholder.com/50/55C1E7/fff" alt="User Avatar"
+                                     class="img-circle" />
+                            </span>
+
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Jack Sparrow</strong>
+                                    <small class="pull-right text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 14 mins ago
+                                    </small>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                    ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix">
+                            <span class="chat-img pull-right">
+                                <img src="http://via.placeholder.com/50/FA6F57/fff" alt="User Avatar"
+                                     class="img-circle" />
+                            </span>
+
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 15 mins ago
+                                    </small>
+                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                    ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.panel-body -->
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm"
+                               placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat">
+                                Send
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <!-- /.panel-footer -->
+            </div>
+            <!-- /.panel .chat-panel -->
         </div>
+        <!-- /.col-lg-4 -->
     </div>
+    <!-- /.row -->
 </div>
 
