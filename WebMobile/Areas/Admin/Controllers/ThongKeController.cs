@@ -17,7 +17,7 @@ namespace WebMobile.Areas.Admin.Controllers
         public ActionResult Index()
         {
             Session["username"] = null;
-            if (true)
+            if (Session["admin"] != null)
             {
                     return View();
             }
@@ -27,9 +27,9 @@ namespace WebMobile.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Index(DateTime? batDau, DateTime? ketThuc)
         {
-            //Session["username"] = null;
-            //if (Session["admin"] != null)
-            //{
+            Session["username"] = null;
+            if (Session["admin"] != null)
+            {
                 try
                 {
                     if (batDau == null || ketThuc == null)
@@ -64,7 +64,7 @@ namespace WebMobile.Areas.Admin.Controllers
                     Console.WriteLine(ex.ToString());   
                 }
 
-            //}
+            }
             return Redirect("/Accout/Login");
         }
     }

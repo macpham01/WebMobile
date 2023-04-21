@@ -59,7 +59,7 @@
                     Tổng tiền đã bán
                 </th>
                 <th>
-                    Lợi nhuận
+                    Tồn kho
                 </th>
             </tr>
             @foreach (var item in ViewBag.thongke)
@@ -68,7 +68,7 @@
                     <td>@item.tensp</td>
                     <td>@item.soluong </td>
                     <td>@String.Format("{0:#,0đ}", @item.tongtien)</td>
-                    <td>@String.Format("{0:#,0đ}", (item.sanpham.Gia * item.soluong - @item.tongtien))</td>
+                    <td>@String.Format("{0:#,0đ}", (item.soluong - @item.soluong))</td>
                 </tr>
             }
 

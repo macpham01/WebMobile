@@ -11,6 +11,7 @@ using PagedList;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using WebMobile.Models.DTO;
 
 namespace WebMobile.Areas.Admin.Controllers
 {
@@ -89,7 +90,7 @@ namespace WebMobile.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,MoTa,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase Image)
+        public ActionResult Create([Bind(Include = "MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,GiamGia,SoLuongDaBan,LuotView,MoTa,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase Image)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +143,7 @@ namespace WebMobile.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "MaSanPham,MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,SoLuongDaBan,LuotView,MoTa,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase image)
+        public ActionResult Edit([Bind(Include = "MaSanPham,MaLoaiSanPham,MaNhaSanXuat,TenSanPham,CauHinh,Image,Gia,GiamGia,SoLuongDaBan,LuotView,MoTa,TinhTrang,GhiChu")] SanPham sanPham, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -228,7 +229,13 @@ namespace WebMobile.Areas.Admin.Controllers
                             Numrd_str = rd.Next(1, 100000000).ToString();
                             var masanpham = Numrd_str;
                             var maLoaiSanPham = worksheet.Cells[i, 1].Value?.ToString();
+                            if (maLoaiSanPham == "Cao Cấp") maLoaiSanPham = "LSP01";
+                            else if (maLoaiSanPham == "Tầm Trung") maLoaiSanPham = "LSP02";
+                            else maLoaiSanPham = "LSP03";
                             var maNhaSanXuat = worksheet.Cells[i, 2].Value?.ToString();
+                            if (maNhaSanXuat == "Iphone") maNhaSanXuat = "NSX01";
+                            else if (maNhaSanXuat == "SamSung") maNhaSanXuat = "NSX02";
+                            else maNhaSanXuat = "NSX03";
                             var tenSanPham = worksheet.Cells[i, 3].Value?.ToString();
                             var cauHinh = worksheet.Cells[i, 4].Value?.ToString();
                             var gia = Convert.ToInt32(worksheet.Cells[i, 5].Value);
@@ -281,56 +288,67 @@ namespace WebMobile.Areas.Admin.Controllers
 
         public ActionResult ExportToExcel()
         {
-
-            var products = db.SanPham.ToList();
-
-            // Tạo một bảng tính mới
-            ExcelPackage package = new ExcelPackage();
-
-            // Thêm một trang tính mới vào bảng tính
-            ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Danh sách sản phẩm");
-
-            // Thêm dữ liệu vào trang tính
-            worksheet.Cells[1, 1].Value = "Mã loại sản phẩm";
-            worksheet.Cells[1, 2].Value = "Mã nhà sản xuất";
-            worksheet.Cells[1, 3].Value = "Tên sản phẩm";
-            worksheet.Cells[1, 4].Value = "Giá bán";
-            worksheet.Cells[1, 5].Value = "Số lượng";
-            worksheet.Cells[1, 6].Value = "Lượt view";
-
-            // Thêm dữ liệu cho từng dòng
-            int row = 2;
-            foreach (var product in products)
+            try
             {
-                worksheet.Cells[row, 1].Value = product.MaLoaiSanPham;
-                worksheet.Cells[row, 2].Value = product.MaNhaSanXuat;
-                worksheet.Cells[row, 3].Value = product.TenSanPham;
-                worksheet.Cells[row, 4].Value = String.Format("{0:#,0đ}",product.GiaBan);
-                worksheet.Cells[row, 5].Value = product.SoLuongDaBan;
-                worksheet.Cells[row, 6].Value = product.LuotView;
-                row++;
+                List<ExportProducts> exports = db.SanPham.Join(db.NhaSanXuat, sp => sp.MaNhaSanXuat, nsx => nsx.MaNhaSanXuat,
+                (sp, nsx) => new { sp.TenSanPham, sp.SoLuongDaBan, sp.LuotView, nsx.TenNhaSanXuat, sp.MaLoaiSanPham, sp.Gia, sp.GiamGia })
+                .Join(db.LoaiSanPham, ab => ab.MaLoaiSanPham, lsp => lsp.MaLoaiSanPham, (ab, lsp) => new ExportProducts { tensp = ab.TenSanPham,giaban = (ab.Gia * (100 - ab.GiamGia)) / 100, soluong = ab.SoLuongDaBan, luotview = ab.LuotView, tennsx = ab.TenNhaSanXuat, tenlsp = lsp.TenLoaiSanPham }).ToList();
+                //var products = db.SanPham.ToList();
+
+                // Tạo một bảng tính mới
+                ExcelPackage package = new ExcelPackage();
+
+                // Thêm một trang tính mới vào bảng tính
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Danh sách sản phẩm");
+
+                // Thêm dữ liệu vào trang tính
+                worksheet.Cells[1, 1].Value = "Tên loại sản phẩm";
+                worksheet.Cells[1, 2].Value = "Tên nhà sản xuất";
+                worksheet.Cells[1, 3].Value = "Tên sản phẩm";
+                worksheet.Cells[1, 4].Value = "Giá bán";
+                worksheet.Cells[1, 5].Value = "Số lượng";
+                worksheet.Cells[1, 6].Value = "Lượt view";
+
+                // Thêm dữ liệu cho từng dòng
+                int row = 2;
+                foreach (var item in exports)
+                {
+                    worksheet.Cells[row, 1].Value = item.tenlsp;
+                    worksheet.Cells[row, 2].Value = item.tennsx;
+                    worksheet.Cells[row, 3].Value = item.tensp;
+                    worksheet.Cells[row, 4].Value = String.Format("{0:#,0đ}", item.giaban);
+                    worksheet.Cells[row, 5].Value = item.soluong;
+                    worksheet.Cells[row, 6].Value = item.luotview;
+                    row++;
+                }
+
+                // Thiết lập định dạng cho các ô trong trang tính
+                worksheet.Cells["A1:F1"].Style.Font.Bold = true;
+                worksheet.Cells.Style.Font.Name = "Times New Roman";
+                worksheet.Cells.Style.Font.Size = 11;
+
+                // Thiết lập độ rộng cho các ô trong excel
+                worksheet.Column(1).Width = 18;
+                worksheet.Column(2).Width = 18;
+                worksheet.Column(3).Width = 28;
+                worksheet.Column(4).Width = 18;
+                worksheet.Column(5).Width = 12;
+                worksheet.Column(6).Width = 12;
+
+                worksheet.Column(5).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                worksheet.Column(6).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                // Tạo ra file Excel từ bảng tính
+                byte[] excelData = package.GetAsByteArray();
+
+                // Trả về file Excel cho client
+                return File(excelData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DanhSachSanPham.xlsx");
             }
-
-            // Thiết lập định dạng cho các ô trong trang tính
-            worksheet.Cells["A1:F1"].Style.Font.Bold = true;
-            worksheet.Cells.Style.Font.Name = "Times New Roman";
-            worksheet.Cells.Style.Font.Size = 11;
-
-            // Thiết lập độ rộng cho các ô trong excel
-            worksheet.Column(1).Width = 18;
-            worksheet.Column(2).Width = 18;
-            worksheet.Column(3).Width = 28;
-            worksheet.Column(4).Width = 18;
-            worksheet.Column(5).Width = 12;
-            worksheet.Column(6).Width = 12;
-
-            worksheet.Column(5).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-            worksheet.Column(6).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-            // Tạo ra file Excel từ bảng tính
-            byte[] excelData = package.GetAsByteArray();
-
-            // Trả về file Excel cho client
-            return File(excelData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DanhSachSanPham.xlsx");
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            
         }
     }
 }
