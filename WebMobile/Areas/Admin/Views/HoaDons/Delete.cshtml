@@ -2,94 +2,102 @@
 
 @{
     ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+
 }
-
-<h2>Xoá đơn hàng</h2>
-
-<h3>Bạn có chắc muốn xoá đơn hàng này?</h3>
-<div>
-   
-    <hr />
-    <dl class="dl-horizontal">
-        
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUsers.Id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayTao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayTao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NguoiNhan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NguoiNhan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SDT)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SDT)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiaChi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongTien)
-        </dt>
-
-        <dd>
-            
-            @String.Format("{0:#,0đ}", Model.TongTien)
-
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TrangThai)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CCCD)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CCCD)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HinhThucThanhToan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HinhThucThanhToan)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Quay lại danh sách", "Index")
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Xoá đơn hàng</h2>
         </div>
-    }
+    </div>
+
+    <h3>Bạn có chắc muốn xoá đơn hàng này?</h3>
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUsers.Id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NgayTao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgayTao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NguoiNhan)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NguoiNhan)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SDT)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SDT)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TongTien)
+            </dt>
+
+            <dd>
+
+                @String.Format("{0:#,0đ}", Model.TongTien)
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TrangThai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CCCD)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CCCD)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HinhThucThanhToan)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HinhThucThanhToan)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+    </div>
+        }
+    </div>
 </div>

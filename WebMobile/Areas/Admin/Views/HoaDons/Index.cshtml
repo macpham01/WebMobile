@@ -1,80 +1,90 @@
-﻿@model IEnumerable<WebMobile.Models.HoaDon>
-
+﻿@model PagedList.IPagedList<WebMobile.Models.HoaDon>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+
 }
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Danh sách đơn hàng</h2>
+        </div>
+    </div>
+    <div style="height: 324px; overflow-y: auto; ">
+        <table border="1" class="table" style="border-collapse: collapse; border-color: gray; min-width: 1230px;">
+            <tr>
+                <th>
+                    Ngày tạo
+                </th>
+                <th>
+                    Người nhận
+                </th>
+                <th>
+                    SĐT
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    CCCD/CMND
+                </th>
+                <th>
+                    Tổng tiền
+                </th>
 
-<h2>Danh sách đơn hàng</h2>
 
-<table class="table" border="1" style="border-collapse:collapse">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayTao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NguoiNhan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SDT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CCCD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TongTien)
-        </th>
+                <th>
+                    Hình thức thanh toán
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th>Chức năng</th>
+            </tr>
 
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayTao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NguoiNhan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SDT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CCCD)
+                    </td>
+                    <td>
+                        @String.Format("{0:#,0đ}", item.TongTien)
+                    </td>
 
-        <th>
-            @Html.DisplayNameFor(model => model.HinhThucThanhToan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </th>
-        <th style=" width: 108px;"></th>
-    </tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HinhThucThanhToan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrangThai)
+                    </td>
+                    <td style="padding-top: 0; padding-bottom: 0;">
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-success btn-sm" })
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm", style = "margin: 10px 0;" })
+                        @Html.ActionLink("Xoá", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayTao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NguoiNhan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SDT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiaChi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CCCD)
-            </td>
-            <td>
-                @String.Format("{0:#,0đ}", item.TongTien)
-            </td>
+                    </td>
+                </tr>
+            }
 
-            <td>
-                @Html.DisplayFor(modelItem => item.HinhThucThanhToan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrangThai)
-            </td>
-            <td align="center">
-                @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-success" })
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-warning", style = "margin: 10px 0;" })
-                <div>@Html.ActionLink("Xoá", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })</div>
-                
-            </td>
-        </tr>
-    }
-
-</table>
-<br />
-<div>@Html.ActionLink("Xuất danh sách đơn hàng", "ExportToExcel")</div>
-
+        </table>
+</div>
+        <div style="display:flex; justify-content:space-between; margin-top:10px">
+            <div> Trang @Model.PageNumber / @Model.PageCount</div>
+            <div>@Html.ActionLink("Xuất danh sách đơn hàng", "ExportToExcel")</div>
+        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = @ViewBag.Search }))
+    </div>

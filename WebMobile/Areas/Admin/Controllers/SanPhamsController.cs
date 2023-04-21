@@ -25,7 +25,7 @@ namespace WebMobile.Areas.Admin.Controllers
             Session["username"] = null;
             if (Session["admin"] != null)
             {
-                var products = db.SanPham.Select(x => x);
+                var products = db.SanPham.Select(x => x);   
 
                 if (search != null)
                 {

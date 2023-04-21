@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,13 +19,16 @@ namespace WebMobile.Areas.Admin.Controllers
         private WebmobileDB db = new WebmobileDB();
 
         // GET: Admin/HoaDons
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             Session["username"] = null;
             if (Session["admin"] != null)
             {
                 var hoaDon = db.HoaDon.Include(h => h.AspNetUsers);
-                return View(hoaDon.ToList());
+                hoaDon = hoaDon.OrderBy(x => x.NgayTao);
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(hoaDon.ToPagedList(pageNumber, pageSize));
             }
             return Redirect("/Accout/Login");
         }

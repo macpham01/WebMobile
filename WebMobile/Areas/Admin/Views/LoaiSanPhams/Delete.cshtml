@@ -2,38 +2,46 @@
 
 @{
     ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+
 }
-
-<h2>Xoá loại sản phẩm</h2>
-
-<h3>Bạn có chắc muốn xoá loại sản phẩm <b>@Model.TenLoaiSanPham</b> không?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenLoaiSanPham)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TenLoaiSanPham)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TinhTrang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TinhTrang)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Danh sách", "Index")
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Xoá loại sản phẩm</h2>
         </div>
-    }
+    </div>
+
+    <h3>Bạn có chắc muốn xoá loại sản phẩm <b>@Model.TenLoaiSanPham</b> không?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenLoaiSanPham)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenLoaiSanPham)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TinhTrang)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+    </div>
+        }
+    </div>
 </div>

@@ -2,53 +2,59 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+
 }
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Chi tiết hoá đơn</h2>
+        </div>
+    </div>
 
-<h2>Chi tiết hoá đơn</h2>
-
-
-<table class="table" border="1" style="border-collapse:collapse">
-    <tr>
-
-        <th>
-            Tên sản phẩm
-        </th>
-        <th>
-            Số lượng
-        </th>
-        <th>
-            Giá
-        </th>
-        <th>
-            Thành tiền
-        </th>
-
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table" border="1" style="border-collapse:collapse">
         <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.TenSanPham)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoLuong)
-            </td>
-            <td>
-
-                @String.Format("{0:#,0đ}", item.Gia)
-            </td>
-            <td>
-
-                @String.Format("{0:#,0đ}", item.TongTien)
-            </td>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Thành tiền
+            </th>
 
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
 
-<div>
-    @Html.ActionLink("Quay lại danh sách", "Index")
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSanPham)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+
+                    @String.Format("{0:#,0đ}", item.Gia)
+                </td>
+                <td>
+
+                    @String.Format("{0:#,0đ}", item.TongTien)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+    <div>
+        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-primary" })
+    </div>
 </div>

@@ -2,32 +2,38 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+
 }
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Thông tin chi tiết</h2>
+        </div>
+    </div>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenNhaSanXuat)
+            </dt>
 
-<h2>Thông tin chi tiết</h2>
+            <dd>
+                @Html.DisplayFor(model => model.TenNhaSanXuat)
+            </dd>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenNhaSanXuat)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenNhaSanXuat)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TinhTrang)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TinhTrang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TinhTrang)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.MaNhaSanXuat }, new { @class = "btn btn-success" }) 
+        @Html.ActionLink("Trở lại danh sách", "Index", null, new { @class = "btn btn-default" })
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaNhaSanXuat }) |
-    @Html.ActionLink("Danh sách", "Index")
-</p>
