@@ -17,7 +17,9 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/NhaSanXuats
         public ActionResult Index()
         {
-            if (Session["admin"] != null) return View(db.NhaSanXuat.ToList());
+            if (Session["admin"] != null) { 
+                return View(db.NhaSanXuat.Where(x=>x.TinhTrang=="0").ToList()); 
+            }
             return Redirect("/Accout/Login");
         }
 
@@ -129,7 +131,7 @@ namespace WebMobile.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             NhaSanXuat nhaSanXuat = db.NhaSanXuat.Find(id);
-            db.NhaSanXuat.Remove(nhaSanXuat);
+            nhaSanXuat.TinhTrang = "1";
             db.SaveChanges();
             return RedirectToAction("Index");
         }

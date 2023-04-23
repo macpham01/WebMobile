@@ -1,7 +1,8 @@
-namespace WebMobile.Models
+﻿namespace WebMobile.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -30,6 +31,7 @@ namespace WebMobile.Models
 
         public bool LockoutEnabled { get; set; }
 
+        [DisplayName("Trạng thái")]
         public int AccessFailedCount { get; set; }
 
         [Required]

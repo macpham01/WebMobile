@@ -17,7 +17,7 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/LoaiSanPhams
         public ActionResult Index()
         {
-            if (Session["admin"] != null) return View(db.LoaiSanPham.ToList());
+            if (Session["admin"] != null) return View(db.LoaiSanPham.Where(x=>x.TinhTrang=="0").ToList());
             return Redirect("/Accout/Login");
         }
 
@@ -128,7 +128,7 @@ namespace WebMobile.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             LoaiSanPham loaiSanPham = db.LoaiSanPham.Find(id);
-            db.LoaiSanPham.Remove(loaiSanPham);
+            loaiSanPham.TinhTrang = "1";
             db.SaveChanges();
             return RedirectToAction("Index");
         }

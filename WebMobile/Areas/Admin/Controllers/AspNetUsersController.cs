@@ -17,7 +17,7 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/AspNetUsers
         public ActionResult Index()
         {
-            return View(db.AspNetUsers.ToList());
+            return View(db.AspNetUsers.Where(x=>x.LockoutEnabled==false).ToList());
         }
 
         // GET: Admin/AspNetUsers/Details/5
@@ -27,7 +27,7 @@ namespace WebMobile.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id.Trim());
             if (aspNetUsers == null)
             {
                 return HttpNotFound();
@@ -65,7 +65,7 @@ namespace WebMobile.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            AspNetUsers aspNetUsers = db.AspNetUsers.FirstOrDefault(x => x.Id == id);
             if (aspNetUsers == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace WebMobile.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            AspNetUsers aspNetUsers = db.AspNetUsers.FirstOrDefault(x=>x.Id==id);
             if (aspNetUsers == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,9 @@ namespace WebMobile.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
-            db.AspNetUsers.Remove(aspNetUsers);
+            AspNetUsers aspNetUsers = db.AspNetUsers.FirstOrDefault(x => x.Id == id);
+            aspNetUsers.LockoutEnabled = true;
+            aspNetUsers.AccessFailedCount = 1;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

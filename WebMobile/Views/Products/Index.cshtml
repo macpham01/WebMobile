@@ -55,7 +55,7 @@
         </div>
         <div class="row text-center">
             Trang @Model.PageNumber / @Model.PageCount
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = @ViewBag.Search, sorted = @ViewBag.Sorted, title = @ViewBag.name, MaNSX = @ViewBag.MaNSX, MaLoaiSP = @ViewBag.MaLoaiSP}))
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = @ViewBag.Search, sorted = @ViewBag.Sorted, title = @ViewBag.name, MaNSX = @ViewBag.MaNSX, MaLoaiSP = @ViewBag.MaLoaiSP, discountStart=ViewBag._discountStart, discountEnd = ViewBag._discountEnd }))
         </div>
     </div>
 

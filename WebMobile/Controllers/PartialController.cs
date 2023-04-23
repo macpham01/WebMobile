@@ -18,6 +18,11 @@ namespace WebMobile.Controllers
 
         public ActionResult Sidebar()
         {
+            var sanpham = db.SanPham.ToList();
+            ViewBag.discount5to10 = sanpham.Where(x=>x.GiamGia>=5 && x.GiamGia<=10).Count();
+            ViewBag.discount10to15 = sanpham.Where(x=>x.GiamGia>=10 && x.GiamGia<=15).Count();
+            ViewBag.discount15to20 = sanpham.Where(x=>x.GiamGia>=15 && x.GiamGia<=20).Count();
+            ViewBag.discountUpto20 = sanpham.Where(x=>x.GiamGia>20).Count();
             return PartialView();
         }
 

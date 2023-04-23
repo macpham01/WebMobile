@@ -23,11 +23,13 @@
         </div>
     </div>
     <div class="widget wid-categories">
-        <div class="heading"><h4>Sắp xếp theo tên</h4></div>
+        <div class="heading"><h4>Giảm giá</h4></div>
         <div class="content">
             <ul class="list-unstyled">
-                <li><a href="@Url.Action("Index", "Products")">Sắp xếp từ a đến z</a></li>
-                <li><a href="@Url.Action("Index", "Products", new {sorted="desName"})">Sắp xếp từ z về a</a></li>
+                <li><a href="@Url.Action("Index", "Products", new {discountStart=5, discountEnd=10})">5% - 10% (@ViewBag.discount5to10)</a></li>
+                <li><a href="@Url.Action("Index", "Products", new {discountStart=10, discountEnd=15})">10% - 15% (@ViewBag.discount10to15)</a></li>
+                <li><a href="@Url.Action("Index", "Products", new {discountStart=15, discountEnd=20})">15% - 20% (@ViewBag.discount15to20)</a></li>
+                <li><a href="@Url.Action("Index", "Products", new {discountStart=20, discountEnd=100})">> 20% (@ViewBag.discountUpto20)</a></li>
             </ul>
         </div>
     </div>

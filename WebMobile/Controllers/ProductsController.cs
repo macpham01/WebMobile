@@ -14,54 +14,75 @@ namespace WebMobile.Controllers
 
 
         // GET: Products
-        public ActionResult Index(int? page, string MaNSX, string title, string MaLoaiSP, string search, string sorted)
+        public ActionResult Index(int? page, string MaNSX, string title, string MaLoaiSP, string search, string sorted, int? discountStart, int? discountEnd)
         {
-            var products = db.SanPham.Select(x=>x);
-            Session["ReturnUrl"] = Request.Url.AbsoluteUri;
-            if (MaNSX != null)
+            try
             {
-                ViewBag.MaNSX = MaNSX;
-                products = products.Where(x => x.MaNhaSanXuat.Equals(MaNSX));
-            }
+                var products = db.SanPham.Select(x => x);
+                Session["ReturnUrl"] = Request.Url.AbsoluteUri;
+                if (MaNSX != null)
+                {
+                    ViewBag.MaNSX = MaNSX;
+                    products = products.Where(x => x.MaNhaSanXuat.Equals(MaNSX));
+                }
 
-            if (MaLoaiSP != null)
-            {
-               
-                ViewBag.MaLoaiSP = MaLoaiSP;
-                products = products.Where(x => x.MaLoaiSanPham.Equals(MaLoaiSP));
-            }
+                if (MaLoaiSP != null)
+                {
 
-            if (title != null)
-            {
-                ViewBag.name = title;
-            }
+                    ViewBag.MaLoaiSP = MaLoaiSP;
+                    products = products.Where(x => x.MaLoaiSanPham.Equals(MaLoaiSP));
+                }
 
-            if (search != null)
-            {
-                ViewBag.Search = search;
-                products = products.Where(x => x.TenSanPham.Contains(search));
+                if (title != null)
+                {
+                    ViewBag.name = title;
+                }
+
+                if (search != null)
+                {
+                    ViewBag.Search = search;
+                    products = products.Where(x => x.TenSanPham.Contains(search));
+                }
+                ViewBag.soluong = 1; //mac dinh so luong san pham khi them vao gio hang la 1
+
+                if (discountStart != null && discountEnd != null)
+                {
+                    ViewBag.name = $"Giảm giá {discountStart}% - {discountEnd}%";
+                    ViewBag._discountStart = discountStart;
+                    ViewBag._discountEnd = discountEnd;
+                    if (discountStart == 20)
+                    {
+                        products = products.Where(x => x.GiamGia > discountStart);
+                        ViewBag.name = $"Giảm giá > {discountStart}%";
+                    }
+                    else
+                        products = products.Where(x => x.GiamGia >= discountStart && x.GiamGia <= discountEnd);
+                }
+                int pageSize = 9;
+                switch (sorted)
+                {
+                    //case "desName":
+                    //    products = products.OrderByDescending(x => x.TenSanPham);
+                    //    break;
+                    case "desPrice":
+                        products = products.OrderByDescending(x => x.Gia);
+                        break;
+                    case "price":
+                        products = products.OrderBy(x => x.Gia);
+                        break;
+                    default:
+                        products = products.OrderBy(x => x.TenSanPham);
+                        break;
+                }
+                ViewBag.Sorted = sorted;
+                int pageNumber = (page ?? 1);
+                return View(products.ToPagedList(pageNumber, pageSize));
             }
-            ViewBag.soluong = 1; //mac dinh so luong san pham khi them vao gio hang la 1
-            
-            int pageSize = 9;
-            switch (sorted)
+            catch (Exception ex)
             {
-                case "desName":
-                    products = products.OrderByDescending(x => x.TenSanPham);
-                    break;
-                case "desPrice":
-                    products = products.OrderByDescending(x => x.Gia);
-                    break;
-                case "price":
-                    products = products.OrderBy(x => x.Gia);
-                    break;
-                default:
-                    products = products.OrderBy(x => x.TenSanPham); 
-                    break;
+                Console.WriteLine(ex.ToString());
+                return RedirectToAction("Index", "Home");
             }
-            ViewBag.Sorted = sorted;
-            int pageNumber = (page ?? 1);
-            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Products/Details?masp=5

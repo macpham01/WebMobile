@@ -27,10 +27,15 @@ namespace WebMobile.Controllers
         public ActionResult Login(AspNetUsers user)
         {
             string passWord = toMD5(user.PasswordHash);
-            var acc = db.AspNetUsers.FirstOrDefault(x => x.Email == user.Email && x.PasswordHash == passWord);
+            var acc = db.AspNetUsers.FirstOrDefault(x => x.Email == user.Email && x.AccessFailedCount==0);
             if (acc == null)
             {
-                ViewBag.error = "Email hoặc mật khẩu không chính xác";
+                ViewBag.error = "Email không chính xác. Mời bạn nhập lại Email.";
+                return View();  
+            }
+            if (acc.PasswordHash != passWord)
+            {
+                ViewBag.error = "Mật khẩu không chính xác.";
                 return View();
             }
             if (acc.isAdmin) {
@@ -39,7 +44,7 @@ namespace WebMobile.Controllers
                 return Redirect("/Admin");
             }
             Session["username"] = acc.UserName;  //ở đây UserName và Email cùng một tên
-            //thật ra mình muốn đặt email làm khoá chính thì Session["username"] = acc.Email
+            //thật ra ở đây đặt email làm khoá chính thì Session["username"] = acc.Email
             Session["Id"] = acc.Id;
             var gh = db.GioHang.Where(x => x.MaTaiKhoan == acc.Email).ToList();
             Session["countItem"] = gh.Count();
