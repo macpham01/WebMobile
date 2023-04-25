@@ -32,9 +32,10 @@ namespace WebMobile.Controllers
 
         public ActionResult test()
         {
+            var ncc = db.ChiTietNhapHang.ToList();
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View(ncc);
         }
     }
 }

@@ -25,6 +25,9 @@ namespace WebMobile.Models
         public virtual DbSet<NhaSanXuat> NhaSanXuat { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
         public virtual DbSet<ThongTinCaNhan> ThongTinCaNhan { get; set; }
+        public virtual DbSet<NhaCungCap> NhaCungCap { get; set; }
+        public virtual DbSet<NhapHang> NhapHang { get; set; }
+        public virtual DbSet<ChiTietNhapHang> ChiTietNhapHang { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

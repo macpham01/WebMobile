@@ -149,9 +149,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChiTietNhapHangsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HoaDonsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaiSanPhamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhapHangsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaSanXuatsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
@@ -165,12 +167,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetRoles.cs" />
     <Compile Include="Models\AspNetUserClaims.cs" />
     <Compile Include="Models\AspNetUserLogins.cs" />
     <Compile Include="Models\AspNetUsers.cs" />
     <Compile Include="Models\BinhLuan.cs" />
     <Compile Include="Models\ChiTietHoaDon.cs" />
+    <Compile Include="Models\ChiTietNhapHang.cs" />
     <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Models\DTO\ExportProducts.cs" />
     <Compile Include="Models\DTO\ThongKe.cs" />
@@ -178,6 +182,7 @@
     <Compile Include="Models\HoaDon.cs" />
     <Compile Include="Models\LoaiSanPham.cs" />
     <Compile Include="Models\NhaCungCap.cs" />
+    <Compile Include="Models\NhapHang.cs" />
     <Compile Include="Models\NhaSanXuat.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\ThongTinCaNhan.cs" />
@@ -843,6 +848,16 @@
     <Content Include="Areas\Admin\Public\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Areas\Admin\Public\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Areas\Admin\Public\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Views\NhapHangs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NhapHangs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\NhapHangs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NhapHangs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhapHangs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietNhapHangs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietNhapHangs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietNhapHangs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietNhapHangs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietNhapHangs\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

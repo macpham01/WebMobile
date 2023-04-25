@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebMobile.Models.NhapHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Nhật ký nhập kho</h2>
+        </div>
+    </div>
+
+    <p>
+        @Html.ActionLink("Nhập kho", "Create", "ChiTietNhapHangs")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Mã hoá đơn
+            </th>
+            <th>
+                Ngày nhập
+            </th>
+            <th>
+                Số lượng nhập
+            </th>
+            <th>
+                Tổng tiền nhập
+            </th>
+            <th>
+                Người nhập hàng
+            </th>
+            <th>
+                Tên nhà cung cấp
+            </th>
+            <th>Chức năng</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNhapHang)
+                </td>
+                <td>
+                    @String.Format("{0:dd/MM/yyyy}", item.NgayNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuongNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTienNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNhaCungCap)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaNhapHang }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaNhapHang }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaNhapHang })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

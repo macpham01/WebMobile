@@ -12,14 +12,14 @@
     {
         [Key]
         [StringLength(10)]
-        [DisplayName("Mã nhà sản xuất")]
+        [DisplayName("Mã nhà cung cấp")]
 
-        public string MaNhaSanXuat { get; set; }
+        public string MaNhaCungCap { get; set; }
 
         [StringLength(50)]
-        [DisplayName("Tên nhà sản xuất")]
+        [DisplayName("Tên nhà cung cấp")]
 
-        public string TenNhaSanXuat { get; set; }
+        public string TenNhaCungCap { get; set; }
 
         [DisplayName("Địa chỉ")]
 
