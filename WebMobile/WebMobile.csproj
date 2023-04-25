@@ -177,6 +177,7 @@
     <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\HoaDon.cs" />
     <Compile Include="Models\LoaiSanPham.cs" />
+    <Compile Include="Models\NhaCungCap.cs" />
     <Compile Include="Models\NhaSanXuat.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\ThongTinCaNhan.cs" />
@@ -882,6 +883,7 @@
     <Content Include="Views\Cart\CheckOut.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\ThankYou.cshtml" />
+    <Content Include="Views\Home\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

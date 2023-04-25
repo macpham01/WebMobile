@@ -76,8 +76,8 @@ namespace WebMobile.Areas.Admin.Controllers
             if (Session["admin"] != null)
             {
                 if (messErrorExcel != null) ViewBag.MessErrorExcel = messErrorExcel;
-                ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPham, "MaLoaiSanPham", "TenLoaiSanPham");
-                ViewBag.MaNhaSanXuat = new SelectList(db.NhaSanXuat, "MaNhaSanXuat", "TenNhaSanXuat");
+                ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPham.Where(x => x.TinhTrang == "0"), "MaLoaiSanPham", "TenLoaiSanPham");
+                ViewBag.MaNhaSanXuat = new SelectList(db.NhaSanXuat.Where(x => x.TinhTrang == "0"), "MaNhaSanXuat", "TenNhaSanXuat");
                 return View();
             }
 
