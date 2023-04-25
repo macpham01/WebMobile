@@ -16,59 +16,109 @@
     {
         @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>ChiTietNhapHang</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.MaNhapHang, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MaNhapHang, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MaNhapHang, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <div class="form-horizontal">
+            <h4>Nhập sản phẩm vào kho</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaSanPham, "Tên sản phẩm", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 col-lg-6">
+                    @Html.DropDownList("MaSanPham", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MaSanPham, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.MaSanPham, "Tên sản phẩm", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10 col-lg-6">
-            @Html.DropDownList("MaSanPham", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.MaSanPham, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SoLuongNhap, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 col-lg-6">
+                    @Html.EditorFor(model => model.SoLuongNhap, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SoLuongNhap, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SoLuongNhap, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SoLuongNhap, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SoLuongNhap, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.GiaNhap, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 col-lg-6">
+                    @Html.EditorFor(model => model.GiaNhap, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GiaNhap, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.GiaNhap, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.GiaNhap, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.GiaNhap, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Thêm" class="btn btn-primary" />
+                </div>
+            </div>
         </div>
-    </div>
+    }
+    @if (ViewBag.gioHang.Count>0)
+    {
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ThanhTien, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ThanhTien, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ThanhTien, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <table class="table" border="1" style="border-collapse:collapse">
+            <tr>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+                <th>
+                    Tên sản phẩm
+                </th>
+                <th>
+                    Số lượng nhập
+                </th>
+                <th>
+                    Giá nhập
+                </th>
+                <th>
+                    Thành tiền
+                </th>
+                <th>Chức năng</th>
+            </tr>
+
+            @foreach (var item in ViewBag.gioHang)
+            {
+                <tr>
+
+                    <td>
+                        @item.TenSanPham
+                    </td>
+                    <td>
+                        @item.SoLuong
+                    </td>
+                    <td>
+
+                        @String.Format("{0:#,0đ}", item.Gia)
+                    </td>
+                    <td>
+                        @String.Format("{0:#,0đ}", item.TongTien)
+                    </td>
+                    <td>
+                        <div>
+                            @Html.ActionLink("Xoá", "Delete", new { id = item.MaSanPham }, new { @class = "btn btn-danger btn-sm" })
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div style="padding-bottom: 20px">
+                    @using (Html.BeginForm("Create", "NhapHangs"))
+                    {
+                        <div style="display:flex; align-items: center; column-gap: 5px">
+                            <select name="maNCC" style=" height: 29px;">
+                                <option value="-1" selected>--Chọn nhà cung cấp--</option>
+                                @foreach (var item in ViewBag.MaNhaCungCap)
+                                {
+                                    <option value="@item.MaNhaCungCap">@item.TenNhaCungCap</option>
+                                }
+                            </select>
+                            <button class="btn btn-primary btn-sm" type="submit">Nhập kho</button>
+                        </div>
+                            }
+                        </div>
+                    </div>
         </div>
-    </div>
-</div>
+
     }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
 </div>

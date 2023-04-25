@@ -15,9 +15,9 @@ namespace WebMobile.Areas.Admin.Controllers
         private WebmobileDB db = new WebmobileDB();
 
         // GET: Admin/ChiTietNhapHangs
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View(db.ChiTietNhapHang.ToList());
+            return View(db.ChiTietNhapHang.Where(x=>x.MaNhapHang==id).ToList());
         }
 
         // GET: Admin/ChiTietNhapHangs/Details/5
@@ -38,7 +38,18 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/ChiTietNhapHangs/Create
         public ActionResult Create()
         {
+            string maTaiKhoan = (string)Session["admin"];
+            ViewBag.gioHang = db.GioHang.Where(x => x.MaTaiKhoan == maTaiKhoan).Join(db.SanPham, gh=>gh.MaSanPham
+            , sp=>sp.MaSanPham, (gh, sp)=> new {masp = gh.MaSanPham,tensp = sp.TenSanPham, soluong = gh.SoLuong, gia = gh.Gia, thanhtien = gh.SoLuong*gh.Gia}).ToList().Select(x=>new GioHang
+            {
+                MaSanPham = x.masp,
+                TenSanPham = x.tensp,
+                SoLuong = x.soluong,
+                Gia = x.gia,
+                TongTien =x.thanhtien
+            }).ToList();
             ViewBag.MaSanPham = new SelectList(db.SanPham, "MaSanPham", "TenSanPham");
+            ViewBag.MaNhaCungCap = db.NhaCungCap.ToList();
             return View();
         }
 
@@ -51,9 +62,17 @@ namespace WebMobile.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ChiTietNhapHang.Add(chiTietNhapHang);
+                string mataikhoan = (string)Session["admin"];
+                var ghNew = new GioHang();
+                ghNew.MaTaiKhoan = mataikhoan;
+                ghNew.MaSanPham = chiTietNhapHang.MaSanPham;
+                ghNew.TenSanPham = db.SanPham.FirstOrDefault(x => x.MaSanPham == chiTietNhapHang.MaSanPham).TenSanPham;
+                ghNew.SoLuong = chiTietNhapHang.SoLuongNhap;
+                ghNew.Gia = chiTietNhapHang.GiaNhap;
+                ghNew.TongTien = chiTietNhapHang.SoLuongNhap * chiTietNhapHang.GiaNhap;
+                db.GioHang.Add(ghNew);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
             return RedirectToAction("Index", "NhapHangs");
 
@@ -94,28 +113,13 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/ChiTietNhapHangs/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ChiTietNhapHang chiTietNhapHang = db.ChiTietNhapHang.Find(id);
-            if (chiTietNhapHang == null)
-            {
-                return HttpNotFound();
-            }
-            return View(chiTietNhapHang);
+            GioHang gh = db.GioHang.FirstOrDefault(x=>x.MaSanPham==id);
+            db.GioHang.Remove(gh);
+            db.SaveChanges();
+            return RedirectToAction("Create");
         }
 
-        // POST: Admin/ChiTietNhapHangs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            ChiTietNhapHang chiTietNhapHang = db.ChiTietNhapHang.Find(id);
-            db.ChiTietNhapHang.Remove(chiTietNhapHang);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        
 
         protected override void Dispose(bool disposing)
         {

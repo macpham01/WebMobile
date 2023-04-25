@@ -17,34 +17,67 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/NhapHangs
         public ActionResult Index()
         {
-            var nhapHang = db.NhapHang.Join(db.NhaCungCap, nh=>nh.MaNhaCungCap, ncc=>ncc.MaNhaCungCap, (nh, ncc) => new{
-            NgayNhap=  nh.NgayNhap,SoLuongNhap= nh.SoLuongNhap,MaNhapHang= nh.MaNhapHang,TongTienNhap = nh.TongTienNhap,TenNhaCungCap = ncc.TenNhaCungCap, Email = nh.Email
-            }).ToList().Select(nh => new NhapHang { NgayNhap = nh.NgayNhap, SoLuongNhap = nh.SoLuongNhap, MaNhapHang = nh.MaNhapHang, TongTienNhap = nh.TongTienNhap, TenNhaCungCap = nh.TenNhaCungCap, Email=nh.Email }); ;
-            return View(nhapHang);
-        }
-
-        // GET: Admin/NhapHangs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var nhapHang = db.NhapHang.Join(db.NhaCungCap, nh => nh.MaNhaCungCap, ncc => ncc.MaNhaCungCap, (nh, ncc) => new
+                {
+                    NgayNhap = nh.NgayNhap,
+                    SoLuongNhap = nh.SoLuongNhap,
+                    MaNhapHang = nh.MaNhapHang,
+                    TongTienNhap = nh.TongTienNhap,
+                    TenNhaCungCap = ncc.TenNhaCungCap,
+                    Email = nh.Email
+                }).ToList().Select(nh => new NhapHang { NgayNhap = nh.NgayNhap, SoLuongNhap = nh.SoLuongNhap, MaNhapHang = nh.MaNhapHang, TongTienNhap = nh.TongTienNhap, TenNhaCungCap = nh.TenNhaCungCap, Email = nh.Email }); ;
+                return View(nhapHang);
             }
-            NhapHang nhapHang = db.NhapHang.Find(id);
-            if (nhapHang == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhapHang);
-        }
-
-        // GET: Admin/NhapHangs/Create
-        public ActionResult Create()
-        {
-            return RedirectToAction("Create", "ChiTietNhapHangs");
+            return Redirect("/Accout/Login");
         }
 
         
+
+        // GET: Admin/NhapHangs/Create
+        public ActionResult Create(string maNCC)
+        {
+            if (Session["admin"] != null)
+            {
+                var maTaiKhoan = (string)Session["admin"];
+                var gioHangs = db.GioHang.Where(x => x.MaTaiKhoan == maTaiKhoan);
+                Random rd = new Random();
+                var nhapHangMoi = new NhapHang();
+                nhapHangMoi.MaNhapHang = rd.Next(1, 100000000).ToString();
+                // lưu vào bảng Nhập hàng
+                nhapHangMoi.NgayNhap = DateTime.Now;
+                nhapHangMoi.SoLuongNhap = 0;
+                nhapHangMoi.TongTienNhap = 0;
+                nhapHangMoi.Email = maTaiKhoan;
+                nhapHangMoi.MaNhaCungCap = maNCC;
+                db.NhapHang.Add(nhapHangMoi);
+                db.SaveChanges();
+
+                // lưu sản phẩm vào bảng chi tiết nhập hàng
+                if (gioHangs != null)
+                {
+                    foreach (var item in gioHangs)
+                    {
+                        var chiTietNhapHang = new ChiTietNhapHang();
+                        chiTietNhapHang.MaNhapHang = nhapHangMoi.MaNhapHang;
+                        chiTietNhapHang.MaSanPham = item.MaSanPham;
+                        chiTietNhapHang.TenSanPham = item.TenSanPham;
+                        chiTietNhapHang.SoLuongNhap = Convert.ToInt32(item.SoLuong);
+                        chiTietNhapHang.GiaNhap = Convert.ToInt32(item.Gia);
+                        chiTietNhapHang.ThanhTien = Convert.ToInt32(item.TongTien);
+                        db.ChiTietNhapHang.Add(chiTietNhapHang);
+                        db.SaveChanges();
+                    }
+                }
+
+                
+                return RedirectToAction("Index");
+            }
+            return Redirect("/Accout/Login");
+        }
+
+
 
         // GET: Admin/NhapHangs/Edit/5
         public ActionResult Edit(string id)
@@ -98,6 +131,11 @@ namespace WebMobile.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             NhapHang nhapHang = db.NhapHang.Find(id);
+            var chiTietNhapHang = db.ChiTietNhapHang.Where(x=>x.MaNhapHang==id).ToList();
+            foreach (var item in chiTietNhapHang)
+            {
+                db.ChiTietNhapHang.Remove(item);
+            }
             db.NhapHang.Remove(nhapHang);
             db.SaveChanges();
             return RedirectToAction("Index");

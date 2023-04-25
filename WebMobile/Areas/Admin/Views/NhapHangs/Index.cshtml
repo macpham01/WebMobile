@@ -13,7 +13,7 @@
     </div>
 
     <p>
-        @Html.ActionLink("Nhập kho", "Create", "ChiTietNhapHangs")
+        @Html.ActionLink("Nhập kho", "Create", "ChiTietNhapHangs",null, new { @class = "btn btn-primary" })
     </p>
     <table class="table">
         <tr>
@@ -60,9 +60,9 @@
                     @Html.DisplayFor(modelItem => item.TenNhaCungCap)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaNhapHang }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MaNhapHang }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MaNhapHang })
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaNhapHang.Trim() }) |
+                    @Html.ActionLink("Chi tiết", "Index", "ChiTietNhapHangs", new { id = item.MaNhapHang }) |
+                    @Html.ActionLink("Xoá", "Delete", new { id = item.MaNhapHang.Trim() })
                 </td>
             </tr>
         }

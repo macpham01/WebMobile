@@ -5,54 +5,65 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>Index</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Chi tiết nhập hàng</h2>
+        </div>
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaSanPham)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TenSanPham)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuongNhap)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiaNhap)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThanhTien)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaNhapHang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongNhap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaNhap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThanhTien)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuongNhap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaNhap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThanhTien)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaNhapHang }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaNhapHang }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaNhapHang })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNhapHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSanPham)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSanPham)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuongNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThanhTien)
+                </td>
+                <td>
+                    @Html.ActionLink("Quay lại nhật ký", "Index", "NhapHangs", new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
