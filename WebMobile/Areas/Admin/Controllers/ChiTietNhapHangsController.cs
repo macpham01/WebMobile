@@ -15,9 +15,9 @@ namespace WebMobile.Areas.Admin.Controllers
         private WebmobileDB db = new WebmobileDB();
 
         // GET: Admin/ChiTietNhapHangs
-        public ActionResult Index(string id)
+        public ActionResult Index(string maNhapHang)
         {
-            return View(db.ChiTietNhapHang.Where(x=>x.MaNhapHang==id).ToList());
+            return View(db.ChiTietNhapHang.Where(x=>x.MaNhapHang== maNhapHang).ToList());
         }
 
         // GET: Admin/ChiTietNhapHangs/Details/5
@@ -40,7 +40,7 @@ namespace WebMobile.Areas.Admin.Controllers
         {
             string maTaiKhoan = (string)Session["admin"];
             ViewBag.gioHang = db.GioHang.Where(x => x.MaTaiKhoan == maTaiKhoan).Join(db.SanPham, gh=>gh.MaSanPham
-            , sp=>sp.MaSanPham, (gh, sp)=> new {masp = gh.MaSanPham,tensp = sp.TenSanPham, soluong = gh.SoLuong, gia = gh.Gia, thanhtien = gh.SoLuong*gh.Gia}).ToList().Select(x=>new GioHang
+            , sp=>sp.MaSanPham, (gh, sp)=> new {masp = gh.MaSanPham,tensp = sp.TenSanPham, soluong = gh.SoLuong, gia = gh.Gia, thanhtien = gh.TongTien}).ToList().Select(x=>new GioHang
             {
                 MaSanPham = x.masp,
                 TenSanPham = x.tensp,
@@ -63,15 +63,28 @@ namespace WebMobile.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string mataikhoan = (string)Session["admin"];
-                var ghNew = new GioHang();
-                ghNew.MaTaiKhoan = mataikhoan;
-                ghNew.MaSanPham = chiTietNhapHang.MaSanPham;
-                ghNew.TenSanPham = db.SanPham.FirstOrDefault(x => x.MaSanPham == chiTietNhapHang.MaSanPham).TenSanPham;
-                ghNew.SoLuong = chiTietNhapHang.SoLuongNhap;
-                ghNew.Gia = chiTietNhapHang.GiaNhap;
-                ghNew.TongTien = chiTietNhapHang.SoLuongNhap * chiTietNhapHang.GiaNhap;
-                db.GioHang.Add(ghNew);
-                db.SaveChanges();
+
+                // kiểm tra xem sản phẩm đã có trong giỏ hàng hay chưa
+                var gh = db.GioHang.FirstOrDefault(x=>x.MaTaiKhoan==mataikhoan&&x.MaSanPham==chiTietNhapHang.MaSanPham);
+                if (gh != null)
+                {
+                    gh.SoLuong += chiTietNhapHang.SoLuongNhap;
+                    gh.Gia = chiTietNhapHang.GiaNhap;
+                    gh.TongTien = gh.SoLuong * gh.Gia;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var ghNew = new GioHang();
+                    ghNew.MaTaiKhoan = mataikhoan;
+                    ghNew.MaSanPham = chiTietNhapHang.MaSanPham;
+                    ghNew.TenSanPham = db.SanPham.FirstOrDefault(x => x.MaSanPham == chiTietNhapHang.MaSanPham).TenSanPham;
+                    ghNew.SoLuong = chiTietNhapHang.SoLuongNhap;
+                    ghNew.Gia = chiTietNhapHang.GiaNhap;
+                    ghNew.TongTien = chiTietNhapHang.SoLuongNhap * chiTietNhapHang.GiaNhap;
+                    db.GioHang.Add(ghNew);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Create");
             }
             return RedirectToAction("Index", "NhapHangs");

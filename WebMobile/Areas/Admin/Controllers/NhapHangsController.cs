@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,7 +16,7 @@ namespace WebMobile.Areas.Admin.Controllers
         private WebmobileDB db = new WebmobileDB();
 
         // GET: Admin/NhapHangs
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             if (Session["admin"] != null)
             {
@@ -27,8 +28,10 @@ namespace WebMobile.Areas.Admin.Controllers
                     TongTienNhap = nh.TongTienNhap,
                     TenNhaCungCap = ncc.TenNhaCungCap,
                     Email = nh.Email
-                }).ToList().Select(nh => new NhapHang { NgayNhap = nh.NgayNhap, SoLuongNhap = nh.SoLuongNhap, MaNhapHang = nh.MaNhapHang, TongTienNhap = nh.TongTienNhap, TenNhaCungCap = nh.TenNhaCungCap, Email = nh.Email }); ;
-                return View(nhapHang);
+                }).ToList().Select(nh => new NhapHang { NgayNhap = nh.NgayNhap, SoLuongNhap = nh.SoLuongNhap, MaNhapHang = nh.MaNhapHang, TongTienNhap = nh.TongTienNhap, TenNhaCungCap = nh.TenNhaCungCap, Email = nh.Email }).OrderByDescending(x=>x.NgayNhap);
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(nhapHang.ToPagedList(pageNumber, pageSize));
             }
             return Redirect("/Accout/Login");
         }
@@ -44,34 +47,44 @@ namespace WebMobile.Areas.Admin.Controllers
                 var gioHangs = db.GioHang.Where(x => x.MaTaiKhoan == maTaiKhoan);
                 Random rd = new Random();
                 var nhapHangMoi = new NhapHang();
-                nhapHangMoi.MaNhapHang = rd.Next(1, 100000000).ToString();
-                // lưu vào bảng Nhập hàng
-                nhapHangMoi.NgayNhap = DateTime.Now;
-                nhapHangMoi.SoLuongNhap = 0;
-                nhapHangMoi.TongTienNhap = 0;
-                nhapHangMoi.Email = maTaiKhoan;
-                nhapHangMoi.MaNhaCungCap = maNCC;
-                db.NhapHang.Add(nhapHangMoi);
-                db.SaveChanges();
+                var maNhapHang = rd.Next(1, 100000000).ToString();
+                int soLuongNhap = 0;
+                int tongTienNhap = 0;
 
                 // lưu sản phẩm vào bảng chi tiết nhập hàng
                 if (gioHangs != null)
                 {
                     foreach (var item in gioHangs)
                     {
+                        // Cộng thêm số lượng tương ứng vào bảng sản phẩm
+                        var sanPham = db.SanPham.FirstOrDefault(x => x.MaSanPham == item.MaSanPham);
+                        if(sanPham != null)
+                            sanPham.SoLuongDaBan += item.SoLuong;
+
+                        // lưu sản phẩm từ bảng giỏ hàng sang bảng chi tiết nhập hàng
                         var chiTietNhapHang = new ChiTietNhapHang();
-                        chiTietNhapHang.MaNhapHang = nhapHangMoi.MaNhapHang;
+                        chiTietNhapHang.MaNhapHang = maNhapHang;
                         chiTietNhapHang.MaSanPham = item.MaSanPham;
                         chiTietNhapHang.TenSanPham = item.TenSanPham;
                         chiTietNhapHang.SoLuongNhap = Convert.ToInt32(item.SoLuong);
                         chiTietNhapHang.GiaNhap = Convert.ToInt32(item.Gia);
                         chiTietNhapHang.ThanhTien = Convert.ToInt32(item.TongTien);
                         db.ChiTietNhapHang.Add(chiTietNhapHang);
-                        db.SaveChanges();
+                        soLuongNhap += chiTietNhapHang.SoLuongNhap;
+                        tongTienNhap += chiTietNhapHang.ThanhTien;
+                        db.GioHang.Remove(item);
                     }
                 }
+                // lưu vào bảng Nhập hàng
+                nhapHangMoi.MaNhapHang = maNhapHang;
+                nhapHangMoi.NgayNhap = DateTime.Now;
+                nhapHangMoi.SoLuongNhap = soLuongNhap;
+                nhapHangMoi.TongTienNhap = tongTienNhap;
+                nhapHangMoi.Email = maTaiKhoan;
+                nhapHangMoi.MaNhaCungCap = maNCC;
+                db.NhapHang.Add(nhapHangMoi);
+                db.SaveChanges();
 
-                
                 return RedirectToAction("Index");
             }
             return Redirect("/Accout/Login");
@@ -110,36 +123,25 @@ namespace WebMobile.Areas.Admin.Controllers
             return View(nhapHang);
         }
 
-        // GET: Admin/NhapHangs/Delete/5
+        
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (Session["admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                NhapHang nhapHang = db.NhapHang.Find(id);
+                var chiTietNhapHang = db.ChiTietNhapHang.Where(x => x.MaNhapHang == id).ToList();
+                foreach (var item in chiTietNhapHang)
+                {
+                    db.ChiTietNhapHang.Remove(item);
+                }
+                db.NhapHang.Remove(nhapHang);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            NhapHang nhapHang = db.NhapHang.Find(id);
-            if (nhapHang == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhapHang);
+            return Redirect("/Accout/Login");
         }
 
-        // POST: Admin/NhapHangs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            NhapHang nhapHang = db.NhapHang.Find(id);
-            var chiTietNhapHang = db.ChiTietNhapHang.Where(x=>x.MaNhapHang==id).ToList();
-            foreach (var item in chiTietNhapHang)
-            {
-                db.ChiTietNhapHang.Remove(item);
-            }
-            db.NhapHang.Remove(nhapHang);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+
 
         protected override void Dispose(bool disposing)
         {

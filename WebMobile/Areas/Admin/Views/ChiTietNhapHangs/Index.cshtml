@@ -12,9 +12,6 @@
         </div>
     </div>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
     <table class="table">
         <tr>
             <th>
@@ -54,16 +51,17 @@
                     @Html.DisplayFor(modelItem => item.SoLuongNhap)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.GiaNhap)
+                    @String.Format("{0:#,0đ}", item.GiaNhap)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ThanhTien)
+                    @String.Format("{0:#,0đ}", item.ThanhTien)
                 </td>
-                <td>
-                    @Html.ActionLink("Quay lại nhật ký", "Index", "NhapHangs", new { @class = "btn btn-primary" })
-                </td>
+
             </tr>
         }
 
     </table>
+    <div>
+        @Html.ActionLink("Quay lại nhật ký", "Index", "NhapHangs", null, new { @class = "btn btn-primary" })
+    </div>
 </div>

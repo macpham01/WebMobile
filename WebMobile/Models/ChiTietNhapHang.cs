@@ -12,9 +12,16 @@ namespace WebMobile.Models
     [Table("ChiTietNhapHang")]
     public partial class ChiTietNhapHang
     {
-        [Key]
+        [DisplayName("Mã nhập hàng")]
+
         public string MaNhapHang { get; set; }
+
+        [Key]
+        [DisplayName("Mã sản phẩm")]
+
         public string MaSanPham { get; set; }
+        [DisplayName("Tên sản phẩm")]
+
         public string TenSanPham { get; set; }
 
         [DisplayName("Số lượng nhập")]
@@ -22,6 +29,8 @@ namespace WebMobile.Models
         [DisplayName("Giá nhập")]
 
         public int GiaNhap { get; set; }
+        [DisplayName("Thành tiền")]
+
         public int ThanhTien { get; set; }
 
     }

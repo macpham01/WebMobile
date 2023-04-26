@@ -63,11 +63,10 @@ namespace WebMobile.Controllers
                     //Thêm dữ liệu vào bảng chi tiết hoá đơn 
                     db.ChiTietHoaDon.Add(orderDetail);
                     
-
                     //Xoá từng bản ghi trong bảng giỏ hàng (dữ liệu đã được copy sang bảng chi tiết hoá đơn)
                     db.GioHang.Remove(item);
-                    db.SaveChanges();
                 }
+                    db.SaveChanges();
 
                 //Hiện thị số lượng item trong giỏ hàng
                 Session["countItem"] = 0;
