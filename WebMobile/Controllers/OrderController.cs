@@ -16,6 +16,21 @@ namespace WebMobile.Controllers
         {
             if (Session["username"] != null)
             {
+                //kiểm tra xem số lượng có đủ để bán không
+                string mataikhoan = (string)Session["username"];
+                var gioHangs = db.GioHang.Where(x=>x.MaTaiKhoan == mataikhoan);
+                foreach (var gh in gioHangs)
+                {
+                    var sp = db.SanPham.FirstOrDefault(x=>x.MaSanPham==gh.MaSanPham);
+                    if (sp!= null)
+                    {
+                        if (sp.SoLuongDaBan < gh.SoLuong)
+                        {
+                            return RedirectToAction("Details", "Products", new { masp = sp.MaSanPham, errorQuantity = "Số lượng bán không đủ" });
+                        }
+                    }
+                }
+                
                 return View();
             }
             return Redirect("/Accout/Login");
@@ -27,6 +42,8 @@ namespace WebMobile.Controllers
         {
             try
             {
+               
+
                 string mataikhoan = (string)Session["username"];
                 var gh = db.GioHang.Where(x => x.MaTaiKhoan == mataikhoan).ToList();
                 var nguoidat = db.AspNetUsers.FirstOrDefault(x=>x.UserName == mataikhoan);
@@ -34,7 +51,7 @@ namespace WebMobile.Controllers
 
                 Random rd = new Random();
                 orderNew.ID = rd.Next(1, 10000);
-                orderNew.NguoiDat = nguoidat.Id; //Lấy id thay cho Email (vì trong CSDL đang bị ràng buộc khoá)
+                orderNew.NguoiDat = nguoidat.Id; //Lấy id thay cho Email (vì trong CSDL đang bị ràng buộc khoá, đáng ra chỗ này phải là email thì hợp lý hơn)
                 orderNew.TongTien = gh.Sum(x => x.TongTien);
                 orderNew.TrangThai = "Chưa giao hàng";
                 
@@ -51,7 +68,7 @@ namespace WebMobile.Controllers
                     var productSelect = product.FirstOrDefault(x => x.MaSanPham == item.MaSanPham);
                     productSelect.SoLuongDaBan -= item.SoLuong;
 
-                    //Khai báo thông tin của một đối tượng thuộc bảng chi tiết hoá đơn 
+                    // Chuyển sản phẩm từ bảng giỏ hàng sang bảng chi tiết hoá đơn 
                     var orderDetail = new ChiTietHoaDon();
                     orderDetail.MaSanPham = item.MaSanPham;
                     orderDetail.OrderID = orderNew.ID;
@@ -71,8 +88,7 @@ namespace WebMobile.Controllers
                 //Hiện thị số lượng item trong giỏ hàng
                 Session["countItem"] = 0;
 
-                //Hiện thanh nav Chi tiết đơn hàng
-                Session["buyProduct"] = orderNew.ID;
+                
                 return RedirectToAction("ThankYou", new {orderID = orderNew.ID});
             }
             catch (Exception ex)
@@ -88,12 +104,24 @@ namespace WebMobile.Controllers
         {
             if (Session["username"] != null)
             {
-                
                 var orderDetails = db.ChiTietHoaDon.Where(x => x.OrderID == orderID);
 
                 ViewBag.sum = orderDetails.Sum(x => x.TongTien);
                
                 return View(orderDetails);
+            }
+            return Redirect("/Accout/Login");
+        }
+
+        public ActionResult OrderHistory()
+        {
+            if (Session["username"] != null)
+            {
+                string email = (string)Session["username"];
+                // Lấy id thay cho Email (tại vì trong db đang bị ràng buộc dữ liệu)
+                var id = db.AspNetUsers.FirstOrDefault(x=>x.Email == email).Id;
+                var orders = db.HoaDon.Where(x => x.NguoiDat == id).OrderByDescending(x=>x.NgayTao).ToList();
+                return View(orders);
             }
             return Redirect("/Accout/Login");
         }

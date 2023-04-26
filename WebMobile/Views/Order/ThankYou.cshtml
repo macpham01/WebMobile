@@ -9,14 +9,14 @@
             <div class="col-lg-12">
                 <ul class="breadcrumb">
                     <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
-                    <li><a href="#">Chi tiết hoá đơn</a></li>
+                    <li><a href="#">Chi tiết đơn hàng</a></li>
                 </ul>
             </div>
         </div>
 
-        <h3>Cảm ơn bạn vì sự tin tưởng mà bạn đã đặt vào sản phẩm của chúng tôi! Chúc bạn có một ngày tuyệt vời.</h3>
-        <br />
-        <h4>Thông tin chi tiết hoá đơn</h4>
+        @*<h3>Cảm ơn bạn vì sự tin tưởng mà bạn đã đặt vào sản phẩm của chúng tôi! Chúc bạn có một ngày tuyệt vời.</h3>
+        <br />*@
+        <h4>Thông tin chi tiết đơn hàng</h4>
         @foreach (var item in Model)
         {
             <div class="row">
@@ -54,7 +54,7 @@
         <div class="row">
             <div class="pricedetails">
                 <div class="col-md-8">
-                    <a href="@Url.Action("Index", "Products")" class="btn btn-primary btn-lg">Tiếp tục mua hàng</a>
+                    <a href="@Url.Action("OrderHistory", "Order")" class="btn btn-primary btn-lg">Trở lại đơn hàng</a>
                 </div>
                 <div class="col-md-4">
                     <table>
