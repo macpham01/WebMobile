@@ -25,7 +25,7 @@ namespace WebMobile.Areas.Admin.Controllers
             if (Session["admin"] != null)
             {
                 var hoaDon = db.HoaDon.Include(h => h.AspNetUsers);
-                hoaDon = hoaDon.OrderBy(x => x.NgayTao);
+                hoaDon = hoaDon.OrderByDescending(x => x.NgayTao);
                 int pageSize = 5;
                 int pageNumber = (page ?? 1);
                 return View(hoaDon.ToPagedList(pageNumber, pageSize));

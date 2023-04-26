@@ -89,7 +89,7 @@ namespace WebMobile.Controllers
                 Session["countItem"] = 0;
 
                 
-                return RedirectToAction("ThankYou", new {orderID = orderNew.ID});
+                return RedirectToAction("OrderHistory");
             }
             catch (Exception ex)
             {
@@ -100,7 +100,7 @@ namespace WebMobile.Controllers
             
         }
 
-        public ActionResult ThankYou(int orderID)
+        public ActionResult OrderDetail(int orderID)
         {
             if (Session["username"] != null)
             {
@@ -113,7 +113,7 @@ namespace WebMobile.Controllers
             return Redirect("/Accout/Login");
         }
 
-        public ActionResult OrderHistory()
+        public ActionResult OrderHistory(string error)
         {
             if (Session["username"] != null)
             {
@@ -121,9 +121,44 @@ namespace WebMobile.Controllers
                 // Lấy id thay cho Email (tại vì trong db đang bị ràng buộc dữ liệu)
                 var id = db.AspNetUsers.FirstOrDefault(x=>x.Email == email).Id;
                 var orders = db.HoaDon.Where(x => x.NguoiDat == id).OrderByDescending(x=>x.NgayTao).ToList();
+                if (error != null) ViewBag.error = error;
                 return View(orders);
             }
             return Redirect("/Accout/Login");
+        }
+
+        public ActionResult OrderDelete(int orderID)
+        {
+            try
+            {
+                if (Session["username"] != null)
+                {
+                    var order = db.HoaDon.FirstOrDefault(x => x.ID == orderID);
+                    var status = order.TrangThai;
+                    // Kiểm tra xem sản phẩm đã được giao hay chưa
+                    if (status == "Chưa giao hàng")
+                    {
+                        var orderDetails = db.ChiTietHoaDon.Where(x => x.OrderID == orderID).ToList();
+                        foreach (var item in orderDetails)
+                        {
+                            var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == item.MaSanPham);
+                            sp.SoLuongDaBan += item.SoLuong;
+                        }
+                        db.HoaDon.Remove(order);
+                        db.SaveChanges();
+                        return RedirectToAction("OrderHistory");
+                    }
+                    else return RedirectToAction("OrderHistory", new {error = "Bạn không thể huỷ đơn hàng vì đơn hàng đang được giao." });
+                    
+                }
+                return Redirect("/Accout/Login");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return RedirectToAction("OrderHistory", new { error = "Bạn không thể huỷ đơn hàng này." });
+            }
+           
         }
     }
 }

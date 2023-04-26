@@ -24,7 +24,12 @@
             <div class="col-md-6 col-sm-12">
                 <div class="caption">
                     <div class="name"><h3 style="font-size:28px;">@Model.TenSanPham</h3></div>
-                    <div class="price">@String.Format("{0:#,0đ}", Model.GiaBan) <span style="font-size: 20px;">@String.Format("{0:#,0đ}", Model.Gia)</span></div>
+                    <div class="price">@String.Format("{0:#,0đ}", Model.GiaBan) 
+                        @if (Model.GiamGia > 0)
+                        {
+                        <span style="font-size: 20px;">@String.Format("{0:#,0đ}", Model.Gia)</span>
+                        }
+                    </div>
                     <div class="price">Lượt xem: @Model.LuotView</div>
                     <div class="name">Số lượng: @Model.SoLuongDaBan</div>
                     <div class="rating" style="color: #fec93f;">

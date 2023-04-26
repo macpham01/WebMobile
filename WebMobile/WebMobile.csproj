@@ -897,7 +897,7 @@
     <Content Include="Views\Partial\AllCommentByMasp.cshtml" />
     <Content Include="Views\Cart\CheckOut.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Order\ThankYou.cshtml" />
+    <Content Include="Views\Order\OrderDetail.cshtml" />
     <Content Include="Views\Home\test.cshtml" />
     <Content Include="Views\Order\OrderHistory.cshtml" />
   </ItemGroup>

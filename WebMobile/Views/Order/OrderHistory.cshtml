@@ -23,6 +23,7 @@
                 @Html.DisplayNameFor(model => model.AspNetUsers.Id)
             </th>
             <th>
+
                 @Html.DisplayNameFor(model => model.NgayTao)
             </th>
             <th>
@@ -48,14 +49,16 @@
                     @item.ID
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NgayTao)
+                    @String.Format("{0:dd/MM/yyyy}", item.NgayTao)
+
+                    @*@Html.DisplayFor(modelItem => item.NgayTao)*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NguoiNhan)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.TongTien)
+                    @String.Format("{0:#,0đ}", item.TongTien)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TrangThai)
@@ -66,13 +69,19 @@
                 </td>
                 <td>
                     @*@Html.ActionLink("Edit", "Edit", new { id=item.ID }) |*@
-                    @Html.ActionLink("Chi tiết", "ThankYou", new { orderID = item.ID }) |
-                    @Html.ActionLink("Huỷ đơn hàng", "Delete", new { id = item.ID })
+                    @Html.ActionLink("Chi tiết", "OrderDetail", new { orderID = item.ID }) |
+                    @Html.ActionLink("Huỷ đơn hàng", "OrderDelete", new { orderID = item.ID })
                 </td>
             </tr>
         }
-
     </table>
+        if(@ViewBag.error!=null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.error
+            </div>
+            <br />
+        }
     <a href="@Url.Action("Index", "Products")" class="btn btn-primary btn-lg">Tiếp tục mua hàng</a>
 }
 else
