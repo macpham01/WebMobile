@@ -167,6 +167,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304290845528_MobileShop.cs" />
+    <Compile Include="Migrations\202304290845528_MobileShop.designer.cs">
+      <DependentUpon>202304290845528_MobileShop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetRoles.cs" />
     <Compile Include="Models\AspNetUserClaims.cs" />
@@ -177,6 +181,9 @@
     <Compile Include="Models\ChiTietNhapHang.cs" />
     <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Models\DTO\ExportProducts.cs" />
+    <Compile Include="Models\DTO\PayOnline\PayCompare.cs" />
+    <Compile Include="Models\DTO\PayOnline\PayLib.cs" />
+    <Compile Include="Models\DTO\PayOnline\Ultil.cs" />
     <Compile Include="Models\DTO\ThongKe.cs" />
     <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\HoaDon.cs" />
@@ -918,6 +925,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202304290845528_MobileShop.resx">
+      <DependentUpon>202304290845528_MobileShop.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

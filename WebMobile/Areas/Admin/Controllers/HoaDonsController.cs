@@ -81,7 +81,7 @@ namespace WebMobile.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NgayTao,NguoiDat,NguoiNhan,SDT,DiaChi,TongTien,TrangThai,CCCD,HinhThucThanhToan")] HoaDon hoaDon)
+        public ActionResult Edit([Bind(Include = "ID,NgayTao,NguoiDat,NguoiNhan,SDT,DiaChi,TongTien,TrangThai,CCCD,HinhThucThanhToan,TinhTrang")] HoaDon hoaDon)
         {
             if (ModelState.IsValid)
             {

@@ -36,10 +36,10 @@
                             Tên sản phẩm
                         </th>
                         <th>
-                            Loại sản phẩm
+                            Nhà sản xuất
                         </th>
                         <th>
-                            Nhà sản xuất
+                            Loại sản phẩm
                         </th>
 
                         @*<th>
@@ -72,11 +72,12 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.TenSanPham)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
-                            </td>
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.NhaSanXuat.TenNhaSanXuat)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
                             </td>
 
                             @*<td>

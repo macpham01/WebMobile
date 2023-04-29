@@ -42,60 +42,57 @@ namespace WebMobile.Controllers
         {
             try
             {
-               
-
                 string mataikhoan = (string)Session["username"];
                 var gh = db.GioHang.Where(x => x.MaTaiKhoan == mataikhoan).ToList();
                 var nguoidat = db.AspNetUsers.FirstOrDefault(x=>x.UserName == mataikhoan);
                 var product = db.SanPham.ToList();
+                //Random rd = new Random();
+                //long orderID = rd.Next(1, 10000000);
 
-                Random rd = new Random();
-                orderNew.ID = rd.Next(1, 10000);
-                orderNew.NguoiDat = nguoidat.Id; //Lấy id thay cho Email (vì trong CSDL đang bị ràng buộc khoá, đáng ra chỗ này phải là email thì hợp lý hơn)
-                orderNew.TongTien = gh.Sum(x => x.TongTien);
-                orderNew.TrangThai = "Chưa giao hàng";
-                
-                orderNew.NgayTao = DateTime.Now;
-
-                db.HoaDon.Add(orderNew);
-                db.SaveChanges();
-
-               
-
+                // Chuyển sản phẩm từ bảng giỏ hàng sang bảng chi tiết hoá đơn 
                 foreach (var item in gh)
                 {
                     //Trừ đi số lượng tương ứng của sản phẩm khi thanh toán
                     var productSelect = product.FirstOrDefault(x => x.MaSanPham == item.MaSanPham);
                     productSelect.SoLuongDaBan -= item.SoLuong;
 
-                    // Chuyển sản phẩm từ bảng giỏ hàng sang bảng chi tiết hoá đơn 
                     var orderDetail = new ChiTietHoaDon();
                     orderDetail.MaSanPham = item.MaSanPham;
-                    orderDetail.OrderID = orderNew.ID;
+                    //orderDetail.OrderID = orderID;
                     orderDetail.TenSanPham = item.TenSanPham;
                     orderDetail.SoLuong = item.SoLuong;
                     orderDetail.Gia = item.Gia;
                     orderDetail.TongTien = item.TongTien;
-
-                    //Thêm dữ liệu vào bảng chi tiết hoá đơn 
                     db.ChiTietHoaDon.Add(orderDetail);
                     
                     //Xoá từng bản ghi trong bảng giỏ hàng (dữ liệu đã được copy sang bảng chi tiết hoá đơn)
                     db.GioHang.Remove(item);
                 }
-                    db.SaveChanges();
+
+                // Tạo một hoá đơn mới
+                //orderNew.ID = orderID;
+                orderNew.NguoiDat = nguoidat.Id; //Lấy id thay cho Email (vì trong CSDL đang bị ràng buộc khoá, đáng ra chỗ này phải là email thì hợp lý hơn)
+                orderNew.TongTien = gh.Sum(x => x.TongTien);
+                orderNew.TrangThai = "Chưa giao hàng";
+                orderNew.TinhTrang = "Chưa thanh toán";
+                orderNew.NgayTao = DateTime.Now;
+                db.HoaDon.Add(orderNew);
+                db.SaveChanges();
 
                 //Hiện thị số lượng item trong giỏ hàng
                 Session["countItem"] = 0;
 
-                
+                if (orderNew.HinhThucThanhToan == "Chuyển khoản")
+                {
+                    return RedirectToAction("Payment", "Home");
+                }
+               
                 return RedirectToAction("OrderHistory");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return Redirect("/Home");
-
             }
             
         }
@@ -133,7 +130,9 @@ namespace WebMobile.Controllers
             {
                 if (Session["username"] != null)
                 {
-                    var order = db.HoaDon.FirstOrDefault(x => x.ID == orderID);
+                    string email = (string)Session["username"]; // giả sử email cũng như id là khoá chính
+                    string id = db.AspNetUsers.FirstOrDefault(x=>x.Email == email).Id;
+                    var order = db.HoaDon.FirstOrDefault(x => x.ID == orderID && x.NguoiDat==id);
                     var status = order.TrangThai;
                     // Kiểm tra xem sản phẩm đã được giao hay chưa
                     if (status == "Chưa giao hàng")
@@ -143,6 +142,7 @@ namespace WebMobile.Controllers
                         {
                             var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == item.MaSanPham);
                             sp.SoLuongDaBan += item.SoLuong;
+                            db.ChiTietHoaDon.Remove(item);
                         }
                         db.HoaDon.Remove(order);
                         db.SaveChanges();

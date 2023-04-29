@@ -12,7 +12,7 @@
         </div>
     </div>
     <div style="min-height: 360px; overflow-x: auto">
-        <table border="1" class="table" style="border-collapse: collapse; border-color: gray; min-width: 1230px;">
+        <table border="1" class="table" style="border-collapse: collapse; border-color: gray; min-width: 1350px;">
             <tr>
                 <th>
                     Ngày tạo
@@ -34,6 +34,9 @@
                 </th>
                 <th>
                     Hình thức thanh toán
+                </th>
+                <th>
+                    Tình trạng
                 </th>
                 <th>
                     Trạng thái
@@ -65,6 +68,9 @@
 
                     <td>
                         @Html.DisplayFor(modelItem => item.HinhThucThanhToan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TinhTrang)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TrangThai)

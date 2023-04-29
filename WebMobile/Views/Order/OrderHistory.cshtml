@@ -33,11 +33,14 @@
                 @Html.DisplayNameFor(model => model.TongTien)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TrangThai)
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhThucThanhToan)
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.HinhThucThanhToan)
+                @Html.DisplayNameFor(model => model.TrangThai)
             </th>
             <th></th>
         </tr>
@@ -61,11 +64,14 @@
                     @String.Format("{0:#,0đ}", item.TongTien)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TrangThai)
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HinhThucThanhToan)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.HinhThucThanhToan)
+                    @Html.DisplayFor(modelItem => item.TrangThai)
                 </td>
                 <td>
                     @*@Html.ActionLink("Edit", "Edit", new { id=item.ID }) |*@

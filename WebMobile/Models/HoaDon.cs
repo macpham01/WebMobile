@@ -48,6 +48,9 @@
         [DisplayName("Hình thức thanh toán")]
         public string HinhThucThanhToan { get; set; }
 
+        [DisplayName("Tình trạng")]
+        public string TinhTrang { get; set; }
+
         public virtual AspNetUsers AspNetUsers { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
