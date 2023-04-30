@@ -14,6 +14,7 @@ namespace WebMobile.Models.DTO
         public int? soluong { get; set; }
 
         public int? tongtien { get; set; }
+        public int? gianhap { get; set; }
 
     }
 }

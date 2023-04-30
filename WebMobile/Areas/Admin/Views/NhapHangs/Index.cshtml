@@ -52,7 +52,7 @@
                         @Html.DisplayFor(modelItem => item.SoLuongNhap)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.TongTienNhap)
+                        @String.Format("{0:#,0đ}", item.TongTienNhap)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)

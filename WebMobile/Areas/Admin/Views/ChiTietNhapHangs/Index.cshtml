@@ -50,9 +50,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.SoLuongNhap)
                 </td>
-                <td>
-                    @String.Format("{0:#,0đ}", item.GiaNhap)
-                </td>
+                @if (item.GiaNhap != null)
+                {
+                   <td>
+                       @String.Format("{0:#,0đ}", item.GiaNhap)
+                   </td>
+                }
+                else
+                {
+                    <td>0đ</td>
+                }
                 <td>
                     @String.Format("{0:#,0đ}", item.ThanhTien)
                 </td>

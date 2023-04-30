@@ -45,9 +45,11 @@ namespace WebMobile.Areas.Admin.Controllers
             {
                 var maTaiKhoan = (string)Session["admin"];
                 var gioHangs = db.GioHang.Where(x => x.MaTaiKhoan == maTaiKhoan);
-                Random rd = new Random();
                 var nhapHangMoi = new NhapHang();
-                var maNhapHang = rd.Next(1, 100000000).ToString();
+                var nhapHang = db.NhapHang.OrderByDescending(x => x.NgayNhap).FirstOrDefault();
+                string maNhapHang;
+                if (nhapHang == null) maNhapHang = "1010";
+                else maNhapHang = (Convert.ToInt32(nhapHang.MaNhapHang) + 1).ToString();
                 int soLuongNhap = 0;
                 int tongTienNhap = 0;
 

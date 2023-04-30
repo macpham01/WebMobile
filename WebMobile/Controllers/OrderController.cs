@@ -12,7 +12,7 @@ namespace WebMobile.Controllers
         private WebmobileDB db = new WebmobileDB();
 
         // GET: Order
-        public ActionResult Index()
+        public ActionResult CheckOut()
         {
             if (Session["username"] != null)
             {

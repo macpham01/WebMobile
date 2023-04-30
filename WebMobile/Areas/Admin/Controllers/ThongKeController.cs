@@ -51,7 +51,8 @@ namespace WebMobile.Areas.Admin.Controllers
                                     soluong = k.Sum(y => y.SoLuong),
                                     tongtien = k.Sum(y => y.TongTien),
                                     sanpham = db.SanPham.FirstOrDefault(x=>x.MaSanPham==k.Select(y => y.MaSanPham).FirstOrDefault()),
-                                    tensp = k.Select(y => y.TenSanPham).FirstOrDefault()
+                                    gianhap = db.ChiTietNhapHang.FirstOrDefault(x => x.MaSanPham == k.Select(y => y.MaSanPham).FirstOrDefault()).GiaNhap,
+                                    tensp = k.Select(y => y.TenSanPham).FirstOrDefault(),
                                 }).ToList();
                         ViewBag.batDau = String.Format("{0:dd/MM/yyyy}", batDau);
                         ViewBag.ketThuc = String.Format("{0:dd/MM/yyyy}", ketThuc); ;

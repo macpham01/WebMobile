@@ -111,29 +111,38 @@ namespace WebMobile.Controllers
                     else
                     {
                         //Thanh toán không thành công. Mã lỗi: vnp_ResponseCode
-                        string email = (string)Session["username"];
-                        string idUser = db.AspNetUsers.FirstOrDefault(x => x.Email == email).Id;
-                        var order = db.HoaDon.OrderByDescending(x => x.NgayTao).FirstOrDefault(x => x.NguoiDat == idUser);
-                        var orderDetails = db.ChiTietHoaDon.Where(x => x.OrderID == order.ID).ToList();
-                        foreach (var item in orderDetails)
-                        {
-                            var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == item.MaSanPham);
-                            sp.SoLuongDaBan += item.SoLuong;
-                            db.ChiTietHoaDon.Remove(item);
-                        }
-                        db.HoaDon.Remove(order);
-                        db.SaveChanges();
+                        DeleteOrderDetailAndOrder();
                         return RedirectToAction("OrderHistory", "Order", new { error = "Thanh toán đơn hàng không thành công."});
                     }
                 }
                 else
                 {
-                    ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý";
-                    return View("Index");
+                    DeleteOrderDetailAndOrder();
+                    return RedirectToAction("OrderHistory", "Order", new { error = "Có lỗi xảy ra trong quá trình xử lý." });
                 }
             }
 
             return View();
+        }
+
+        /// <summary>
+        /// Xoá các sản phẩm trong bảng chi tiết sản phẩm và đơn hàng khi gặp lỗi
+        /// </summary>
+        public void DeleteOrderDetailAndOrder()
+        {
+            string email = (string)Session["username"];
+            string idUser = db.AspNetUsers.FirstOrDefault(x => x.Email == email).Id;
+            var order = db.HoaDon.OrderByDescending(x => x.NgayTao).FirstOrDefault(x => x.NguoiDat == idUser);
+            var orderDetails = db.ChiTietHoaDon.Where(x => x.OrderID == order.ID).ToList();
+            foreach (var item in orderDetails)
+            {
+                // Cộng lại số lượng sản phẩm
+                var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == item.MaSanPham);
+                sp.SoLuongDaBan += item.SoLuong;
+                db.ChiTietHoaDon.Remove(item);
+            }
+            db.HoaDon.Remove(order);
+            db.SaveChanges();
         }
     }
 }

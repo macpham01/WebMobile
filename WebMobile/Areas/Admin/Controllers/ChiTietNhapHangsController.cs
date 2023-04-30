@@ -20,20 +20,20 @@ namespace WebMobile.Areas.Admin.Controllers
             return View(db.ChiTietNhapHang.Where(x=>x.MaNhapHang== maNhapHang).ToList());
         }
 
-        // GET: Admin/ChiTietNhapHangs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ChiTietNhapHang chiTietNhapHang = db.ChiTietNhapHang.Find(id);
-            if (chiTietNhapHang == null)
-            {
-                return HttpNotFound();
-            }
-            return View(chiTietNhapHang);
-        }
+        //// GET: Admin/ChiTietNhapHangs/Details/5
+        //public ActionResult Details(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ChiTietNhapHang chiTietNhapHang = db.ChiTietNhapHang.Find(id);
+        //    if (chiTietNhapHang == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(chiTietNhapHang);
+        //}
 
         // GET: Admin/ChiTietNhapHangs/Create
         public ActionResult Create()
