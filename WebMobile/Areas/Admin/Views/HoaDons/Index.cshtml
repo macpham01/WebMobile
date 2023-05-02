@@ -12,8 +12,11 @@
         </div>
     </div>
     <div style="min-height: 360px; overflow-x: auto">
-        <table border="1" class="table" style="border-collapse: collapse; border-color: gray; min-width: 1350px;">
+        <table border="1" class="table" style="border-collapse: collapse; border-color: gray; min-width: 1360px;">
             <tr>
+                <th>
+                    Mã đơn hàng
+                </th>
                 <th>
                     Ngày tạo
                 </th>
@@ -41,14 +44,18 @@
                 <th>
                     Trạng thái
                 </th>
-                <th>Chức năng</th>
+                <th style="width: 170px;">Chức năng</th>
             </tr>
 
             @foreach (var item in Model)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.NgayTao)
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @String.Format("{0:dd/MM/yyyy}", item.NgayTao)
+                        @*@Html.DisplayFor(modelItem => item.NgayTao)*@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.NguoiNhan)

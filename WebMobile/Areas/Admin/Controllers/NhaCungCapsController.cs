@@ -10,113 +10,112 @@ using WebMobile.Models;
 
 namespace WebMobile.Areas.Admin.Controllers
 {
-    public class AspNetUsersController : Controller
+    public class NhaCungCapsController : Controller
     {
         private WebmobileDB db = new WebmobileDB();
 
-        // GET: Admin/AspNetUsers
+        // GET: Admin/NhaCungCaps
         public ActionResult Index()
         {
             Session["username"] = null;
             if (Session["admin"] != null)
             {
-                return View(db.AspNetUsers.Where(x => x.LockoutEnabled == false).ToList());
+                return View(db.NhaCungCap.ToList());
             }
             return Redirect("/Accout/Login");
         }
 
-        // GET: Admin/AspNetUsers/Details/5
+        // GET: Admin/NhaCungCaps/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id.Trim());
-            if (aspNetUsers == null)
+            NhaCungCap nhaCungCap = db.NhaCungCap.Find(id);
+            if (nhaCungCap == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUsers);
+            return View(nhaCungCap);
         }
 
-        // GET: Admin/AspNetUsers/Create
+        // GET: Admin/NhaCungCaps/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/AspNetUsers/Create
+        // POST: Admin/NhaCungCaps/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,isAdmin")] AspNetUsers aspNetUsers)
+        public ActionResult Create([Bind(Include = "MaNhaCungCap,TenNhaCungCap,DiaChi,SoDienThoai,EmailNCC")] NhaCungCap nhaCungCap)
         {
             if (ModelState.IsValid)
             {
-                db.AspNetUsers.Add(aspNetUsers);
+                db.NhaCungCap.Add(nhaCungCap);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(aspNetUsers);
+            return View(nhaCungCap);
         }
 
-        // GET: Admin/AspNetUsers/Edit/5
+        // GET: Admin/NhaCungCaps/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.FirstOrDefault(x => x.Id == id);
-            if (aspNetUsers == null)
+            NhaCungCap nhaCungCap = db.NhaCungCap.Find(id);
+            if (nhaCungCap == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUsers);
+            return View(nhaCungCap);
         }
 
-        // POST: Admin/AspNetUsers/Edit/5
+        // POST: Admin/NhaCungCaps/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,isAdmin")] AspNetUsers aspNetUsers)
+        public ActionResult Edit([Bind(Include = "MaNhaCungCap,TenNhaCungCap,DiaChi,SoDienThoai,EmailNCC")] NhaCungCap nhaCungCap)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aspNetUsers).State = EntityState.Modified;
+                db.Entry(nhaCungCap).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(aspNetUsers);
+            return View(nhaCungCap);
         }
 
-        // GET: Admin/AspNetUsers/Delete/5
+        // GET: Admin/NhaCungCaps/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.FirstOrDefault(x=>x.Id==id);
-            if (aspNetUsers == null)
+            NhaCungCap nhaCungCap = db.NhaCungCap.Find(id);
+            if (nhaCungCap == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUsers);
+            return View(nhaCungCap);
         }
 
-        // POST: Admin/AspNetUsers/Delete/5
+        // POST: Admin/NhaCungCaps/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            AspNetUsers aspNetUsers = db.AspNetUsers.FirstOrDefault(x => x.Id == id);
-            aspNetUsers.LockoutEnabled = true;
-            aspNetUsers.AccessFailedCount = 1;
+            NhaCungCap nhaCungCap = db.NhaCungCap.Find(id);
+            db.NhaCungCap.Remove(nhaCungCap);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

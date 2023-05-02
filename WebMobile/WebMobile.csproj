@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\HoaDonsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaiSanPhamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhaCungCapsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhapHangsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaSanXuatsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
@@ -865,6 +866,11 @@
     <Content Include="Areas\Admin\Views\ChiTietNhapHangs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ChiTietNhapHangs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ChiTietNhapHangs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCaps\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCaps\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCaps\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCaps\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCaps\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

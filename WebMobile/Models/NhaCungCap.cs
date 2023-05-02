@@ -27,7 +27,7 @@
         [DisplayName("Số điện thoại")]
 
         public string SoDienThoai { get; set; }
-        [DisplayName("Email nhà cung cấp")]
+        [DisplayName("Email NCC")]
 
         public string EmailNCC { get; set; }
     }
