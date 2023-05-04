@@ -20,6 +20,7 @@ namespace WebMobile.Controllers
 
         public ActionResult Login()
         {
+            Session["countItem"] = 0;
             return View();
         }
 

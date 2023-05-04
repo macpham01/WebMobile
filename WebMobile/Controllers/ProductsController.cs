@@ -65,10 +65,12 @@ namespace WebMobile.Controllers
                     //    products = products.OrderByDescending(x => x.TenSanPham);
                     //    break;
                     case "desPrice":
-                        products = products.OrderByDescending(x => x.Gia);
+                        products = products.OrderByDescending(x => (x.Gia * (100 - x.GiamGia)) / 100);
+                        ViewBag.name = "Sắp xếp theo giá";
                         break;
                     case "price":
-                        products = products.OrderBy(x => x.Gia);
+                        products = products.OrderBy(x => (x.Gia * (100 - x.GiamGia)) / 100);
+                        ViewBag.name = "Sắp xếp theo giá";
                         break;
                     default:
                         products = products.OrderBy(x => x.TenSanPham);

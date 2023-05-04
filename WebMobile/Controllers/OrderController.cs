@@ -14,27 +14,37 @@ namespace WebMobile.Controllers
         // GET: Order
         public ActionResult CheckOut()
         {
-            if (Session["username"] != null)
+            try
             {
-                //kiểm tra xem số lượng có đủ để bán không
-                string mataikhoan = (string)Session["username"];
-                var gioHangs = db.GioHang.Where(x=>x.MaTaiKhoan == mataikhoan);
-                foreach (var gh in gioHangs)
+                if (Session["username"] != null)
                 {
-                    var sp = db.SanPham.FirstOrDefault(x=>x.MaSanPham==gh.MaSanPham);
-                    if (sp!= null)
+                    //kiểm tra xem số lượng có đủ để bán không
+                    string mataikhoan = (string)Session["username"];
+                    var gioHangs = db.GioHang.Where(x => x.MaTaiKhoan == mataikhoan);
+                    foreach (var gh in gioHangs)
                     {
-                        if (sp.SoLuongDaBan < gh.SoLuong)
+                        var sp = db.SanPham.FirstOrDefault(x => x.MaSanPham == gh.MaSanPham);
+                        if (sp != null)
                         {
-                            return RedirectToAction("Details", "Products", new { masp = sp.MaSanPham, errorQuantity = "Số lượng bán không đủ" });
+                            if (sp.SoLuongDaBan < gh.SoLuong)
+                            {
+                                return RedirectToAction("Details", "Products", new { masp = sp.MaSanPham, errorQuantity = "Số lượng bán không đủ" });
+                            }
                         }
                     }
+
+                    return View();
                 }
-                
-                return View();
+                return Redirect("/Accout/Login");
             }
-            return Redirect("/Accout/Login");
-           
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Session["countItem"] = 0;
+                return Redirect("/Home");
+            }
+
+
         }
 
         [HttpPost]

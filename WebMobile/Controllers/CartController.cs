@@ -20,6 +20,7 @@ namespace WebMobile.Controllers
                 var gh = db.GioHang.Where(x => x.MaTaiKhoan == mataikhoan).ToList();
                 if (gh.Count == 0)
                 {
+                    Session["countItem"] = 0;
                     return Redirect("/Home");
                 }
                 ViewBag.sum = gh.Sum(x => x.TongTien);

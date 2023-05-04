@@ -32,19 +32,23 @@
 
         public string MaNhaSanXuat { get; set; }
         [DisplayName("Tên sản phẩm")]
+        [Required(ErrorMessage = "Tên sản phẩm không được để trống.")]
 
         public string TenSanPham { get; set; }
         [DisplayName("Cấu hình")]
 
         public string CauHinh { get; set; }
+        [Required(ErrorMessage ="Hình ảnh không được để trống.")]
         [DisplayName("Hình ảnh")]
 
         public string Image { get; set; }
         [DisplayName("Giá")]
+        [Required(ErrorMessage = "Giá không được để trống.")]
 
         public int? Gia { get; set; }
 
         [DisplayName("Giảm giá")]
+        [Required(ErrorMessage = "Giảm giá không được để trống.")]
 
         public int? GiamGia { get; set; }
 
@@ -55,7 +59,8 @@
             
         } }
 
-        [DisplayName("Số lượng")] //Số lượng đã bán trong DB
+        [DisplayName("Số lượng")] //Thay thế số lượng đã bán trong DB
+        [Required(ErrorMessage = "Số lượng không được để trống.")]
 
         public int? SoLuongDaBan { get; set; }
         [DisplayName("Lượt xem")]

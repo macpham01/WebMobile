@@ -105,6 +105,7 @@ namespace WebMobile.Areas.Admin.Controllers
                     Image.SaveAs(Server.MapPath(fullPathWithFileName));
                     sanPham.Image = fileName + ".png";
                 }
+                sanPham.LuotView = 1;
                 db.SanPham.Add(sanPham);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -193,6 +194,16 @@ namespace WebMobile.Areas.Admin.Controllers
         {
             SanPham sanPham = db.SanPham.Find(id);
             db.SanPham.Remove(sanPham);
+
+            // xoá các sản phẩm có id sản phẩm bị xoá hiện đang có trong giỏ hàng
+            var sanphams = db.GioHang.Where(x => x.MaSanPham == id).ToList();
+            if (sanphams.Count > 0)
+            {
+                foreach (var sp in sanphams)
+                {
+                    db.GioHang.Remove(sp);
+                }
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
