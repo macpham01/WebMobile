@@ -25,7 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.TinhTrang)
             </th>
-            <th></th>
+            <th>Chức năng</th>
         </tr>
 
         @foreach (var item in Model)
@@ -35,11 +35,18 @@
                     @Html.DisplayFor(modelItem => item.TenNhaSanXuat)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                    @if (item.TinhTrang == "0")
+                    {
+                        <div>Đang hoạt động</div>
+                    }
+                    else
+                    {
+                        <div>Ngừng hoạt động</div>
+                    }
                 </td>
                 <td>
                     @Html.ActionLink("Sửa", "Edit", new { id = item.MaNhaSanXuat }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaNhaSanXuat }, new { @class = "btn btn-warning" })
+                    @*@Html.ActionLink("Chi tiết", "Details", new { id = item.MaNhaSanXuat }, new { @class = "btn btn-warning" })*@
                     @Html.ActionLink("Xoá", "Delete", new { id = item.MaNhaSanXuat }, new { @class = "btn btn-danger" })
                 </td>
             </tr>

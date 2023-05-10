@@ -18,7 +18,7 @@ namespace WebMobile.Areas.Admin.Controllers
         public ActionResult Index()
         {
             if (Session["admin"] != null) { 
-                return View(db.NhaSanXuat.Where(x=>x.TinhTrang=="0").ToList()); 
+                return View(db.NhaSanXuat.Where(x=>x.TinhTrang != "2").ToList()); 
             }
             return Redirect("/Accout/Login");
         }
@@ -131,7 +131,7 @@ namespace WebMobile.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             NhaSanXuat nhaSanXuat = db.NhaSanXuat.Find(id);
-            nhaSanXuat.TinhTrang = "1";
+            nhaSanXuat.TinhTrang = "2"; // Nhà sản xuất tạm dừng hoạt động
             db.SaveChanges();
             return RedirectToAction("Index");
         }

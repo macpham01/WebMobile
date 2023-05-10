@@ -15,44 +15,46 @@
     <p>
         @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenNhaCungCap)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiaChi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoDienThoai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailNCC)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <div style="min-height: 400px; overflow-x: auto">
+        <table class="table" border="1" style="border-collapse: collapse; border-color: gray">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenNhaCungCap)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DiaChi)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SoDienThoai)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmailNCC)
-                </td>
-                <td>
-                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaNhaCungCap.Trim() }) 
-                    @Html.ActionLink("Xoá", "Delete", new { id = item.MaNhaCungCap.Trim() })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenNhaCungCap)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaChi)
+                </th>
+                <th style=" width: 160px;">
+                    @Html.DisplayNameFor(model => model.SoDienThoai)
+                </th>
+                <th >
+                    @Html.DisplayNameFor(model => model.EmailNCC)
+                </th>
+                <th style="width: 110px ">Chức năng</th>
             </tr>
-        }
 
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenNhaCungCap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoDienThoai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailNCC)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.MaNhaCungCap.Trim() }, new {@class= "btn btn-success btn-sm" })
+                        @Html.ActionLink("Xoá", "Delete", new { id = item.MaNhaCungCap.Trim() }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
 </div>

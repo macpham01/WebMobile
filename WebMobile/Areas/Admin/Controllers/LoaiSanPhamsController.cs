@@ -17,7 +17,7 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/LoaiSanPhams
         public ActionResult Index()
         {
-            if (Session["admin"] != null) return View(db.LoaiSanPham.Where(x=>x.TinhTrang=="0").ToList());
+            if (Session["admin"] != null) return View(db.LoaiSanPham.Where(x=>x.TinhTrang != "2").ToList());
             return Redirect("/Accout/Login");
         }
 
@@ -128,7 +128,7 @@ namespace WebMobile.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             LoaiSanPham loaiSanPham = db.LoaiSanPham.Find(id);
-            loaiSanPham.TinhTrang = "1";
+            loaiSanPham.TinhTrang = "2"; // Loại sản phẩm tạm dừng hoạt động
             db.SaveChanges();
             return RedirectToAction("Index");
         }

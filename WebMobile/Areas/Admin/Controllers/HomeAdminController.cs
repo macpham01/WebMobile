@@ -14,12 +14,15 @@ namespace WebMobile.Areas.Admin.Controllers
         // GET: Admin/HomeAdmin
         public ActionResult Index()
         {
-            ViewBag.qualityProduct = db.SanPham.ToList().Count;
-            ViewBag.qualityProducer = db.NhaSanXuat.ToList().Count;
-            ViewBag.qualityType = db.LoaiSanPham.ToList().Count;
-            ViewBag.qualityOrder = db.HoaDon.ToList().Count;
-
-            return View();
+            if (Session["admin"] != null)
+            {
+                ViewBag.qualityProduct = db.SanPham.ToList().Count;
+                ViewBag.qualityProducer = db.NhaSanXuat.ToList().Count;
+                ViewBag.qualityType = db.LoaiSanPham.ToList().Count;
+                ViewBag.qualityOrder = db.HoaDon.ToList().Count;
+                return View();
+            }
+            return Redirect("/Accout/Login");
         }
     }
 }

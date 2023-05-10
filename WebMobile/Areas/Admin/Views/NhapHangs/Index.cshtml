@@ -16,7 +16,7 @@
         @Html.ActionLink("Nhập kho", "Create", "ChiTietNhapHangs", null, new { @class = "btn btn-primary" })
     </p>
     <div style="overflow-x: auto; min-height: 323px ">
-        <table class="table" style="min-width: 1045px">
+        <table class="table" style="min-width: 1045px;border-collapse: collapse; border-color: gray" border="1">
             <tr>
                 <th>
                     Mã hoá đơn
@@ -36,7 +36,7 @@
                 <th style="width: 296px;">
                     Tên nhà cung cấp
                 </th>
-                <th style="width: 122px;">Chức năng</th>
+                <th style="width: 12%;">Chức năng</th>
             </tr>
 
             @foreach (var item in Model)
