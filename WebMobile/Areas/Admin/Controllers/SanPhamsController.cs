@@ -15,7 +15,7 @@ using WebMobile.Models.DTO;
 
 namespace WebMobile.Areas.Admin.Controllers
 {
-    public class SanPhamsController : Controller
+    public class SanPhamsController : AlertMessage
     {
         private WebmobileDB db = new WebmobileDB();
 
@@ -108,6 +108,7 @@ namespace WebMobile.Areas.Admin.Controllers
                 sanPham.LuotView = 1;
                 db.SanPham.Add(sanPham);
                 db.SaveChanges();
+                SetAlert("Thêm mới sản phẩm thành công", 1);
                 return RedirectToAction("Index");
             }
 
@@ -152,6 +153,7 @@ namespace WebMobile.Areas.Admin.Controllers
                 {                 
                     db.Entry(sanPham).State = EntityState.Modified;
                     db.SaveChanges();
+                    SetAlert("Sửa sản phẩm thành công", 2);
                     return RedirectToAction("Index");
                 }
                 string fileName = sanPham.MaSanPham.ToString();
@@ -160,6 +162,7 @@ namespace WebMobile.Areas.Admin.Controllers
                 sanPham.Image = fileName + ".png";
                 db.Entry(sanPham).State = EntityState.Modified;
                 db.SaveChanges();
+                SetAlert("Sửa sản phẩm thành công", 2);
                 return RedirectToAction("Index");
             }
             ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPham, "MaLoaiSanPham", "TenLoaiSanPham", sanPham.MaLoaiSanPham);
@@ -205,6 +208,7 @@ namespace WebMobile.Areas.Admin.Controllers
                 }
             }
             db.SaveChanges();
+            SetAlert("Xoá sản phẩm thành công", 3);
             return RedirectToAction("Index");
         }
 

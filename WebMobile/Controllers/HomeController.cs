@@ -6,11 +6,12 @@ using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using WebMobile.Models;
+using WebMobile.Models.DTO;
 using WebMobile.Models.DTO.PayOnline;
 
 namespace WebMobile.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AlertMessage
     {
         private WebmobileDB db = new WebmobileDB();
         public ActionResult Index()
@@ -106,6 +107,7 @@ namespace WebMobile.Controllers
                         var order = db.HoaDon.OrderByDescending(x => x.NgayTao).FirstOrDefault(x => x.NguoiDat == idUser);
                         order.TinhTrang = "Đã thanh toán";
                         db.SaveChanges();
+                        SetAlert("Đặt hàng thành công", 1);
                         return RedirectToAction("OrderHistory", "Order");
                     }
                     else

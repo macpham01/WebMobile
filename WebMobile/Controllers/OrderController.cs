@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebMobile.Models;
+using WebMobile.Models.DTO;
 
 namespace WebMobile.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController : AlertMessage
     {
         private WebmobileDB db = new WebmobileDB();
 
@@ -96,7 +97,7 @@ namespace WebMobile.Controllers
                 {
                     return RedirectToAction("Payment", "Home");
                 }
-               
+                SetAlert("Đặt hàng thành công", 1);
                 return RedirectToAction("OrderHistory");
             }
             catch (Exception ex)

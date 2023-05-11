@@ -16,11 +16,17 @@
 </div>
 @if (Model.Any())
 {
+    if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert">
+            @TempData["AlertMessage"]
+        </div>
+    }
     <h3>Lịch sử đơn hàng</h3>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AspNetUsers.Id)
+                Mã đơn hàng
             </th>
             <th>
 
@@ -81,13 +87,13 @@
             </tr>
         }
     </table>
-        if(@ViewBag.error!=null)
-        {
-            <div class="alert alert-danger" role="alert">
-                @ViewBag.error
-            </div>
-            <br />
-        }
+    if (@ViewBag.error != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.error
+        </div>
+        <br />
+    }
     <a href="@Url.Action("Index", "Products")" class="btn btn-primary btn-lg">Tiếp tục mua hàng</a>
 }
 else

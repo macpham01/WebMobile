@@ -181,6 +181,7 @@
     <Compile Include="Models\ChiTietHoaDon.cs" />
     <Compile Include="Models\ChiTietNhapHang.cs" />
     <Compile Include="Models\C__MigrationHistory.cs" />
+    <Compile Include="Models\DTO\AlertMessage.cs" />
     <Compile Include="Models\DTO\ExportProducts.cs" />
     <Compile Include="Models\DTO\PayOnline\PayCompare.cs" />
     <Compile Include="Models\DTO\PayOnline\PayLib.cs" />
@@ -917,6 +918,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\test\" />
     <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>

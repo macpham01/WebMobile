@@ -66,12 +66,12 @@
                 <div class="col-xs-6">
                     <select class="language">
                         <option value="VietNam" selected>VietNam</option>
-                        <option value="English" >English</option>
+                        <option value="English">English</option>
 
                     </select>
                     <select class="currency">
                         <option value="VND" selected>VND</option>
-                        <option value="USD" >USD</option>
+                        <option value="USD">USD</option>
 
                     </select>
                 </div>
@@ -188,7 +188,7 @@
                     </div>
                     <div class="col-md-3 col-footer footer-2 ">
                         <div class="heading"><h4>Dịch vụ khách hàng</h4></div>
-                        <ul >
+                        <ul>
                             <li><a style="color: white;" href="#">Về chúng tôi</a></li>
                             <li><a style="color: white;" href="#">Chính sách bảo mật</a></li>
                             <li><a style="color: white;" href="#">Điều khoản và điều kiện</a></li>
@@ -235,5 +235,11 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.getElementById("AlertBox").classList.remove("hide");
+        setTimeout(() => {
+            document.getElementById("AlertBox").classList.add("hide")
+        }, 5000)
+    </script>
 </body>
 </html>

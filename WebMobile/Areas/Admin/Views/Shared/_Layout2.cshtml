@@ -9,6 +9,8 @@
 
     <title>Mobile Shop Admin</title>
 
+   
+
     <script src="~/Areas/Admin/Public/ckeditor/ckeditor.js"></script>
 
     <!-- Bootstrap Core CSS -->
@@ -121,8 +123,8 @@
                             <a href="#"><i class="fa fa-user fa-fw"></i>@Session["admin"]</a>
                         </li>
                         @*<li>
-                            <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>*@
+                                <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>*@
                         <li class="divider"></li>
                         <li>
                             <a href="/Accout/Logout"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
@@ -175,7 +177,7 @@
     </div>
     <!-- /#wrapper -->
     <!-- jQuery -->
-    
+
     <script src="~/Areas/Admin/Public/assets/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -191,6 +193,12 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="~/Areas/Admin/Public/assets/js/startmin.js"></script>
-
+    <script>
+        console.log("hello world")
+        document.getElementById("AlertBox").classList.remove("hide");
+        setTimeout(() => {
+            document.getElementById("AlertBox").classList.add("hide")
+        }, 3000)
+    </script>
 </body>
 </html>

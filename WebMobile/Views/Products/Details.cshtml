@@ -24,56 +24,61 @@
             <div class="col-md-6 col-sm-12">
                 <div class="caption">
                     <div class="name"><h3 style="font-size:28px;">@Model.TenSanPham</h3></div>
-                    <div class="price">@String.Format("{0:#,0đ}", Model.GiaBan) 
-                        @if (Model.GiamGia > 0)
-                        {
+                    <div class="price">
+                        @String.Format("{0:#,0đ}", Model.GiaBan)
+                    @if (Model.GiamGia > 0)
+                    {
                         <span style="font-size: 20px;">@String.Format("{0:#,0đ}", Model.Gia)</span>
-                        }
-                    </div>
-                    <div class="price">Lượt xem: @Model.LuotView</div>
-                    <div class="name">Số lượng: @Model.SoLuongDaBan</div>
-                    <div class="rating" style="color: #fec93f;">
-                        @for (int i = 0; i < 4; i++)
-                        {
-                            <span class="glyphicon glyphicon-star">
-                            </span>
-                        }
-                        <span class="glyphicon glyphicon-star-empty">
+                    }
+                </div>
+                <div class="price">Lượt xem: @Model.LuotView</div>
+                <div class="name">Số lượng: @Model.SoLuongDaBan</div>
+                <div class="rating" style="color: #fec93f;">
+                    @for (int i = 0; i < 4; i++)
+                    {
+                        <span class="glyphicon glyphicon-star">
                         </span>
-                    </div>
+                    }
+                    <span class="glyphicon glyphicon-star-empty">
+                    </span>
+                </div>
 
-                    <div class="info">
-                        @Html.Raw(@Model.CauHinh)
-                    </div>
+                <div class="info">
+                    @Html.Raw(@Model.CauHinh)
+                </div>
 
 
-                    <div class="well">
-                        @using (Html.BeginForm("Add", "Cart"))
-                        {
-                            <input type="hidden" name="MaSanPham" value="@Model.MaSanPham" />
-                            <input type="hidden" name="TenSanPham" value="@Model.TenSanPham" />
-                            <input type="hidden" name="Gia" value=@Model.GiaBan />
-                            <label>Số lượng: </label> <input name="SoLuong" class="form-inline quantity" style="width:80px;" type="number" min="1" max="1000" value="1">
-                            <input type="hidden" name="image" value="@Model.Image" />
-                            @*<input type="submit" name="submit" value="ADD" />*@
-                            <button type="submit" class="btn btn-primary" style=" position: relative; bottom: 1px;">Thêm vào giỏ</button>
-                        }
+                <div class="well">
+                    @using (Html.BeginForm("Add", "Cart"))
+                    {
+                        <input type="hidden" name="MaSanPham" value="@Model.MaSanPham" />
+                        <input type="hidden" name="TenSanPham" value="@Model.TenSanPham" />
+                        <input type="hidden" name="Gia" value=@Model.GiaBan />
+                        <label>Số lượng: </label> <input name="SoLuong" class="form-inline quantity" style="width:80px;" type="number" min="1" max="1000" value="1">
+                        <input type="hidden" name="image" value="@Model.Image" />
+                        @*<input type="submit" name="submit" value="ADD" />*@
+                        <button type="submit" class="btn btn-primary" style=" position: relative; bottom: 1px;">Thêm vào giỏ</button>
+                    }
 
+                </div>
+                @if (ViewBag.ErrorQuantity != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.ErrorQuantity
                     </div>
-                    @if (ViewBag.ErrorQuantity != null)
-                    {<p style="color:red">@ViewBag.ErrorQuantity</p>}
-                    <div class="share well">
-                        <strong style="margin-right: 13px;">Share :</strong>
-                        <a href="#" class="share-btn" target="_blank">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="share-btn" target="_blank">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="share-btn" target="_blank">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
+                }
+                <div class="share well">
+                    <strong style="margin-right: 13px;">Share :</strong>
+                    <a href="#" class="share-btn" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#" class="share-btn" target="_blank">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="#" class="share-btn" target="_blank">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                </div>
                 </div>
             </div>
             <div class="clear"></div>
