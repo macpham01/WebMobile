@@ -21,6 +21,7 @@
 
         public string SecurityStamp { get; set; }
 
+        [DisplayName("Số điện thoại")]
         public string PhoneNumber { get; set; }
 
         public bool PhoneNumberConfirmed { get; set; }
@@ -37,6 +38,7 @@
         [Required]
         [StringLength(256)]
         public string UserName { get; set; }
+        [DisplayName("Nhân viên")]
 
         public bool isAdmin { get; set; }
 

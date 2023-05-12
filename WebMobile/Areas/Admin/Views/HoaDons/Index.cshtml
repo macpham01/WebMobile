@@ -97,5 +97,5 @@
             <div> Trang @Model.PageNumber / @Model.PageCount</div>
             <div>@Html.ActionLink("Xuất danh sách đơn hàng", "ExportToExcel")</div>
         </div>
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = @ViewBag.Search }))
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page}))
     </div>

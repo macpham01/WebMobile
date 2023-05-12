@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,12 +16,20 @@ namespace WebMobile.Areas.Admin.Controllers
         private WebmobileDB db = new WebmobileDB();
 
         // GET: Admin/AspNetUsers
-        public ActionResult Index()
+        public ActionResult Index(int? page, string search)
         {
             Session["username"] = null;
             if (Session["admin"] != null)
             {
-                return View(db.AspNetUsers.Where(x => x.LockoutEnabled == false).ToList());
+                var accounts = db.AspNetUsers.Where(x => x.LockoutEnabled == false).OrderByDescending(x => x.Email).Select(x => x);
+                int pageSize = 6;
+                int pageNumber = (page ?? 1);
+                if (search != null)
+                {
+                    @ViewBag.Search = search;
+                    accounts = accounts.Where(x=>x.Email.Contains(search)||x.PhoneNumber.Contains(search));
+                }
+                return View(accounts.ToPagedList(pageNumber, pageSize));
             }
             return Redirect("/Accout/Login");
         }

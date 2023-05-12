@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -149,45 +150,49 @@ namespace WebMobile.Areas.Admin.Controllers
             ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Danh sách đơn hàng");
 
             // Thêm dữ liệu vào trang tính
-            worksheet.Cells[1, 1].Value = "Ngày tạo";
-            worksheet.Cells[1, 2].Value = "Người nhận";
-            worksheet.Cells[1, 3].Value = "Số điện thoại";
-            worksheet.Cells[1, 4].Value = "Địa chỉ";
-            worksheet.Cells[1, 5].Value = "CCCD";
-            worksheet.Cells[1, 6].Value = "Tổng tiền";
-            worksheet.Cells[1, 7].Value = "Hình thức thanh toán";
-            worksheet.Cells[1, 8].Value = "Trạng thái giao hàng";
+            worksheet.Cells[1, 1].Value = "Mã đơn hàng";
+            worksheet.Cells[1, 2].Value = "Ngày tạo";
+            worksheet.Cells[1, 3].Value = "Người nhận";
+            worksheet.Cells[1, 4].Value = "Số điện thoại";
+            worksheet.Cells[1, 5].Value = "Địa chỉ";
+            worksheet.Cells[1, 6].Value = "CCCD";
+            worksheet.Cells[1, 7].Value = "Tổng tiền";
+            worksheet.Cells[1, 8].Value = "Hình thức thanh toán";
+            worksheet.Cells[1, 9].Value = "Trạng thái giao hàng";
 
             // Thêm dữ liệu cho từng dòng
             int row = 2;
             foreach (var order in orders)
             {
-                worksheet.Cells[row, 1].Value = String.Format("{0:dd/MM/yyyy}", order.NgayTao);
-                worksheet.Cells[row, 2].Value = order.NguoiNhan;
-                worksheet.Cells[row, 3].Value = order.SDT;
-                worksheet.Cells[row, 4].Value = order.DiaChi;
-                worksheet.Cells[row, 5].Value = order.CCCD;
-                worksheet.Cells[row, 6].Value = String.Format("{0:#,0đ}", order.TongTien);
-                worksheet.Cells[row, 7].Value = order.HinhThucThanhToan;
-                worksheet.Cells[row, 8].Value = order.TrangThai;
+                worksheet.Cells[row, 1].Value = order.ID;
+                worksheet.Cells[row, 2].Value = String.Format("{0:dd/MM/yyyy}", order.NgayTao);
+                worksheet.Cells[row, 3].Value = order.NguoiNhan;
+                worksheet.Cells[row, 4].Value = order.SDT;
+                worksheet.Cells[row, 5].Value = order.DiaChi;
+                worksheet.Cells[row, 6].Value = order.CCCD;
+                worksheet.Cells[row, 7].Value = String.Format("{0:#,0đ}", order.TongTien);
+                worksheet.Cells[row, 8].Value = order.HinhThucThanhToan;
+                worksheet.Cells[row, 9].Value = order.TrangThai;
                 row++;
             }
             
 
             // Thiết lập định dạng cho các ô trong trang tính
-            worksheet.Cells["A1:H1"].Style.Font.Bold = true;
+            worksheet.Cells["A1:I1"].Style.Font.Bold = true;
             worksheet.Cells.Style.Font.Name = "Times New Roman";
-            worksheet.Cells.Style.Font.Size = 11;
+            worksheet.Cells.Style.Font.Size = 12;
 
             // Thiết lập độ rộng cho các ô trong excel
             worksheet.Column(1).Width = 12;
-            worksheet.Column(2).Width = 20;
-            worksheet.Column(3).Width = 18;
-            worksheet.Column(4).Width = 25;
-            worksheet.Column(5).Width = 18;
-            worksheet.Column(6).Width = 15;
-            worksheet.Column(7).Width = 20;
-            worksheet.Column(8).Width = 20;
+            worksheet.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+            worksheet.Column(2).Width = 12;
+            worksheet.Column(3).Width = 20;
+            worksheet.Column(4).Width = 18;
+            worksheet.Column(5).Width = 30;
+            worksheet.Column(6).Width = 18;
+            worksheet.Column(7).Width = 15;
+            worksheet.Column(8).Width = 23;
+            worksheet.Column(9).Width = 23;
 
             // Tạo ra file Excel từ bảng tính
             byte[] excelData = package.GetAsByteArray();
