@@ -69,6 +69,11 @@ namespace WebMobile.Controllers
         [HttpPost]
         public ActionResult Signup(AspNetUsers user, string confirmPassword)
         {
+          if(user.PhoneNumber.Length != 10)
+          {
+                ViewBag.error = "Số điện thoại phải gồm 10 chữ số";
+                return View();
+          }
           if (user.PasswordHash == confirmPassword)
           {
                 try
